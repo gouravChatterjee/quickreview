@@ -14,12 +14,12 @@
 <div class="col-md-6 col-lg-6 col-sm-12 ml-auto mr-auto">
 <div class="">
   <div class="register-logo">
-    <a href="https://atheneumglobal.education"><b>Atheneum Global College</b></a>
+    <a href="#"><b>E-Quick Review </b></a>
   </div>
 
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Sign in to your E-Quick Review account to start your session</p>
 
       <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="s_Hash" value="<?php echo $_SESSION['s_Hash']; ?>">
