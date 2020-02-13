@@ -79,9 +79,9 @@ if(mysqli_connect_error()){
              <a href="https://twitter.com" class="btn" style="background-color: #4BCFFA"><i class="fa fa-twitter" style="font-size:25px; color: #fff;"></i></a>
              <a href="https://youtube.com" class="btn btn-danger"><i class="fa fa-youtube" style="font-size:25px; color: #fff;"></i></a>
             <?php if (!$_SESSION['LoggedIn']){ ?>
-              <a href="signIn" class="btn btn-outline-light float-right" style="text-decoration: none; ">Sign In</a>
+              <a href="signIn" class="btn btn-outline-light float-right" style="text-decoration: none;">Sign In</a>
              <?php }else{ ?>
-             <a href="signout" class="btn btn-outline-light float-right" style="text-decoration: none; ">Sign Out</a>
+             <a href="signout" class="btn btn-outline-light float-right" style="text-decoration: none;">Sign Out</a>
            <?php } ?>
           </div>
         </div>

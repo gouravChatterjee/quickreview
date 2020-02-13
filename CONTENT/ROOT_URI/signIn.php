@@ -14,12 +14,12 @@
 <div class="col-md-6 col-lg-6 col-sm-12 ml-auto mr-auto">
 <div class="">
   <div class="register-logo">
-    <a href="#"><b>E-Quick Review </b></a>
+    <a href="https://atheneumglobal.education"><b>Atheneum Global College</b></a>
   </div>
 
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to your E-Quick Review account to start your session</p>
+      <p class="login-box-msg">Sign in to start your session</p>
 
       <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="s_Hash" value="<?php echo $_SESSION['s_Hash']; ?>">
@@ -57,8 +57,20 @@
         </div>
       </form>
 
-      
+      <div class="social-auth-links text-center mb-3">
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-primary">
+          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+        </a>
+        <a href="#" class="btn btn-block btn-danger">
+          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+        </a>
+      </div>
       <!-- /.social-auth-links -->
+
+      <p class="mb-1">
+        <a href="noPassword" class="text-center">I don't have a password</a>
+      </p>
       <p class="mb-1">
         <a href="forgotpassword">I forgot my password</a>
       </p>

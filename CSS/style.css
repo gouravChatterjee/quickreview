@@ -26,12 +26,3 @@ body, html {
   border: 1px solid grey;
   height: 250px;
 }
-.social{
-  background-color: #2B2B52;
-  height:auto;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-.btns{
-  border-radius: 60%;
-}
