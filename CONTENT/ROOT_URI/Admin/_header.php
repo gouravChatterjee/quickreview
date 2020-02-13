@@ -70,23 +70,6 @@ if(mysqli_connect_error()){
   </head>
   <body class="hold-transition  layout-top-nav">
     <div class="wrapper">
-      <div class="container-fluid social">
-        <div class="container">
-          <h1 class="text-center colorWhite">E-Quick Review</h1>
-          <p class="text-center colorWhite">The place where you can find the best reviews</p>
-          <div class="text">
-            <a href="https://facebook.com" class="btn btn-primary btns"><i class="fa fa-facebook" style="font-size:25px; color: #fff;"></i></a>
-             <a href="https://twitter.com" class="btn" style="background-color: #4BCFFA"><i class="fa fa-twitter" style="font-size:25px; color: #fff;"></i></a>
-             <a href="https://youtube.com" class="btn btn-danger"><i class="fa fa-youtube" style="font-size:25px; color: #fff;"></i></a>
-            <?php if (!$_SESSION['LoggedIn']){ ?>
-              <a href="signIn" class="btn btn-outline-light float-right" style="text-decoration: none;">Sign In</a>
-             <?php }else{ ?>
-             <a href="signout" class="btn btn-outline-light float-right" style="text-decoration: none;">Sign Out</a>
-           <?php } ?>
-          </div>
-        </div>
-      </div>
-
   <!-- NAVBAR STARTS -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
@@ -95,12 +78,9 @@ if(mysqli_connect_error()){
              style="height: 40px; width:auto;">
         <span class="btn btn-outline-danger brand-text">Atheneum</span>
       </a>
-      
-     
-
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
         <!-- Left navbar links -->
-     
+     <?php if ($_SESSION['LoggedIn']){ ?>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" style="margin-right: 5px;">
             <a href="about" class="btn btn-outline-primary">About</a>
@@ -108,15 +88,22 @@ if(mysqli_connect_error()){
           <li class="nav-item" style="margin-right: 5px;">
             <a href="bestReviews" class="btn btn-outline-dark">Best Reviews</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" style="margin-right: 5px;">
             <a href="shareReview" class="btn btn-outline-success">Share a Review</a>
           </li>
+          <li class="nav-item">
+            <a href="adminSignOut" class="btn btn-outline-danger">Sign Out</a>
+          </li>
         </ul>
+      <?php }else{ ?>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item" style="margin-right: 5px;">
+              <a href="adminSign" class="btn btn-outline-primary">Sign In</a>
+            </li>
+        </ul>
+     <?php } ?>
     
       </div>
-     
-
-
        
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

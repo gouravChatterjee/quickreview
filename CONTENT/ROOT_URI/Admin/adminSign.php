@@ -23,7 +23,7 @@
 
       <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="s_Hash" value="<?php echo $_SESSION['s_Hash']; ?>">
-        <input type="hidden" name="formName" value="userSignIn">
+        <input type="hidden" name="formName" value="adminSignIn">
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email" name="email" required>
           <div class="input-group-append">
