@@ -56,11 +56,6 @@ if(mysqli_connect_error()){
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
 
-   <!--  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="  crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-       -->
-
     <title>E-Quick review</title>
     <style type="text/css">
       .colorWhite{
@@ -68,28 +63,25 @@ if(mysqli_connect_error()){
       }
     </style>
   </head>
-  <body class="hold-transition  layout-top-nav">
+  <body class="hold-transition layout-top-nav">
     <div class="wrapper">
   <!-- NAVBAR STARTS -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="https://atheneumglobal.education" class="navbar-brand">
-        <img src="/IMAGES/favicon.ico" alt="" class="brand-image"
-             style="height: 40px; width:auto;">
-        <span class="btn btn-outline-danger brand-text">Atheneum</span>
+      <a href="/Admin/allProducts" class="navbar-brand">
+       <!--  <img src="/IMAGES/favicon.ico" alt="" class="brand-image"
+             style="height: 40px; width:auto;"> -->
+        <span class="btn btn-outline-danger brand-text">E - Quick Review</span>
       </a>
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
         <!-- Left navbar links -->
      <?php if ($_SESSION['LoggedIn']){ ?>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" style="margin-right: 5px;">
-            <a href="about" class="btn btn-outline-primary">About</a>
+            <a href="addProduct" class="btn btn-outline-primary">Add a product</a>
           </li>
-          <li class="nav-item" style="margin-right: 5px;">
-            <a href="bestReviews" class="btn btn-outline-dark">Best Reviews</a>
-          </li>
-          <li class="nav-item" style="margin-right: 5px;">
-            <a href="shareReview" class="btn btn-outline-success">Share a Review</a>
+           <li class="nav-item" style="margin-right: 5px;">
+            <a href="allProducts" class="btn btn-outline-primary">All Products</a>
           </li>
           <li class="nav-item">
             <a href="adminSignOut" class="btn btn-outline-danger">Sign Out</a>

@@ -1,5 +1,5 @@
 <?php 
-  $link = new mysqli(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB_BEANSTALKFP);
+  $link = new mysqli(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
   $link->set_charset("utf8");
     if(mysqli_connect_error()){
         die("ERROR: UNABLE TO CONNECT: ".mysqli_connect_error());
@@ -810,25 +810,40 @@ if (isset($_GET['business'])) {
 // <td>'.$jsonD->{'Address'}->{'Agreement'}.'</td>franchiseListFilter
 		// <a href="CONTENT/UPLOADS/FRANCHISE/'.$row["BS_USER_ID"].'/Agreement/'.$jsonD->{'Address'}->{'Agreement'}.'" download><button class="btn btn-sm btn-success" title="Download Agreement Copy"><i class="fas fa-download"></i></button></a>
 
-		if (isset($_GET['franchiseList'])) {
-			$sql = "SELECT * FROM BS_USER WHERE BS_USER_TYPE = 'FRANCHISE'";
+		if (isset($_GET['productList'])) {
+			$sql = "SELECT * FROM PRODUCT ORDER BY ID DESC";
+
 			$result = mysqli_query($link,$sql);
 			if($result){
 	  			
 				if(mysqli_num_rows($result)>0){
 					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 
-						$jsonD=json_decode($row['USER_JSOND']);
+						// $jsonD=json_decode($row['USER_JSOND']);
+						$id = $row['UNI_ID'];
+						$name = $row['PR_NAME'];
+						$category = $row['CATEGORY'];
+						$price = $row['PRICE'];
+						$imgName = $row['IMAGE'];
 
-						echo '<tr>
-							      <td>'.$row['BS_USER_ID'].'</td>
-							     <td><a href="franchiseDetails?id='.$row['BS_USER_ID'].'">'.$row['USER_FULL_NAME'].'</a></td>
-							     <td>'.$row["CENTER_NAME"].'</td>
-							     <td>'.$row['USER_PHONE'].'</td>
-							      <td>'.$row['USER_EMAIL'].'</td>
-							      <td>'.$jsonD->{'Details'}->{'Programs'}.'</td>
-							      <td><a href="updateFranchise?id='.$row['BS_USER_ID'].'"><button class="btn btn-sm btn-success" title="Update Details"><i class="fas fa-edit"></i></button></a></td>
-							  </tr>';
+						echo '<div class="card flex-row flex-wrap">
+					          <div class="card-body">
+					          <div class="row">
+					          <div class="col-lg-4 col-sm-6">
+					          	<img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" height="100%" width="100%" alt="">
+					          </div>
+					          <div class="col-lg-8 col-sm-6">
+					          	<div class=" px-2">
+						            <h4 class="card-title"><b>'.$name.'</b></h4>
+						            <p class="card-text">'.$category.'</p>
+						            <a href="singleProduct?id='.$id.'" class="btn btn-primary">GO</a>
+						        </div>
+					          </div>
+					          </div>
+					          	
+					          </div>
+					         
+					        </div>';
 
 					}
 
@@ -880,9 +895,9 @@ if (isset($_GET['business'])) {
 			}
 		}
 
-		if (isset($_GET['franchiseListSearch'])) {
+		if (isset($_GET['productSearch'])) {
 			$search = $_POST['search'];
-			$sql = "SELECT * FROM BS_USER WHERE USER_FULL_NAME LIKE'%".$search."%'";
+			$sql = "SELECT * FROM PRODUCT WHERE PR_NAME LIKE'%".$search."%'";
 			
 			$result = mysqli_query($link,$sql);
 			if($result){
@@ -890,17 +905,32 @@ if (isset($_GET['business'])) {
 				if(mysqli_num_rows($result)>0){
 					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 
-						$jsonD=json_decode($row['USER_JSOND']);
+						// $jsonD=json_decode($row['USER_JSOND']);
 
-						echo '<tr>
-							      <td>'.$row['BS_USER_ID'].'</td>
-							     <td><a href="franchiseDetails?id='.$row['BS_USER_ID'].'">'.$row['USER_FULL_NAME'].'</a></td>
-							     <td>'.$row["CENTER_NAME"].'</td>
-							     <td>'.$row['USER_PHONE'].'</td>
-							      <td>'.$row['USER_EMAIL'].'</td>
-							      <td>'.$jsonD->{'Details'}->{'Programs'}.'</td>
-							      <td><a href="updateFranchise?id='.$row['BS_USER_ID'].'"><button class="btn btn-sm btn-success" title="Update Details"><i class="fas fa-edit"></i></button></a></td>
-							  </tr>';
+						$id = $row['UNI_ID'];
+						$name = $row['PR_NAME'];
+						$category = $row['CATEGORY'];
+						$price = $row['PRICE'];
+						$imgName = $row['IMAGE'];
+
+						echo '<div class="card flex-row flex-wrap">
+					          <div class="card-body">
+					          <div class="row">
+					          <div class="col-lg-4 col-sm-6">
+					          	<img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" height="100%" width="100%" alt="">
+					          </div>
+					          <div class="col-lg-8 col-sm-6">
+					          	<div class=" px-2">
+						            <h4 class="card-title"><b>'.$name.'</b></h4>
+						            <p class="card-text">'.$category.'</p>
+						            <a href="singleProduct?id='.$id.'" class="btn btn-primary">GO</a>
+						        </div>
+					          </div>
+					          </div>
+					          	
+					          </div>
+					         
+					        </div>';
 
 					}
 

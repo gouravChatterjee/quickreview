@@ -1,5 +1,5 @@
 <?php 
-	$link = mysqli_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB_BEANSTALKFP);
+	$link = mysqli_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
    $email = $_SESSION["user"];
 
    $sql = "SELECT * FROM BS_USER WHERE USER_EMAIL = '$email'";
@@ -20,6 +20,8 @@
 
  <?php if (!$_SESSION['LoggedIn']){
  	header("Location: adminSign");
+ }else{
+  header("Location: allProducts");
  }
 
 

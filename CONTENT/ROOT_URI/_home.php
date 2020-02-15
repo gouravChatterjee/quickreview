@@ -31,32 +31,32 @@
 	$link = mysqli_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
   $email = $_SESSION["user"];
   $userId = $_SESSION["userId"];
-  $sql = "SELECT * FROM ATHENEUM_STUDENT WHERE UNI_ID = '$userId'";
-  $result = mysqli_query($link,$sql);
+ //  $sql = "SELECT * FROM ATHENEUM_STUDENT WHERE UNI_ID = '$userId'";
+ //  $result = mysqli_query($link,$sql);
 
- if($result){
-      if(mysqli_num_rows($result)>0){
-        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        $userName = $row["NAME"];
-        $email = $row["EMAIL"];
-        $phone = $row["PHONE"];
-        $programName = $row['PROGRAM_NAME'];
-        $programType = $row['PROGRAM_TYPE'];
-      }
-  }
-  if (isset($_POST['flag'])) {
-    $image = $_FILES['propic']['name'];
-    $imgName = "propic.webp";
-    mkdir("CONTENT/UPLOADS/USERS/".$userId."/",  0755, true);
-    $target = "CONTENT/UPLOADS/USERS/".$userId."/".$imgName;
-    if (move_uploaded_file($_FILES['propic']['tmp_name'], $target)) {
-      // $msg = "Image uploaded successfully";
-      echo '<div class=container><div class="alert alert-success">Successfully updated profile picture</div></div>';
-    }else{
-      echo '<div class=container><div class="alert alert-danger">Error occured! Please try again!</div></div>';
+ // if($result){
+ //      if(mysqli_num_rows($result)>0){
+ //        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+ //        $userName = $row["NAME"];
+ //        $email = $row["EMAIL"];
+ //        $phone = $row["PHONE"];
+ //        $programName = $row['PROGRAM_NAME'];
+ //        $programType = $row['PROGRAM_TYPE'];
+ //      }
+ //  }
+ //  if (isset($_POST['flag'])) {
+ //    $image = $_FILES['propic']['name'];
+ //    $imgName = "propic.webp";
+ //    mkdir("CONTENT/UPLOADS/USERS/".$userId."/",  0755, true);
+ //    $target = "CONTENT/UPLOADS/USERS/".$userId."/".$imgName;
+ //    if (move_uploaded_file($_FILES['propic']['tmp_name'], $target)) {
+ //      // $msg = "Image uploaded successfully";
+ //      echo '<div class=container><div class="alert alert-success">Successfully updated profile picture</div></div>';
+ //    }else{
+ //      echo '<div class=container><div class="alert alert-danger">Error occured! Please try again!</div></div>';
       
-    }
-  }
+ //    }
+ //  }
  ?>
 
 
@@ -87,6 +87,20 @@
                   </div>
                   <div class="col-lg-9 col-sm-12">
                    <h4>Featured Product</h4>
+                   <?php 
+                      $sql = "SELECT * FROM PRODUCT";
+                      $result = mysqli_query($link,$sql);
+                      if(mysqli_num_rows($result)>0){
+                        while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
+                            echo '<div class="card" style="width: 18rem;">
+                      <img src="" class="card-img-top" alt="...">
+                   </div>';
+                         }
+                      }else{
+                        echo "dsfnjs";
+                      }
+
+                    ?>
                   </div>
                 </div>
               </div> 
