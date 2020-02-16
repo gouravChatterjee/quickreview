@@ -99,8 +99,8 @@
                           $category = $row['CATEGORY'];
                           $price = $row['PRICE'];
                           $imgName = $row['IMAGE'];
-                            echo '<div class="col-xs-6 col-sm-4 col-md-6 col-lg-2">
-                            <a href="singleProduct?id='.$id.'"><img style="margin-bottom:5px" src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'"  width="100%" height="80px"></a>
+                            echo '<div class="col-sm-4 col-md-6 col-lg-2">
+                            <a href="singleProduct?id='.$id.'"><img style="margin-bottom:5px; border: 2px solid;" src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'"  width="90px" height="90px"></a>
                             </div>';
                          }
                       }else{
