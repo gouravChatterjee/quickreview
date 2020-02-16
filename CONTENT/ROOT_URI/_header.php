@@ -70,7 +70,7 @@ if(mysqli_connect_error()){
   </head>
   <body class="hold-transition  layout-top-nav">
     <div class="wrapper">
-      <div class="container-fluid social">
+      <div class="container-fluid social" style="background: #192A56;">
         <div class="container">
           <h1 class="text-center colorWhite">E-Quick Review</h1>
           <p class="text-center colorWhite">The place where you can find the best reviews</p>
