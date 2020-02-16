@@ -14,12 +14,12 @@
 <div class="col-md-6 col-lg-6 col-sm-12 ml-auto mr-auto">
 <div class="">
   <div class="register-logo">
-    <a href=""><b>E - Quick Review</b></a>
+    <a href=""><b>E - Quick Review Admin</b></a>
   </div>
 
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Sign in to start your session (Admin)</p>
 
       <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="s_Hash" value="<?php echo $_SESSION['s_Hash']; ?>">
@@ -57,12 +57,6 @@
         </div>
       </form>
 
-      <p class="mb-1">
-        <a href="forgotpassword">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="signUp" class="text-center">Register a new membership</a>
-      </p>
     </div>
     <!-- /.login-card-body -->
   </div>

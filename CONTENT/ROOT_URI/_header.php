@@ -81,7 +81,7 @@ if(mysqli_connect_error()){
             <?php if (!$_SESSION['LoggedIn']){ ?>
               <a href="signIn" class="btn btn-outline-light float-right" style="text-decoration: none; ">Sign In</a>
              <?php }else{ ?>
-             <a href="signout" class="btn btn-outline-light float-right" style="text-decoration: none; ">Sign Out</a>
+             <a href="signOut" class="btn btn-outline-light float-right" style="text-decoration: none; ">Sign Out</a>
            <?php } ?>
           </div>
         </div>
@@ -90,10 +90,8 @@ if(mysqli_connect_error()){
   <!-- NAVBAR STARTS -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="https://atheneumglobal.education" class="navbar-brand">
-        <img src="/IMAGES/favicon.ico" alt="" class="brand-image"
-             style="height: 40px; width:auto;">
-        <span class="btn btn-outline-danger brand-text">Atheneum</span>
+      <a href="/" class="navbar-brand">
+        <span class="btn btn-outline-danger brand-text">Review</span>
       </a>
       
      
@@ -103,14 +101,18 @@ if(mysqli_connect_error()){
      
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" style="margin-right: 5px;">
-            <a href="about" class="btn btn-outline-primary">About</a>
+            <a href="/" class="btn btn-outline-success">Products</a>
           </li>
           <li class="nav-item" style="margin-right: 5px;">
             <a href="bestReviews" class="btn btn-outline-dark">Best Reviews</a>
           </li>
-          <li class="nav-item">
-            <a href="shareReview" class="btn btn-outline-success">Share a Review</a>
+          <li class="nav-item" style="margin-right: 5px;">
+            <a href="allQuestions" class="btn btn-outline-warning"> Questions</a>
           </li>
+          <li class="nav-item" >
+            <a href="about" class="btn btn-outline-primary">About</a>
+          </li>
+          
         </ul>
     
       </div>

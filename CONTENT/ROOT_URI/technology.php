@@ -75,8 +75,8 @@
                   <div class="col-lg-3 col-sm-12">
                     <h4>Categories</h4>
                     <div class="vertical-menu">
-                      <a href="/" class="active">All Products</a>
-                      <a href="technology">Technology</a>
+                      <a href="/" >All Products</a>
+                      <a href="technology" class="active">Technology</a>
                       <a href="food">Food</a>
                       <a href="medicine">Medicine</a>
                       <a href="clothes">Clothes</a>
@@ -90,7 +90,7 @@
                    <h4>Featured Product</h4>
                    <div class="row">
                    <?php 
-                      $sql = "SELECT * FROM PRODUCT ORDER BY ID DESC";
+                      $sql = "SELECT * FROM PRODUCT WHERE CATEGORY= 'Technology' ORDER BY ID DESC";
                       $result = mysqli_query($link,$sql);
                       if(mysqli_num_rows($result)>0){
                         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
@@ -104,7 +104,7 @@
                             </div>';
                          }
                       }else{
-                        echo "Error";
+                        echo '<div class="container"><div class="alert alert-warning">No review</div></div>';
                       }
 
                     ?>

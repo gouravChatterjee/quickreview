@@ -56,6 +56,7 @@
   // SIGN IN PHP CODE
 
   if (isset($_POST['formName']) && $_POST['formName']=="userSignIn"){
+   
 
           $email = $_POST['email'];
 
@@ -66,7 +67,7 @@
 
           $sql = "SELECT * FROM USERS WHERE `EMAIL` = '$email'";
           $result = mysqli_query($link, $sql);
-
+          $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
           $results = mysqli_num_rows($result);
           if(!$results){
               // echo '<div class="alert alert-danger">No Such User</div>';

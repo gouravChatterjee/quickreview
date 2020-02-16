@@ -83,6 +83,9 @@ if(mysqli_connect_error()){
            <li class="nav-item" style="margin-right: 5px;">
             <a href="allProducts" class="btn btn-outline-primary">All Products</a>
           </li>
+           <li class="nav-item" style="margin-right: 5px;">
+            <a href="allQuestions" class="btn btn-outline-primary">All Questions</a>
+          </li>
           <li class="nav-item">
             <a href="adminSignOut" class="btn btn-outline-danger">Sign Out</a>
           </li>

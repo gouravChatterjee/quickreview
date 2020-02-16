@@ -1,50 +1,8 @@
-<script type="text/javascript">
-	$(document).ready(function(){
-		$.ajax({ 
-			url: "/API/V1/?productList",
-	        dataType:"html",
-		    type: "post",
-	        success: function(data){
-	           var show = $('#productsShow');
-    		   show.find("div").remove();
-    		   show.append(data);
-	        }
-	    });
-	    $('#region').change(function(){
-	    	$.ajax({ 
-				url: "/API/V1/?franchiseListFilter",
-				data: { 
-	              region: $("#region").val() 
-	            },
-		        dataType:"html",
-			    type: "post",
-		        success: function(data){
-		           var show = $('#productsShow');
-	    		   show.find("div").remove();
-	    		   show.append(data);
-		        }
-		    });
-	    });
-
-	    $('#searchProduct').keypress(function(){
-	    	var searchElem = $('#searchProduct').val();
-	    	$.ajax({ 
-				url: "/API/V1/?productSearch",
-				data: { 
-	              search: searchElem 
-	            },
-		        dataType:"html",
-			    type: "post",
-		        success: function(data){
-		           var show = $('#productsShow');
-	    		   show.find("div").remove();
-	    		   show.append(data);
-		        }
-		    });
-	    });
-	});
+<script>
+      if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+      }
 </script>
-
 <style type="text/css">
 	.con{
 		padding: 20px;
@@ -61,6 +19,22 @@ if(mysqli_connect_error()){
 if (isset($_GET['id'])) {
 	$id = $_GET['id'];
 }
+if ($_SESSION['LoggedIn']) {
+	$userId = $_SESSION['userId'];
+	$userName = $_SESSION["userName"];
+}
+
+if (isset($_POST['submit'])) {
+	$review = $_POST['rvw'];
+	$sql = "INSERT INTO REVIEWS (`PRODUCT_ID`, `USER_ID`, `USER_NAME`, `REVIEW_DETAILS`) VALUES ('$id', '$userId', '$userName', '$review')";
+	$result = mysqli_query($link,$sql);
+	if ($result) {
+		echo '<div class="container"><div class="alert alert-success">Successfully submitted review</div></div>';
+	}else{
+		echo mysqli_error($link);
+	}
+
+}
 $sql = "SELECT * FROM PRODUCT WHERE UNI_ID = '$id'";
 
 $result = mysqli_query($link,$sql);
@@ -74,7 +48,7 @@ $review = $row['REVIEW'];
 $imgName = $row['IMAGE'];
 ?>
 
-<?php if($_SESSION['LoggedIn'] && $_SESSION['userAdmin']): ?>
+
 <div class="container">
 	<div class="row">
           <!-- left column -->
@@ -88,17 +62,29 @@ $imgName = $row['IMAGE'];
           	</div>
           	<div class="col-lg-6 col-sm-12">
           		<h3 style="color: green"><?php echo "Rs:- ".$price ?></h3>
-          		<h3>Link:- <?php echo $linkDe; ?></h3>
+          		<h3><a href="<?php echo $linkDe; ?>" class="btn btn-success"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+	Buy</a></h3>
           		<h3>Category:- <?php echo $category; ?></h3>
           		<h4>Product Description:- <?php echo $description; ?></h4>
           	</div>
           </div>
       	</div>
+      	<?php if($_SESSION['LoggedIn'] ): ?>
+      	<div class="card">
+        	<div class="card-header"><h4>Share a review</h4></div>
+        	<div class="card-body">
+        		<form method="POST">
+        			<input type="text" name="rvw" placeholder="Enter your review" class="form-control" required><br>
+        			<input type="submit" name="submit" class="btn btn-success" value="Submit Review">
+        		</form>
+        	</div>
+      	</div>
+		<?php endif; ?>
       	<div class="card">
         	<div class="card-header"><h4>Reviews</h4></div>
         	<div class="card-body">
         		 <?php 
-        		 	  $id = $_GET['id'];
+        		 $id = $_GET['id']; 
                       $sql = "SELECT * FROM REVIEWS WHERE PRODUCT_ID = '$id' ORDER BY ID DESC";
                       $result = mysqli_query($link,$sql);
                       if ($result) {
@@ -115,7 +101,6 @@ $imgName = $row['IMAGE'];
 	                        echo '<div class="container"><div class="alert alert-warning">No review</div></div>';
 	                      }
                       }else{
-                      	echo "sdnj";
                       	echo mysqli_error($link);
                       }
                      
@@ -128,4 +113,3 @@ $imgName = $row['IMAGE'];
 	
 </div>
 
-<?php endif; ?>

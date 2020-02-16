@@ -28,7 +28,7 @@
 </script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0"></script>
 <?php 
-	$link = mysqli_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
+  $link = mysqli_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
   $email = $_SESSION["user"];
   $userId = $_SESSION["userId"];
  //  $sql = "SELECT * FROM ATHENEUM_STUDENT WHERE UNI_ID = '$userId'";
@@ -62,8 +62,8 @@
 
 <div class="container">
   <div id="fb-root"></div>
-	
-	 <div class="row">
+  
+   <div class="row">
         <div class="col-md-12">
 
           <div class="row">
@@ -75,9 +75,9 @@
                   <div class="col-lg-3 col-sm-12">
                     <h4>Categories</h4>
                     <div class="vertical-menu">
-                      <a href="/" class="active">All Products</a>
+                      <a href="/">All Products</a>
                       <a href="technology">Technology</a>
-                      <a href="food">Food</a>
+                      <a href="food" class="active">Food</a>
                       <a href="medicine">Medicine</a>
                       <a href="clothes">Clothes</a>
                       <a href="accessories">Accessories</a>
@@ -90,7 +90,7 @@
                    <h4>Featured Product</h4>
                    <div class="row">
                    <?php 
-                      $sql = "SELECT * FROM PRODUCT ORDER BY ID DESC";
+                      $sql = "SELECT * FROM PRODUCT WHERE CATEGORY= 'Food' ORDER BY ID DESC";
                       $result = mysqli_query($link,$sql);
                       if(mysqli_num_rows($result)>0){
                         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 

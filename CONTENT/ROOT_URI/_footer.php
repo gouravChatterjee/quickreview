@@ -22,7 +22,7 @@
 </div>
 
 <footer class="main-footer">
-    <strong>Copyright &copy; 2020-2021 <a href="https://atheneumglobal.education/">Atheneum Global College</a>.</strong>
+    <strong>Copyright &copy; 2020-2021 <a href="">E - Quick Review</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 2.0.0
