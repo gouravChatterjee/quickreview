@@ -1,3 +1,8 @@
+<script>
+      if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+      }
+</script>
 <?php
 $link = new mysqli(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
 $link->set_charset("utf8");
@@ -7,7 +12,7 @@ $email = $_SESSION["user"];
 if(mysqli_connect_error()){
    die("ERROR: UNABLE TO CONNECT: ".mysqli_connect_error());
 }
-
+  
  // $sql = "SELECT * FROM ATHENEUM_STUDENT WHERE EMAIL = '$email'";
 
  // $result = mysqli_query($link,$sql);
@@ -56,11 +61,6 @@ if(mysqli_connect_error()){
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
 
-   <!--  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="  crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-       -->
-
     <title>E-Quick review</title>
     <style type="text/css">
       .colorWhite{
@@ -87,7 +87,7 @@ if(mysqli_connect_error()){
              <a href="https://youtube.com" class="btn btn-danger"><i class="fa fa-youtube" style="font-size:25px; color: #fff;"></i></a>
             <?php if (!$_SESSION['LoggedIn']){ ?>
               <a href="signIn" class="btn btn-outline-light float-right" style="text-decoration: none; ">Sign In</a>
-              <a href="signUp" class="btn btn-light float-right" style="text-decoration: none; margin-right: 5px;">Subscribe</a>
+              <a href="#" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-light float-right" style="text-decoration: none; margin-right: 5px;">Subscribe</a>
              <?php }else{ ?>
              <a href="signOut" class="btn btn-outline-light float-right" style="text-decoration: none; ">Sign Out</a>
            <?php } ?>
@@ -101,8 +101,6 @@ if(mysqli_connect_error()){
       <a href="/" class="navbar-brand">
         <span class="btn btn-outline-danger brand-text">Review</span>
       </a>
-      
-     
 
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
         <!-- Left navbar links -->
@@ -154,15 +152,13 @@ if(mysqli_connect_error()){
           <li class="nav-item" >
             <a href="about" class="btn btn-primary">About</a>
             <a href="contact" class="btn btn-success">Contact Us</a>
+            <a href="contact" class="btn btn-dark">Sign Up</a>
           </li>
           
         </ul>
     
       </div>
      
-
-
-       
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -175,5 +171,76 @@ if(mysqli_connect_error()){
   <div class="content-wrapper">
   <section class="content">
     <br>
-  
+   <?php 
+        if (isset($_POST['subscribe'])) {
+          $fName = $_POST['fName'];
+          $lName = $_POST['lName'];
+          $bEmail = $_POST['bEmail'];
+          $phone = $_POST['pNumber'];
+
+          $stmt = $link->prepare("INSERT INTO SUBSCRIBERS (`FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`) VALUES (?, ?, ?, ?)");
+          $stmt->bind_param("ssss", $fName, $lName, $phone, $bEmail);
+          if ($stmt->execute()) { 
+            echo '<div class="alert alert-success">You are now subscribed!</div>';
+          }else{
+            echo '<div class="alert alert-warning">'.mysqli_error($link).'</div>';
+          }
+        }
+
+       ?>
+
+      <!-- MODAL FOR SUBSCRIBE FORM -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Subscribe Now to get all the updates</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form method="POST">
+              <div class="modal-body">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="First Name" name="fName" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Last Name" name="lName" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Best Email" name="bEmail" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Phone Number" name="pNumber" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-phone"></span>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" name="subscribe" class="btn btn-primary">Subscribe Now</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      <!-- MODAL ENDS -->
 
