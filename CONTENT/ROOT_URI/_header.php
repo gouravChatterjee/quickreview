@@ -125,7 +125,7 @@ if(mysqli_connect_error()){
               <a class="dropdown-item" href="computer">Computer/Internet</a>
               <a class="dropdown-item" href="health">Health & Fitness</a>
               <a class="dropdown-item" href="bestProducts">Best Products</a>
-              <a class="dropdown-item" href="bestProducts">Others</a>
+              <a class="dropdown-item" href="others">Others</a>
             </div>
           </li>
           <li class="nav-item dropdown dd2" style="margin-right: 5px;">
@@ -147,7 +147,7 @@ if(mysqli_connect_error()){
             </div>
           </li>
           <li class="nav-item" style="margin-right: 5px;">
-            <a href="allQuestions" class="btn btn-warning">Forum</a>
+            <a href="forum" class="btn btn-warning">Forum</a>
           </li>
           <li class="nav-item" >
             <a href="about" class="btn btn-primary">About</a>

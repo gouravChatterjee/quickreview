@@ -944,247 +944,28 @@ if (isset($_GET['business'])) {
 			}
 		}	
 
+// ---------------- QUESTION LIST API ----------
 
-// ----------JOINING CHECKLIST API -------------
-function fileCheck($franId,$value){
-  if(file_exists("CONTENT/UPLOADS/FRANCHISE/".$franId."/JoiningCheckList/".$value."/Recieved.txt"))
-    return true;
-  else
-    return false;
-
-}
-
-	if (isset($_GET['franchiseJoiningList'])) {
-		 $sql = "SELECT * FROM BS_USER WHERE BS_USER_TYPE = 'FRANCHISE'";
-	    $result = mysqli_query($link,$sql);
-	    if(mysqli_num_rows($result)>0){
-	      while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-	        $franId = $row['BS_USER_ID'];
-	        $franName = $row['USER_FULL_NAME'];
-	        echo
-	          '<tr>
-	            <td> '.$franName.'</td>';
-	            if(fileCheck($franId,1)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,2)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,3)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,4)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,5)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,6)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,7)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	          echo '</tr>';
-	     }
-	    }else{
-			echo '<div class="alert alert-danger">No Data</div>';
-		}
-
-	}
-
-if (isset($_GET['franchiseJoiningFilter'])) {
-	$region = $_POST['region'];
-	if(strcasecmp($region, "ALL")==0){
-		$sql = "SELECT * FROM BS_USER WHERE BS_USER_TYPE = 'FRANCHISE'";
-	}else{
-		$sql = "SELECT * FROM BS_USER WHERE BS_USER_TYPE = 'FRANCHISE' AND REGION = '$region'";
-	}
-	
+if (isset($_GET['questionList'])) {
+	$sql = "SELECT * FROM QUESTIONS ORDER BY ID DESC";
 	$result = mysqli_query($link,$sql);
 	if($result){
-			
 		if(mysqli_num_rows($result)>0){
 			while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-	        $franId = $row['BS_USER_ID'];
-	        $franName = $row['USER_FULL_NAME'];
-	        echo
-	          '<tr>
-	            <td> '.$franName.'</td>';
-	            if(fileCheck($franId,1)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
+			  $uId = $row['USER_ID'];
+              $qId = $row['ID'];
+              $uName = $row['USER_NAME'];
+              $question = $row['QUESTION_DETAILS'];
+              $category = $row['CATEGORY'];
 
-	            if(fileCheck($franId,2)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,3)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,4)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,5)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,6)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,7)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	          echo '</tr>';
-	     }
-
-		}else{
-			echo '<div class="alert alert-danger">No Data</div>';
-		}
-
-	}else{
-		echo '<div class="alert alert-danger">Error Running the Query</div>';
-		echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
-	}
-
-}
-
-if (isset($_GET['franchiseJoiningSearch'])) {
-	$search = $_POST['search'];
-	$sql = "SELECT * FROM BS_USER WHERE USER_FULL_NAME LIKE'%".$search."%'";
-	
-	$result = mysqli_query($link,$sql);
-	if($result){
-			
-		if(mysqli_num_rows($result)>0){
-			while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-	        $franId = $row['BS_USER_ID'];
-	        $franName = $row['USER_FULL_NAME'];
-	        echo
-	          '<tr>
-	            <td> '.$franName.'</td>';
-	            if(fileCheck($franId,1)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,2)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,3)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,4)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,5)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,6)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	            if(fileCheck($franId,7)){ 
-	              echo '<td>&#10004;</td>';
-	            }else{ 
-	              echo '<td>&#10006;</td>';
-	           } 
-
-	          echo '</tr>';
-	     }
-		}else{
-			echo '<div class="alert alert-danger">No Data</div>';
-		}
-
-	}else{
-		echo '<div class="alert alert-danger">Error Running the Query</div>';
-		echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
-	}
-}	
-
-
-// ---------------- STUDENT LIST API ----------
-
-if (isset($_GET['franchiseStudentList'])) {
-	$sql = "SELECT * FROM BS_USER WHERE BS_USER_TYPE = 'FRANCHISE'";
-	$result = mysqli_query($link,$sql);
-	if($result){
-			
-		if(mysqli_num_rows($result)>0){
-			while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-				$franId = $row['BS_USER_ID'];
-	        	$franName = $row['USER_FULL_NAME'];
-				$sqlEnq = "SELECT * FROM FRP_TB_STUDENT_ENQUIRY WHERE FRANCHISE_ID = '$franId'";
-				$resultEnq = mysqli_query($link,$sqlEnq);
-				$totalEnq = mysqli_num_rows($resultEnq);
-
-				$sqlStudent = "SELECT * FROM FRP_TB_STUDENT_REGISTER WHERE FRANCHISE_ID = '$franId'";
-				$resultStudent = mysqli_query($link,$sqlStudent);
-				$totalStudent = mysqli_num_rows($resultStudent);
-
-				echo '<tr>
-					    <td>'.$franId.'</td>
-					    <td>'.$franName.'</td>
-					    <td>'.$totalEnq.'</td>
-					    <td>'.$totalStudent.'</td>
-					    <td><a href="studentListIndividual?id='.$franId.'" class="btn btn-sm btn-primary" title="Detail Student List"><i class="fas fa-external-link-alt"></i></a>
-					    	<a href="#" class="btn btn-sm btn-warning" title="Trigger SMS/MAIL"><i class="fa fa-envelope" aria-hidden="true"></i>
-							</a></td>
-					  </tr>';
+				echo '<div class="card border"> 
+	                    <div class="card-body text-dark">
+	                      <p>Category:- '.$category.'</p>
+	                      <h3 style="font-weight:bold">Q:-'.$question.'</h3>
+	                      <p>Asked By:- '.$uName.'</p>
+	                      <a href="answers?qid='.$qId.'" class="btn btn-outline-dark"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Answer</a>
+	                    </div>
+	                  </div>';
 
 			}
 
@@ -1198,38 +979,32 @@ if (isset($_GET['franchiseStudentList'])) {
 	}
 }
 
-	if (isset($_GET['franchiseStudentFilter'])) {
-		$region = $_POST['region'];
-		if(strcasecmp($region, "ALL")==0){
-			$sql = "SELECT * FROM BS_USER WHERE BS_USER_TYPE = 'FRANCHISE'";
+	if (isset($_GET['questionListFilter'])) {
+		$product = $_POST['product'];
+		if($product == 'all'){
+			$sql = "SELECT * FROM QUESTIONS ORDER BY ID DESC";
 		}else{
-			$sql = "SELECT * FROM BS_USER WHERE BS_USER_TYPE = 'FRANCHISE' AND REGION = '$region'";
+			$sql = "SELECT * FROM QUESTIONS WHERE CATEGORY = '$product' ORDER BY ID DESC";
 		}
-		
 		$result = mysqli_query($link,$sql);
 		if($result){
   			
 			if(mysqli_num_rows($result)>0){
 				while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-				$franId = $row['BS_USER_ID'];
-	        	$franName = $row['USER_FULL_NAME'];
-				$sqlEnq = "SELECT * FROM FRP_TB_STUDENT_ENQUIRY WHERE FRANCHISE_ID = '$franId'";
-				$resultEnq = mysqli_query($link,$sqlEnq);
-				$totalEnq = mysqli_num_rows($resultEnq);
+				  $uId = $row['USER_ID'];
+	              $qId = $row['ID'];
+	              $uName = $row['USER_NAME'];
+	              $question = $row['QUESTION_DETAILS'];
+	              $category = $row['CATEGORY'];
 
-				$sqlStudent = "SELECT * FROM FRP_TB_STUDENT_REGISTER WHERE FRANCHISE_ID = '$franId'";
-				$resultStudent = mysqli_query($link,$sqlStudent);
-				$totalStudent = mysqli_num_rows($resultStudent);
-
-				echo '<tr>
-					    <td>'.$franId.'</td>
-					    <td>'.$franName.'</td>
-					    <td>'.$totalEnq.'</td>
-					    <td>'.$totalStudent.'</td>
-					    <td><a href="studentListIndividual?id='.$franId.'" class="btn btn-sm btn-primary" title="Detail Student List"><i class="fas fa-external-link-alt"></i></a>
-					    	<a href="#" class="btn btn-sm btn-warning" title="Trigger SMS/MAIL"><i class="fa fa-envelope" aria-hidden="true"></i>
-							</a></td>
-					  </tr>';
+					echo '<div class="card border"> 
+		                    <div class="card-body text-dark">
+		                      <p>Category:- '.$category.'</p>
+		                      <h3 style="font-weight:bold">Q:-'.$question.'</h3>
+		                      <p>Asked By:- '.$uName.'</p>
+		                      <a href="answers?qid='.$qId.'" class="btn btn-outline-dark"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Answer</a>
+		                    </div>
+		                  </div>';
 
 			}
 
@@ -1244,34 +1019,30 @@ if (isset($_GET['franchiseStudentList'])) {
 		}
 	}
 
-		if (isset($_GET['franchiseStudentSearch'])) {
+		if (isset($_GET['questionListSearch'])) {
 			$search = $_POST['search'];
-			$sql = "SELECT * FROM BS_USER WHERE USER_FULL_NAME LIKE'%".$search."%'";
+			$sql = "SELECT * FROM QUESTIONS WHERE QUESTION_DETAILS LIKE'%".$search."%'";
 			
 			$result = mysqli_query($link,$sql);
 			if($result){
 	  			
 				if(mysqli_num_rows($result)>0){
 					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-				$franId = $row['BS_USER_ID'];
-	        	$franName = $row['USER_FULL_NAME'];
-				$sqlEnq = "SELECT * FROM FRP_TB_STUDENT_ENQUIRY WHERE FRANCHISE_ID = '$franId'";
-				$resultEnq = mysqli_query($link,$sqlEnq);
-				$totalEnq = mysqli_num_rows($resultEnq);
+					  $uId = $row['USER_ID'];
+		              $qId = $row['ID'];
+		              $uName = $row['USER_NAME'];
+		              $question = $row['QUESTION_DETAILS'];
+		              $category = $row['CATEGORY'];
 
-				$sqlStudent = "SELECT * FROM FRP_TB_STUDENT_REGISTER WHERE FRANCHISE_ID = '$franId'";
-				$resultStudent = mysqli_query($link,$sqlStudent);
-				$totalStudent = mysqli_num_rows($resultStudent);
+						echo '<div class="card border"> 
+			                    <div class="card-body text-dark">
+			                      <p>Category:- '.$category.'</p>
+			                      <h3 style="font-weight:bold">Q:-'.$question.'</h3>
+			                      <p>Asked By:- '.$uName.'</p>
+			                      <a href="answers?qid='.$qId.'" class="btn btn-outline-dark"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Answer</a>
+			                    </div>
+			                  </div>';
 
-				echo '<tr>
-					    <td>'.$franId.'</td>
-					    <td>'.$franName.'</td>
-					    <td>'.$totalEnq.'</td>
-					    <td>'.$totalStudent.'</td>
-					    <td><a href="studentListIndividual?id='.$franId.'" class="btn btn-sm btn-primary" title="Detail Student List"><i class="fas fa-external-link-alt"></i></a>
-					    	<a href="#" class="btn btn-sm btn-warning" title="Trigger SMS/MAIL"><i class="fa fa-envelope" aria-hidden="true"></i>
-							</a></td>
-					  </tr>';
 
 			}
 

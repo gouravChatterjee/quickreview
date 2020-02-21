@@ -47,14 +47,16 @@ if (isset($_POST['submit'])) {
         	<div class="card-header"><h4>Ask what is on your mind?</h4></div>
         	<div class="card-body">
         		<form method="POST">
-        			<input type="text" name="question" placeholder="Ask a question" class="form-control" required><br>
+        			<textarea name="question" placeholder="Ask a question" class="form-control" rows="3" required></textarea><br>
         			<input type="submit" name="submit" class="btn btn-success" value="Submit Question">
         		</form>
         	</div>
       	</div>
+        <?php else: ?>
+          <div class="alert alert-warning"><a href="signIn" style=" color: black;">Sign In</a> to ask a question!</div>
 		<?php endif; ?>
       	<div class="card">
-        	<div class="card-header"><h4>Questions</h4></div>
+        	<div class="card-header"><h4>Discussion</h4></div>
         	<div class="card-body">
         		 <?php 
                       $sql = "SELECT * FROM QUESTIONS ORDER BY ID DESC";
@@ -63,12 +65,15 @@ if (isset($_POST['submit'])) {
                       	 if(mysqli_num_rows($result)>0){
 	                        while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
 	                          $uId = $row['USER_ID'];
+                            $qId = $row['ID'];
 	                          $uName = $row['USER_NAME'];
 	                          $question = $row['QUESTION_DETAILS'];
-                            echo '<div class="card"> 
-                              <div class="card-body">
-                                <h3>'.$uName.' :-</h3>
-                                <h3>'.$question.'</h3>
+                            echo '<div class="card border-"> 
+                              <div class="card-body text-dark">
+                                <p>Category:- asji</p>
+                                <h3 style="font-weight:bold">'.$question.'</h3>
+                                <p>Asked By:- '.$uName.'</p>
+                                <a href="answers?qid='.$qId.'" class="btn btn-outline-light"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Answer</a>
                               </div>
                             </div>';
 	                         }
