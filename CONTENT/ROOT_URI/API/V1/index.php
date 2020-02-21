@@ -953,7 +953,7 @@ if (isset($_GET['questionList'])) {
 		if(mysqli_num_rows($result)>0){
 			while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 			  $uId = $row['USER_ID'];
-              $qId = $row['ID'];
+              $qId = $row['QUES_ID'];
               $uName = $row['USER_NAME'];
               $question = $row['QUESTION_DETAILS'];
               $category = $row['CATEGORY'];
@@ -992,7 +992,7 @@ if (isset($_GET['questionList'])) {
 			if(mysqli_num_rows($result)>0){
 				while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 				  $uId = $row['USER_ID'];
-	              $qId = $row['ID'];
+	              $qId = $row['QUES_ID'];
 	              $uName = $row['USER_NAME'];
 	              $question = $row['QUESTION_DETAILS'];
 	              $category = $row['CATEGORY'];
@@ -1029,7 +1029,7 @@ if (isset($_GET['questionList'])) {
 				if(mysqli_num_rows($result)>0){
 					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 					  $uId = $row['USER_ID'];
-		              $qId = $row['ID'];
+		              $qId = $row['QUES_ID'];
 		              $uName = $row['USER_NAME'];
 		              $question = $row['QUESTION_DETAILS'];
 		              $category = $row['CATEGORY'];

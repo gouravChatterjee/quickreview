@@ -16,6 +16,16 @@ $link->set_charset("utf8");
 if(mysqli_connect_error()){
 	die("ERROR: UNABLE TO CONNECT: ".mysqli_connect_error());
 }
+$qid = $_GET['qid'];
+
+$sql = "SELECT * FROM QUESTIONS WHERE QUES_ID = '$qid'";
+$result = mysqli_query($link, $sql);
+$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+$uId = $row['USER_ID'];
+$qId = $row['QUES_ID'];
+$uName = $row['USER_NAME'];
+$question = $row['QUESTION_DETAILS'];
+$category = $row['CATEGORY'];
 
 if ($_SESSION['LoggedIn']) {
 	$userId = $_SESSION['userId'];
@@ -41,6 +51,12 @@ if (isset($_POST['submit'])) {
 	<div class="row">
           <!-- left column -->
       <div class="col-md-12 ml-auto mr-auto">
+        <div class="card">
+          <div class="card-body">
+            <h3 style="font-weight: bold">Q:- <?php echo $question; ?></h3>
+            <p>Asked By:- <?php echo $uName; ?></p>
+          </div>
+        </div>
         <!-- general form elements -->
       	<?php if($_SESSION['LoggedIn'] ): ?>
       	<div class="card">

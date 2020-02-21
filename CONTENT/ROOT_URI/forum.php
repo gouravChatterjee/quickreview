@@ -46,13 +46,13 @@
         data: { 
                 search: searchElem 
               },
-            dataType:"html",
-            type: "post",
-            success: function(data){
-                var ques = $('#questionsDiv');
-                ques.find("div").remove();
-                ques.append(data);
-            }
+        dataType:"html",
+        type: "post",
+        success: function(data){
+            var ques = $('#questionsDiv');
+            ques.find("div").remove();
+            ques.append(data);
+        }
         });
       });
   });
