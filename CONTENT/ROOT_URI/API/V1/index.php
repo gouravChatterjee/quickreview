@@ -958,17 +958,17 @@ if (isset($_GET['questionList'])) {
               $question = $row['QUESTION_DETAILS'];
               $category = $row['CATEGORY'];
 
-				echo '<div class="card border"> 
-	                    <div class="card-body text-dark">
+				echo '<div class="card" style="background:#00CCCD; color:black;"> 
+	                    <div class="card-body">
 	                      <p>Category:- '.$category.'</p>
 	                      <h3 style="font-weight:bold">Q:-'.$question.'</h3>
-	                      <p>Asked By:- '.$uName.'</p>
-	                      <a href="answers?qid='.$qId.'" class="btn btn-outline-dark"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Answer</a>
+	                      <p class="getAnswer">Asked By:- '.$uName.'</p>
+	                      <button class="btn btn-outline-dark" onclick="openAnswer(`'.$qId.'`);" data-toggle="modal" data-target="#answerModal"><i class="fa fa-reply" aria-hidden="true" ></i>&nbsp;Answer</button>
 	                    </div>
 	                  </div>';
 
 			}
-
+// href="answers?qid='.$qId.'"
 		}else{
 			echo '<div class="alert alert-danger">No Data</div>';
 		}
@@ -1002,7 +1002,7 @@ if (isset($_GET['questionList'])) {
 		                      <p>Category:- '.$category.'</p>
 		                      <h3 style="font-weight:bold">Q:-'.$question.'</h3>
 		                      <p>Asked By:- '.$uName.'</p>
-		                      <a href="answers?qid='.$qId.'" class="btn btn-outline-dark"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Answer</a>
+		                      <button class="btn btn-outline-dark" onclick="openAnswer(`'.$qId.'`);" data-toggle="modal" data-target="#answerModal"><i class="fa fa-reply" aria-hidden="true" ></i>&nbsp;Answer</button>
 		                    </div>
 		                  </div>';
 
@@ -1039,14 +1039,52 @@ if (isset($_GET['questionList'])) {
 			                      <p>Category:- '.$category.'</p>
 			                      <h3 style="font-weight:bold">Q:-'.$question.'</h3>
 			                      <p>Asked By:- '.$uName.'</p>
-			                      <a href="answers?qid='.$qId.'" class="btn btn-outline-dark"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;Answer</a>
+			                      <button class="btn btn-outline-dark" onclick="openAnswer(`'.$qId.'`);" data-toggle="modal" data-target="#answerModal"><i class="fa fa-reply" aria-hidden="true" ></i>&nbsp;Answer</button>
 			                    </div>
 			                  </div>';
 
+					}
 
+				}else{
+					echo '<div class="alert alert-danger">No Data</div>';
+				}
+
+			}else{
+				echo '<div class="alert alert-danger">Error Running the Query</div>';
+				echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
 			}
+		}
+		if (isset($_GET['answers'])) {
+			$quesID = $_GET['qid'];
+			$sql = "SELECT * FROM ANSWERS WHERE QUESTION_ID ='$quesID' ORDER BY ID DESC";
+			$result = mysqli_query($link,$sql);
+			if($_SESSION['LoggedIn']){
+				echo '<div class="card"> 
+                    <div class="card-body">
+                      
+						<textarea placeholder="Enter your answer" name="answer" class="form-control" rows="3" id="ansText"></textarea><br>
+						<input type="hidden" name="questionId" id="quesId" value="'.$quesID.'">
+						<button type="button" onclick="submitAnswer()" class="btn btn-success">Submit</button>	
 
+                    </div>
+                  </div>';
+			}
+			if($result){
+				if(mysqli_num_rows($result)>0){
+					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+					  $uId = $row['ANSWER_ID'];
+		              $qId = $row['QUES_ID'];
+		              $uName = $row['USER_NAME'];
+		              $ans = $row['ANSWER'];
 
+						echo '<div class="card"> 
+			                    <div class="card-body text-dark">
+			                      <h3 style="font-weight:bold">Reply:-'.$ans.'</h3>
+			                      <p>Replied By:- '.$uName.'</p>
+			                    </div>
+			                  </div>';
+
+					}
 				}else{
 					echo '<div class="alert alert-danger">No Data</div>';
 				}
@@ -1057,6 +1095,20 @@ if (isset($_GET['questionList'])) {
 			}
 		}	
 
+		if (isset($_GET['submitAnswer'])) {
+			  $ansId = D_create_UserId();
+			  $answer = $_POST['answer'];
+			  $questionId = $_POST['questionId'];
+			  $userId = $_SESSION['userId'];
+			  $userName = $_SESSION['userName'];
+			  $sql = "INSERT INTO ANSWERS (`QUESTION_ID`, `ANSWER_ID`, `USER_ID`, `USER_NAME`, `ANSWER`) VALUES ('$questionId', '$ansId', '$userId', '$userName', '$answer')";
+			  $result = mysqli_query($link,$sql);
+			  if ($result) {
+			    echo '<div class="container"><div class="alert alert-success">Successfully submitted Question</div></div>';
+			  }else{
+			    echo mysqli_error($link);
+			  }
+		}
 
 
 

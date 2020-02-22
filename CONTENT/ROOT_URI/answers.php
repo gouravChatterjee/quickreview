@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 	<div class="row">
           <!-- left column -->
       <div class="col-md-12 ml-auto mr-auto">
-        <div class="card">
+        <div class="card" style="background: #F5BCBA">
           <div class="card-body">
             <h3 style="font-weight: bold">Q:- <?php echo $question; ?></h3>
             <p>Asked By:- <?php echo $uName; ?></p>
