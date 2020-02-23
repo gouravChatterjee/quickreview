@@ -1056,19 +1056,28 @@ if (isset($_GET['questionList'])) {
 		}
 		if (isset($_GET['answers'])) {
 			$quesID = $_GET['qid'];
+			$sqlQues = "SELECT * FROM QUESTIONS WHERE QUES_ID ='$quesID'";
+			$resultQues = mysqli_query($link,$sqlQues);
+			if ($resultQues) {
+				$rowQues = mysqli_fetch_array($resultQues,MYSQLI_ASSOC);
+				$uName = $rowQues['USER_NAME'];
+			    $question = $rowQues['QUESTION_DETAILS'];
+			    $category = $rowQues['CATEGORY'];
+			    echo '<div class="card"> 
+	                    <div class="card-body" style="background:#67E6DC;">
+							<p>Category:- '.$category.'</p>
+		                      <h3 style="font-weight:bold">Q:-'.$question.'</h3>
+		                      <p>Asked By:- '.$uName.'</p>	
+
+	                    </div>
+	                  </div>';
+			}else{
+				echo mysqli_error($link);
+			}
+			
 			$sql = "SELECT * FROM ANSWERS WHERE QUESTION_ID ='$quesID' ORDER BY ID DESC";
 			$result = mysqli_query($link,$sql);
-			if($_SESSION['LoggedIn']){
-				echo '<div class="card"> 
-                    <div class="card-body">
-                      
-						<textarea placeholder="Enter your answer" name="answer" class="form-control" rows="3" id="ansText"></textarea><br>
-						<input type="hidden" name="questionId" id="quesId" value="'.$quesID.'">
-						<button type="button" onclick="submitAnswer()" class="btn btn-success">Submit</button>	
-
-                    </div>
-                  </div>';
-			}
+			
 			if($result){
 				if(mysqli_num_rows($result)>0){
 					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -1092,6 +1101,16 @@ if (isset($_GET['questionList'])) {
 			}else{
 				echo '<div class="alert alert-danger">Error Running the Query</div>';
 				echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
+			}
+			if($_SESSION['LoggedIn']){
+				echo '<div class="card"> 
+                    <div class="card-body">
+						<textarea placeholder="Enter your answer" name="answer" class="form-control" rows="3" id="ansText"></textarea><br>
+						<input type="hidden" name="questionId" id="quesId" value="'.$quesID.'">
+						<button type="button" onclick="submitAnswer()" class="btn btn-success">Submit</button>	
+
+                    </div>
+                  </div>';
 			}
 		}	
 

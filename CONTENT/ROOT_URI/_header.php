@@ -152,7 +152,7 @@ if(mysqli_connect_error()){
           <li class="nav-item" >
             <a href="about" class="btn btn-primary">About</a>
             <a href="contact" class="btn btn-success">Contact Us</a>
-            <a href="contact" class="btn btn-dark">Sign Up</a>
+            <a href="signUp" class="btn btn-dark">Sign Up</a>
           </li>
           
         </ul>

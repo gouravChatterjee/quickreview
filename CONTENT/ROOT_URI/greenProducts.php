@@ -56,18 +56,18 @@
                     <div class="vertical-menu">
                       <a href="allProducts">All Products</a>
                       <a href="technology">Technology</a>
-                      <a href="food" class="active">Food</a>
-                      <a href="fashion">Fashion</a>
-                      <a href="skincare">Skincare & beauty</a>
+                      <a href="food">Food</a>
+                      <a href="fashion" >Fashion</a>
+                      <a href="skincare" >Skincare & beauty</a>
                       <a href="accessories">Accessories</a>
                       <a href="art">Art</a>
                       <a href="games">Games</a>
-                      <a href="books">Books/e-books/audio-books</a>
+                      <a href="books" >Books/e-books/audio-books</a>
                       <a href="homeDecor">Home Decor</a>
                       <a href="software">Software</a>
                       <a href="sports">Sports</a>
                       <a href="travel">Travel</a>
-                      <a href="greenProducts">Green Products</a>
+                      <a href="greenProducts" class="active">Green Products</a>
                       <a href="computer">Computer/Internet</a>
                       <a href="health">Health & Fitness</a>
                       <a href="bestProducts">Best Products</a>
@@ -78,7 +78,7 @@
                    <h4>Latest Products</h4>
                    <div class="row">
                    <?php 
-                      $sql = "SELECT * FROM PRODUCT WHERE CATEGORY = 'Food' ORDER BY ID DESC";
+                      $sql = "SELECT * FROM PRODUCT WHERE CATEGORY = 'GreenProducts' ORDER BY ID DESC";
                       $result = mysqli_query($link,$sql);
                       if(mysqli_num_rows($result)>0){
                         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 

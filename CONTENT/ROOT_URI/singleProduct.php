@@ -8,6 +8,36 @@
 		padding: 20px;
 	}
 </style>
+<style type="text/css">
+  .vertical-menu {
+  width: 230px;
+  background: #67E6DC;
+  color: #67E6DC;
+}
+
+.vertical-menu a {
+  background-color: #eee;
+  color: black;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc;
+}
+
+.vertical-menu a.active {
+  background-color: #192A56;
+  color: white;
+}
+.card-img-top {
+    width: 100%;
+    height: 8vw;
+    object-fit: cover;
+}
+
+</style>
 
 <?php 
 $link = new mysqli(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
@@ -51,14 +81,15 @@ $imgName = $row['IMAGE'];
 
 <div class="container">
 	<div class="row">
+    
           <!-- left column -->
-      <div class="col-md-12 ml-auto mr-auto">
+      <div class="col-md-9 col-sm-12">
         <!-- general form elements -->
         <div class="card con">
         	<h1 class="text-center"><?php echo $name ?></h1><hr>
           <div class="row">
           	<div class="col-lg-6 col-sm-12">
-          	 	<?php echo '<img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" height="100%" width="100%" alt="">'; ?>
+          	 	<?php echo '<img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" height="300" width="100%" alt="">'; ?>
           	</div>
           	<div class="col-lg-6 col-sm-12">
           		<h3 style="color: green"><?php echo "Rs:- ".$price ?></h3>
@@ -108,6 +139,29 @@ $imgName = $row['IMAGE'];
                 ?>
         	</div>
       	</div>
+      </div>
+      <div class="col-md-3 col-sm-12">
+      <h3>Categories</h3>
+        <div class="vertical-menu">
+          <a href="allProducts">All Products</a>
+          <a href="technology">Technology</a>
+          <a href="food">Food</a>
+          <a href="fashion">Fashion</a>
+          <a href="skincare">Skincare & beauty</a>
+          <a href="accessories">Accessories</a>
+          <a href="art">Art</a>
+          <a href="games">Games</a>
+          <a href="books">Books/e-books/audio-books</a>
+          <a href="homeDecor">Home Decor</a>
+          <a href="software">Software</a>
+          <a href="sports">Sports</a>
+          <a href="travel">Travel</a>
+          <a href="greenProducts">Green Products</a>
+          <a href="computer">Computer/Internet</a>
+          <a href="health">Health & Fitness</a>
+          <a href="bestProducts">Best Products</a>
+          <a href="others">Others</a>
+        </div>
       </div>
   	</div>
 	

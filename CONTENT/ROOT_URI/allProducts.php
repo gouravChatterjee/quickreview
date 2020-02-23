@@ -36,32 +36,6 @@
 	$link = mysqli_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
   $email = $_SESSION["user"];
   $userId = $_SESSION["userId"];
- //  $sql = "SELECT * FROM ATHENEUM_STUDENT WHERE UNI_ID = '$userId'";
- //  $result = mysqli_query($link,$sql);
-
- // if($result){
- //      if(mysqli_num_rows($result)>0){
- //        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
- //        $userName = $row["NAME"];
- //        $email = $row["EMAIL"];
- //        $phone = $row["PHONE"];
- //        $programName = $row['PROGRAM_NAME'];
- //        $programType = $row['PROGRAM_TYPE'];
- //      }
- //  }
- //  if (isset($_POST['flag'])) {
- //    $image = $_FILES['propic']['name'];
- //    $imgName = "propic.webp";
- //    mkdir("CONTENT/UPLOADS/USERS/".$userId."/",  0755, true);
- //    $target = "CONTENT/UPLOADS/USERS/".$userId."/".$imgName;
- //    if (move_uploaded_file($_FILES['propic']['tmp_name'], $target)) {
- //      // $msg = "Image uploaded successfully";
- //      echo '<div class=container><div class="alert alert-success">Successfully updated profile picture</div></div>';
- //    }else{
- //      echo '<div class=container><div class="alert alert-danger">Error occured! Please try again!</div></div>';
-      
- //    }
- //  }
  ?>
 
 
@@ -81,23 +55,23 @@
                     <h4>Categories</h4>
                     <div class="vertical-menu">
                       <a href="allProducts" class="active">All Products</a>
-                      <a class="dropdown-item" href="technology">Technology</a>
-                      <a class="dropdown-item" href="food">Food</a>
-                      <a class="dropdown-item" href="fashion">Fashion</a>
-                      <a class="dropdown-item" href="skincare">Skincare & beauty</a>
-                      <a class="dropdown-item" href="accessories">Accessories</a>
-                      <a class="dropdown-item" href="art">Art</a>
-                      <a class="dropdown-item" href="games">Games</a>
-                      <a class="dropdown-item" href="books">Books/e-books/audio-books</a>
-                      <a class="dropdown-item" href="homeDecor">Home Decor</a>
-                      <a class="dropdown-item" href="software">Software</a>
-                      <a class="dropdown-item" href="sports">Sports</a>
-                      <a class="dropdown-item" href="travel">Travel</a>
-                      <a class="dropdown-item" href="greenProducts">Green Products</a>
-                      <a class="dropdown-item" href="computer">Computer/Internet</a>
-                      <a class="dropdown-item" href="health">Health & Fitness</a>
-                      <a class="dropdown-item" href="bestProducts">Best Products</a>
-                      <a class="dropdown-item" href="bestProducts">Others</a>
+                      <a href="technology">Technology</a>
+                      <a href="food">Food</a>
+                      <a href="fashion">Fashion</a>
+                      <a href="skincare">Skincare & beauty</a>
+                      <a href="accessories">Accessories</a>
+                      <a href="art">Art</a>
+                      <a href="games">Games</a>
+                      <a href="books">Books/e-books/audio-books</a>
+                      <a href="homeDecor">Home Decor</a>
+                      <a href="software">Software</a>
+                      <a href="sports">Sports</a>
+                      <a href="travel">Travel</a>
+                      <a href="greenProducts">Green Products</a>
+                      <a href="computer">Computer/Internet</a>
+                      <a href="health">Health & Fitness</a>
+                      <a href="bestProducts">Best Products</a>
+                      <a href="others">Others</a>
                     </div>
                   </div>
                   <div class="col-lg-9 col-sm-12">
