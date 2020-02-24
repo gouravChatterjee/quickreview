@@ -1,4 +1,4 @@
-
+<!--  -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
@@ -56,12 +56,12 @@
 <!-- Sparkline -->
 <!-- <script src="/CSS/plugins/sparklines/sparkline.js"></script> -->
 <!-- JQVMap -->
-<script src="/CSS/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="/CSS/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- <script src="/CSS/plugins/jqvmap/jquery.vmap.min.js"></script> -->
+<!-- <script src="/CSS/plugins/jqvmap/maps/jquery.vmap.usa.js"></script> -->
 <!-- jQuery Knob Chart -->
-<script src="/CSS/plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- <script src="/CSS/plugins/jquery-knob/jquery.knob.min.js"></script> -->
 <!-- daterangepicker -->
-<script src="/CSS/plugins/moment/moment.min.js"></script>
+<!-- <script src="/CSS/plugins/moment/moment.min.js"></script> -->
 <!-- <script src="/CSS/plugins/daterangepicker/daterangepicker.js"></script> -->
 <!-- Tempusdominus Bootstrap 4 -->
 <!-- <script src="/CSS/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script> -->

@@ -7,386 +7,6 @@
 
 //--------------INVENTORY MODULE-----------------
 
-if (isset($_GET['business'])) {
-	$bsns =  $_POST['value'];
-    	$sql = "SELECT DISTINCT(PROGRAM) FROM FRP_TB_ANNEXURE_PROGRAM WHERE BUSINESS_VERTICAL = '$bsns'";
-			$result = mysqli_query($link,$sql);
-			echo "<option value='Select'>Select Program</option>" ;
-			 if(mysqli_num_rows($result)>0){
-			 	while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-			 		# code...
-			 		$program = $row["PROGRAM"];
-	                echo "<option value='". $program ."'>" .$program ."</option>" ;
-                
-		}
-               
-     }
-		// echo "hello";	
-	// $bsns =  $_POST['value'];
-	// echo '<option value="">Select</option>';
-	// echo $bsns;
-
-	// echo glob("CONTENT/DATA/Structure/Business/*");
-	// foreach (glob("CONTENT/DATA/Structure/Business/".$bsns."/*") as $filename) {
-		// echo $fileName;
-		// if(is_file($filename)){
-			// $response=array('file'=>'yes', // First Value
-				   // );
-					// echo json_encode($response);
-						// $filePresent = "yes";
-						// echo $filePresent;
-						// exit();
-
-
-					// }
-	          // if(is_dir($filename)) {
-	            // $i++;
-	            // $FolderName=explode('/', $filename); $FolderName=end($FolderName);
-	            // echo $FolderName;
-	            // $response=array('folder'=>$FolderName, // First Value
-				   // );
-					// echo json_encode($response);
-	            // echo "<option value='". $FolderName ."'>" .$FolderName ."</option>" ;
-	            
-	          // }
-	        // }
-		}
-
-		if (isset($_GET['program'])) {
-		// echo "hello";	
-			
-			$program =  $_POST['value'];
-			// if ($program == "IIMTT Basic" || $program == "IIMTT Advance") {
-			// 	$program = "IIMTT";
-			// }
-			if ($program == "IIMTT") {
-				
-				$sql = "SELECT * FROM FRP_TB_ANNEXURE_PROGRAM WHERE PROGRAM LIKE'%".$program."%'";
-				
-				$result = mysqli_query($link,$sql);
-				echo "<option value='Select'>Select Now</option>" ;
-				 if(mysqli_num_rows($result)>0){
-				 	while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-				 		# code...
-				 		$itemName = $row["ITEM_DESC"];
-				 		$itemId = $row["ITEM_ID"];
-		                echo "<option value='". $itemId ."'>".$itemId." - " .$itemName ."</option>" ;
-	                
-				 	}
-	               
-	            }
-		
-			}else{
-				$sql = "SELECT * FROM FRP_TB_ANNEXURE_PROGRAM WHERE PROGRAM = '$program'";
-			$result = mysqli_query($link,$sql);
-			echo "<option value='Select'>Select Now</option>" ;
-			 if(mysqli_num_rows($result)>0){
-			 	while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-			 		# code...
-			 		$itemName = $row["ITEM_DESC"];
-			 		$itemId = $row["ITEM_ID"];
-	                echo "<option value='". $itemId ."'>".$itemId." - " .$itemName ."</option>" ;
-                
-			 	}
-               
-            }
-			}
-		
-		}
-
-
-		if (isset($_GET['programIssue'])) {
-		// echo "hello";	
-			
-			$program =  $_POST['value'];
-			$sql = "SELECT * FROM FRP_TB_ANNEXURE_PROGRAM WHERE PROGRAM = '$program'";
-			$result = mysqli_query($link,$sql);
-			echo "<option value='Select'>Select now</option>" ;
-			 if(mysqli_num_rows($result)>0){
-			 	while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-			 		# code...
-			 		$itemName = $row["ITEM_DESC"];
-			 		$itemId = $row["ITEM_ID"];
-	                echo "<option value='". $itemName ."'>".$itemId." - " .$itemName ."</option>" ;
-                
-			 	}
-               
-            }
-		
-
-		}
-
-		if (isset($_GET['numberOfItems'])) {
-		// echo "hello";	
-			
-			$item =  $_POST['value'];
-			$franId = $_SESSION['franId'];
-
-			$sql = "SELECT * FROM FRANCHISE_INVENTORY WHERE FRANCHISE_ID = '$franId' AND ITEM_ID = '$item' AND ITEM_STATUS='AVAILABLE'";
-			$result = mysqli_query($link,$sql);
-			if(mysqli_num_rows($result)>0){
-				$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-				$numberOfItems = $row["NUMBER_OF_ITEM"];
-				if($numberOfItems)
-					echo "Items available in stock: ".$numberOfItems;
-			 	           
-            }else{
-            	echo "Item is not available in the stock";
-            }
-		
-
-		}
-
-		
-
-	if (isset($_GET['updateMarksTheory'])) {
-		// echo "hello";	
-			
-			$value =  $_POST['subject'];
-			$chapter =  $_POST['ch'];
-
-    		echo '<h4>'.$chapter.' - '.$value.'</h4><hr>
-    		<form method="POST" id="form'.$value.'">
-    		<div class="form-group">
-				<input class="form-control" type="number" id="'.$value.'internal" name="'.$value.'internal" placeholder="Internal (30)" required>						
-			</div>
-			<div class="form-group">
-    		<input class="form-control" type="number" id="'.$value.'attandance" name="'.$value.'attandance" placeholder="Attandance(20)" required>
-			</div>
-			<div class="form-group">
-				<input class="form-control" type="number" id="'.$value.'final" name="'.$value.'final" placeholder="Final (50)" required onkeyup="calculateMarks('."'".$value."internal','".$value."attandance','".$value."final','".$value."net'".');">						
-			</div>
-    		
-    		 <div class="row">
-				          <div class="col"><input class="form-control" id="'.$value.'net" type="number" name="'.$value.'net" placeholder="Net Marks" readonly required></div>
-				          <div class="col"><button type="submit" form="form'.$value.'" name="save'.$value.'" class="btn btn-success" value="Save"> Save</button></div>  
-				        </div>
-
-    		</form>';
-
-			
-			
-		}
-
-		if (isset($_GET['totalBasicTheory'])) {
-		// echo "hello";	
-			
-			$value =  $_POST['id'];
-			$franId = $_SESSION['franId'];
-
-
-		
-    		// echo $value;
-
-    		$sql = "SELECT * FROM BS_BASIC_THEORY_MARKS WHERE FRANCHISE_ID = '$franId' AND STUDENT_ID = '$value'";
-            $result = mysqli_query($link, $sql);
-            if ($result) {
-              if(mysqli_num_rows($result)>0){
-              	
-				$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-				// echo $row['STUDENT_ID'];
-				$val =  $row['DM101'];
-				// echo $val;
-				$totalMarks = $row['DM101']+$row['DM102']+ $row['DM103']+$row['DM104']+$row['DM105']+$row['DM106']+$row['DM107']+$row['DM108'];
-				echo "Total Marks:- ".$totalMarks;
-                
-                
-                $sql2 = "UPDATE BS_BASIC_THEORY_MARKS SET  TOTAL_BASIC_THEORY = '$totalMarks' WHERE FRANCHISE_ID = '$franId' AND STUDENT_ID='$value'";
-                $result2 = mysqli_query($link, $sql2);
-              }
-            }
-
-			
-			
-		}
-
-		if (isset($_GET['totalAdvanceTheory'])) {
-		// echo "hello";	
-			
-			$value =  $_POST['id'];
-			// $chapter =  $_POST['ch'];
-			$franId = $_SESSION['franId'];
-
-		
-    		// echo $value;
-
-    		$sql = "SELECT * FROM BS_ADVANCE_THEORY_MARKS WHERE FRANCHISE_ID = '$franId' AND STUDENT_ID = '$value'";
-            $result = mysqli_query($link, $sql);
-            if ($result) {
-              if(mysqli_num_rows($result)>0){
-              	
-				$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-				// echo $row['STUDENT_ID'];
-				// $val =  $row['DM101'];
-				// echo $val;
-				$totalMarks = $row['DA101']+$row['DA102']+ $row['DA103']+$row['DA104']+$row['DA105']+$row['DA106']+$row['DA107']+$row['DA108'];
-				echo "Total Marks:- ".$totalMarks;
-                
-                
-                $sql2 = "UPDATE BS_ADVANCE_THEORY_MARKS SET TOTAL_ADVANCE_THEORY = '$totalMarks' WHERE FRANCHISE_ID = '$franId' AND STUDENT_ID='$value'";
-                $result2 = mysqli_query($link, $sql2);
-              }
-            }
-
-			
-			
-		}
-
-		if (isset($_GET['updateMarksPractical'])) {
-		// echo "hello";	
-			
-			$value =  $_POST['subject'];
-			$chapter =  $_POST['ch'];
-
-		
-    		echo '<h4>'.$chapter.' - '.$value.'</h4><hr>
-    		<form method="POST" id="form'.$value.'">
-    		<div class="form-group">
-				<input class="form-control" type="number" id="'.$value.'internal" name="'.$value.'internal" placeholder="Record Presentation (10)" required >						
-			</div>
-			<div class="form-group">
-    		<input class="form-control" type="number" id="'.$value.'attandance" name="'.$value.'attandance" placeholder="Attandance (5)" required>
-			</div>
-			<div class="form-group">
-				<input class="form-control" type="number" id="'.$value.'final" name="'.$value.'final" placeholder="Demonstration (10)" required onkeyup="calculateMarksPractical('."'".$value."internal','".$value."attandance','".$value."final','".$value."net'".');">					
-			</div>
-    		
-    		 <div class="row">
-				          <div class="col"><input class="form-control" id="'.$value.'net" type="number" name="'.$value.'net" placeholder="Net Marks" readonly required></div>
-          <div class="col"><input type="submit" name="save'.$value.'" class="btn btn-success" value="Save"></div> 
-			 </div>
-
-    		</form>';
-
-			
-			
-		}
-
-		if (isset($_GET['calculateTotalPractical'])) {
-		// echo "hello";	
-			
-			$value =  $_POST['id'];
-			// $chapter =  $_POST['ch'];
-			$franId = $_SESSION['franId'];
-
-		
-    		// echo $value;
-
-    		$sql = "SELECT * FROM BS_PRACTICAL_MARKS WHERE FRANCHISE_ID = '$franId' AND STUDENT_ID = '$value'";
-            $result = mysqli_query($link, $sql);
-            if ($result) {
-              if(mysqli_num_rows($result)>0){
-              	
-				$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-				// echo $row['STUDENT_ID'];
-				
-				// echo $val;
-				$totalMarks = $row['DMP101']+$row['DMP102']+ $row['DMP103']+$row['DMP104'];
-				echo "Total Marks:- ".$totalMarks;
-                
-                
-                $sql2 = "UPDATE BS_PRACTICAL_MARKS SET  TOTAL_PRACTICAL_MARKS = '$totalMarks' WHERE FRANCHISE_ID = '$franId' AND STUDENT_ID='$value'";
-                $result2 = mysqli_query($link, $sql2);
-              }
-            }
-
-			
-			
-		}
-
-
-		if (isset($_GET['updateMarksAlbum'])) {
-		// echo "hello";	
-			
-			$value =  $_POST['subject'];
-			$chapter =  $_POST['ch'];
-
-		
-    		echo '<h4>'.$chapter.' - '.$value.'</h4><hr>
-    		<form method="POST" id="form'.$value.'">
-    		<div class="form-group">
-				<input class="form-control" type="number" id="'.$value.'record" name="'.$value.'record" placeholder="Record Presentation (40)" required>						
-			</div>
-		
-			<div class="form-group">
-				<input class="form-control" type="number" id="'.$value.'attandance" name="'.$value.'attandance" placeholder="Attandance(10)" required onkeyup="calculateMarksAlbum('."'".$value."record','".$value."attandance','".$value."net'".');">					
-			</div>
-    		
-    		 <div class="row">
-          <div class="col"><input class="form-control" id="'.$value.'net" type="number" name="'.$value.'net" placeholder="Net Marks" readonly required></div>
-          <div class="col"><input type="submit" name="save'.$value.'" class="btn btn-success" value="Save"></div>  
-        </div>
-
-    		</form>';
-
-			
-			
-		}
-
-
-		if (isset($_GET['calculateTotalAlbum'])) {
-		// echo "hello";	
-			
-			$value =  $_POST['id'];
-			// $chapter =  $_POST['ch'];
-			$franId = $_SESSION['franId'];
-
-		
-    		// echo $value;
-
-    		$sql = "SELECT * FROM BS_ALBUM_MARKS WHERE FRANCHISE_ID = '$franId' AND STUDENT_ID = '$value'";
-            $result = mysqli_query($link, $sql);
-            if ($result) {
-              if(mysqli_num_rows($result)>0){
-              	
-				$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-				// echo $row['STUDENT_ID'];
-				
-				// echo $val;
-				$totalMarks = $row['DMA101']+$row['DMA102']+ $row['DMA103']+$row['DMA104']+$row['DMA105'];
-				echo "Total Marks:- ".$totalMarks;
-                
-                
-                $sql2 = "UPDATE BS_ALBUM_MARKS SET  TOTAL_ALBUM_MARKS = '$totalMarks' WHERE FRANCHISE_ID = '$franId' AND STUDENT_ID='$value'";
-                $result2 = mysqli_query($link, $sql2);
-              }
-            }
-
-			
-			
-		}
-
-		if (isset($_GET['updateMarksViva'])) {
-		// echo "hello";	
-			
-			$value =  $_POST['subject'];
-			$chapter =  $_POST['ch'];
-
-		
-    		echo '<h4>'.$chapter.' - '.$value.'</h4><hr>
-    		<form method="POST" id="form'.$value.'">
-    		<div class="form-group">
-				<input class="form-control" type="number" id="'.$value.'communication" name="'.$value.'communication" placeholder="Communication(20)" required>						
-			</div>
-			<div class="form-group">
-				<input class="form-control" type="number" id="'.$value.'presentation" name="'.$value.'presentation" placeholder="Presentation(20)" required>						
-			</div>
-		
-			<div class="form-group">
-				<input class="form-control" type="number" id="'.$value.'body" name="'.$value.'body" placeholder="Enter the marks" required onkeyup="calculateMarksViva('."'".$value."communication','".$value."presentation','".$value."body','".$value."net'".');">					
-			</div>
-    		
-    		 <div class="row">
-          <div class="col"><input class="form-control" id="'.$value.'net" type="number" name="'.$value.'net" placeholder="Net Marks" readonly required></div>
-          <div class="col"><input type="submit" name="save'.$value.'" class="btn btn-success" value="Save"></div>  
-        </div>
-
-    		</form>';
-
-			
-			
-		}
-
 			if (isset($_GET['calculateTotalViva'])) {
 		// echo "hello";	
 			
@@ -902,6 +522,57 @@ if (isset($_GET['business'])) {
 			$result = mysqli_query($link,$sql);
 			if($result){
 	  			
+				if(mysqli_num_rows($result)>0){
+					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+
+						// $jsonD=json_decode($row['USER_JSOND']);
+
+						$id = $row['UNI_ID'];
+						$name = $row['PR_NAME'];
+						$category = $row['CATEGORY'];
+						$price = $row['PRICE'];
+						$imgName = $row['IMAGE'];
+
+						echo '<div class="card flex-row flex-wrap">
+					          <div class="card-body">
+					          <div class="row">
+					          <div class="col-lg-4 col-sm-6">
+					          	<img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" height="100%" width="100%" alt="">
+					          </div>
+					          <div class="col-lg-8 col-sm-6">
+					          	<div class=" px-2">
+						            <h4 class="card-title"><b>'.$name.'</b></h4>
+						            <p class="card-text">'.$category.'</p>
+						            <a href="singleProduct?id='.$id.'" class="btn btn-primary">GO</a>
+						        </div>
+					          </div>
+					          </div>
+					          	
+					          </div>
+					         
+					        </div>';
+
+					}
+
+				}else{
+					echo '<div class="alert alert-danger">No Data</div>';
+				}
+
+			}else{
+				echo '<div class="alert alert-danger">Error Running the Query</div>';
+				echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
+			}
+		}	
+
+		if (isset($_GET['productListFilter'])) {
+			$product = $_POST['product'];
+			if ($product == 'all') {
+				$sql = "SELECT * FROM PRODUCT";
+			}else{
+				$sql = "SELECT * FROM PRODUCT WHERE CATEGORY='$product'";
+			}
+			$result = mysqli_query($link,$sql);
+			if($result){
 				if(mysqli_num_rows($result)>0){
 					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 

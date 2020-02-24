@@ -109,14 +109,23 @@ if ($GLOBALS['alert_info']!="") {
 	      		  	  <div class="form-group">
 					   <label for="name">Product Category<span style="color: red;">*</span></label>
 		    			<select name ="prCategory" class="form-control">
-		    				<option value="Technology">Technology</option>
-		    				<option value="Food">Food</option>
-		    				<option value="Medicine">Medicine</option>
-		    				<option value="Clothes">Clothes</option>
-		    				<option value="Accessories">Accessories</option>
-		    				<option value="art">art</option>
-		    				<option value="entertainment">entertainment</option>
-		    				<option value="Games">Games</option>
+		    				<option>Select Category</option>
+			                  <option value="all">All Product</option>
+			                  <option value="Technology">Technology</option>
+			                  <option value="Food">Food</option>
+			                  <option value="Fashion">Fashion</option>
+			                  <option value="Skincare">Skincare</option>
+			                  <option value="Accessories">Accessories</option>
+			                  <option value="Art">Art</option>
+			                  <option value="Games">Games</option>
+			                  <option value="Books">Books</option>
+			                  <option value="Home Decor">Home Decor</option>
+			                  <option value="Software">Software</option>
+			                  <option value="sports">sports</option>
+			                  <option value="Travel">Travel</option>
+			                  <option value="Green Products">Green Products</option>
+			                  <option value="Health">Health</option>
+			                  <option value="Others">Others</option>
 		    			</select>
 					  </div>
       		  		</div>
@@ -139,9 +148,7 @@ if ($GLOBALS['alert_info']!="") {
 	            	<div class="col-sm-6">
 	            		 <label for="validform">Upload Product Image<span style="color: red;">*</span></label>
 					  	 <br>
-
 						  <div class="input-group">
-
 							  <div class="input-group-prepend">
 							    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
 							  </div>
