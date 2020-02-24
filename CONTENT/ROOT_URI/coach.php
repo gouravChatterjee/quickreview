@@ -54,31 +54,27 @@
                   <div class="col-lg-3 col-sm-12">
                     <h4>Categories</h4>
                     <div class="vertical-menu">
-                      <a href="allProducts" class="active">All Products</a>
-                      <a href="technology">Technology</a>
-                      <a href="food">Food</a>
-                      <a href="fashion">Fashion</a>
-                      <a href="skincare">Skincare & beauty</a>
-                      <a href="accessories">Accessories</a>
-                      <a href="art">Art</a>
-                      <a href="games">Games</a>
-                      <a href="books">Books/e-books/audio-books</a>
-                      <a href="homeDecor">Home Decor</a>
-                      <a href="software">Software</a>
-                      <a href="sports">Sports</a>
-                      <a href="travel">Travel</a>
-                      <a href="greenProducts">Green Products</a>
-                      <a href="computer">Computer/Internet</a>
-                      <a href="health">Health & Fitness</a>
-                      <a href="bestProducts">Best Products</a>
-                      <a href="others">Others</a>
+                       <a href="allServices">All Services</a>
+                       <a href="education" >Education/Course</a>
+                        <a href="onlineCourses" >Online Courses</a>
+                        <a href="eCommerce" >E-Commerce</a>
+                        <a href="meditation">Spirituality/Meditation</a>
+                        <a href="selfAwarness">Self-awareness</a>
+                        <a href="jobs">Employment/Jobs</a>
+                        <a href="movies" >Movies/Music</a>
+                        <a href="business">Business/ Entrepreneurship</a>
+                        <a href="publicSpeaking">Public speaking</a>
+                        <a href="coach" class="active">Coach/Mentor</a>
+                        <a href="leadership">Leadership</a>
+                        <a href="opportunity">Best opportunity</a>
+                        <a href="otherServices">Other Services</a>
                     </div>
                   </div>
                   <div class="col-lg-9 col-sm-12">
-                   <h4>Latest Products</h4>
+                   <h4>Latest Services</h4>
                    <div class="row">
                    <?php 
-                      $sql = "SELECT * FROM PRODUCT ORDER BY ID DESC";
+                      $sql = "SELECT * FROM SERVICES WHERE CATEGORY='Coach' ORDER BY ID DESC";
                       $result = mysqli_query($link,$sql);
                       if(mysqli_num_rows($result)>0){
                         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
