@@ -152,7 +152,11 @@ if(mysqli_connect_error()){
           <li class="nav-item" >
             <a href="about" class="btn btn-primary">About</a>
             <a href="contact" class="btn btn-success">Contact Us</a>
-            <a href="signUp" class="btn btn-dark">Sign Up</a>
+            <?php if ($_SESSION['LoggedIn']) { ?>
+              <a href="#" class="btn btn-dark"><?php echo $_SESSION['userName']; ?></a>
+            <?php }else{
+              echo '<a href="signUp" class="btn btn-dark">Sign Up</a>';
+            } ?>
           </li>
           
         </ul>

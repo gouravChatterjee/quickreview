@@ -1,29 +1,11 @@
-<!--  -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-
-
-  <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
-   
-
-   <!--  <footer class="footer" style="background-color: #99AAAB; position: relative; left: 0; bottom: 0;  width: 100%; margin-top: 15px;">
-  	<div class="footer-copyright text-center py-3">© 2019-2020 Copyright:
-      <a href="https://beanstalkedu.com/"> Beanstalkedu Services Pvt Ltd.</a>
-    </div>
-
-</footer> -->
-<br><br><br>
+<br>
 </section>
 </div>
 
 <footer class="main-footer">
     <strong>Copyright &copy; 2020-2021 <a href="">E - Quick Review</a>.</strong>
-    All rights reserved.
+    All rights reserved. <a href="/terms.txt">Terms & Condition</a>
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 2.0.0
     </div>
