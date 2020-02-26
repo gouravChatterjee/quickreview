@@ -79,12 +79,12 @@
                       if(mysqli_num_rows($result)>0){
                         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
                           $id = $row['UNI_ID'];
-                          $name = $row['PR_NAME'];
+                          $name = $row['SR_NAME'];
                           $category = $row['CATEGORY'];
                           $price = $row['PRICE'];
                           $imgName = $row['IMAGE'];
                           echo '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleProduct?id='.$id.'">
-                          <img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" class="card-img-top" alt="...">
+                          <img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title" style="text-decoration:none;">'.$name.'</h5>
                           </div></a>

@@ -477,43 +477,6 @@
 			}
 		}
 
-		if (isset($_GET['franchiseListFilter'])) {
-			$region = $_POST['region'];
-			if(strcasecmp($region, "ALL")==0){
-				$sql = "SELECT * FROM BS_USER WHERE BS_USER_TYPE = 'FRANCHISE'";
-			}else{
-				$sql = "SELECT * FROM BS_USER WHERE BS_USER_TYPE = 'FRANCHISE' AND REGION = '$region'";
-			}
-			
-			$result = mysqli_query($link,$sql);
-			if($result){
-	  			
-				if(mysqli_num_rows($result)>0){
-					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-
-						$jsonD=json_decode($row['USER_JSOND']);
-
-						echo '<tr>
-							      <td>'.$row['BS_USER_ID'].'</td>
-							     <td><a href="franchiseDetails?id='.$row['BS_USER_ID'].'">'.$row['USER_FULL_NAME'].'</a></td>
-							     <td>'.$row["CENTER_NAME"].'</td>
-							     <td>'.$row['USER_PHONE'].'</td>
-							      <td>'.$row['USER_EMAIL'].'</td>
-							      <td>'.$jsonD->{'Details'}->{'Programs'}.'</td>
-							      <td><a href="updateFranchise?id='.$row['BS_USER_ID'].'"><button class="btn btn-sm btn-success" title="Update Details"><i class="fas fa-edit"></i></button></a></td>
-							  </tr>';
-
-					}
-
-				}else{
-					echo '<div class="alert alert-danger">No Data</div>';
-				}
-
-			}else{
-				echo '<div class="alert alert-danger">Error Running the Query</div>';
-				echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
-			}
-		}
 
 		if (isset($_GET['productSearch'])) {
 			$search = $_POST['search'];
@@ -595,6 +558,156 @@
 						            <h4 class="card-title"><b>'.$name.'</b></h4>
 						            <p class="card-text">'.$category.'</p>
 						            <a href="singleProduct?id='.$id.'" class="btn btn-primary">GO</a>
+						        </div>
+					          </div>
+					          </div>
+					          	
+					          </div>
+					         
+					        </div>';
+
+					}
+
+				}else{
+					echo '<div class="alert alert-danger">No Data</div>';
+				}
+
+			}else{
+				echo '<div class="alert alert-danger">Error Running the Query</div>';
+				echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
+			}
+		}	
+
+		// --------------------SERVICE LIST API---------------------
+
+		if (isset($_GET['serviceList'])) {
+			$sql = "SELECT * FROM SERVICES ORDER BY ID DESC";
+
+			$result = mysqli_query($link,$sql);
+			if($result){
+	  			
+				if(mysqli_num_rows($result)>0){
+					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+
+						// $jsonD=json_decode($row['USER_JSOND']);
+						$id = $row['UNI_ID'];
+						$name = $row['SR_NAME'];
+						$category = $row['CATEGORY'];
+						$price = $row['PRICE'];
+						$imgName = $row['IMAGE'];
+
+						echo '<div class="card flex-row flex-wrap">
+					          <div class="card-body">
+					          <div class="row">
+					          <div class="col-lg-4 col-sm-6">
+					          	<img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" height="100%" width="100%" alt="">
+					          </div>
+					          <div class="col-lg-8 col-sm-6">
+					          	<div class=" px-2">
+						            <h4 class="card-title"><b>'.$name.'</b></h4>
+						            <p class="card-text">'.$category.'</p>
+						            <a href="singleService?id='.$id.'" class="btn btn-primary">GO</a>
+						        </div>
+					          </div>
+					          </div>
+					          	
+					          </div>
+					         
+					        </div>';
+
+					}
+
+				}else{
+					echo '<div class="alert alert-danger">No Data</div>';
+				}
+
+			}else{
+				echo '<div class="alert alert-danger">Error Running the Query</div>';
+				echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
+			}
+		}
+
+
+		if (isset($_GET['searchService'])) {
+			$search = $_POST['search'];
+			$sql = "SELECT * FROM SERVICES WHERE SR_NAME LIKE'%".$search."%'";
+			
+			$result = mysqli_query($link,$sql);
+			if($result){
+	  			
+				if(mysqli_num_rows($result)>0){
+					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+
+						// $jsonD=json_decode($row['USER_JSOND']);
+
+						$id = $row['UNI_ID'];
+						$name = $row['SR_NAME'];
+						$category = $row['CATEGORY'];
+						$price = $row['PRICE'];
+						$imgName = $row['IMAGE'];
+
+						echo '<div class="card flex-row flex-wrap">
+					          <div class="card-body">
+					          <div class="row">
+					          <div class="col-lg-4 col-sm-6">
+					          	<img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" height="100%" width="100%" alt="">
+					          </div>
+					          <div class="col-lg-8 col-sm-6">
+					          	<div class=" px-2">
+						            <h4 class="card-title"><b>'.$name.'</b></h4>
+						            <p class="card-text">'.$category.'</p>
+						            <a href="singleService?id='.$id.'" class="btn btn-primary">GO</a>
+						        </div>
+					          </div>
+					          </div>
+					          	
+					          </div>
+					         
+					        </div>';
+
+					}
+
+				}else{
+					echo '<div class="alert alert-danger">No Data</div>';
+				}
+
+			}else{
+				echo '<div class="alert alert-danger">Error Running the Query</div>';
+				echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
+			}
+		}	
+
+		if (isset($_GET['serviceListFilter'])) {
+			$service = $_POST['service'];
+			if ($service == 'all') {
+				$sql = "SELECT * FROM SERVICES";
+			}else{
+				$sql = "SELECT * FROM SERVICES WHERE CATEGORY='$service'";
+			}
+			$result = mysqli_query($link,$sql);
+			if($result){
+				if(mysqli_num_rows($result)>0){
+					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+
+						// $jsonD=json_decode($row['USER_JSOND']);
+
+						$id = $row['UNI_ID'];
+						$name = $row['SR_NAME'];
+						$category = $row['CATEGORY'];
+						$price = $row['PRICE'];
+						$imgName = $row['IMAGE'];
+
+						echo '<div class="card flex-row flex-wrap">
+					          <div class="card-body">
+					          <div class="row">
+					          <div class="col-lg-4 col-sm-6">
+					          	<img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" height="100%" width="100%" alt="">
+					          </div>
+					          <div class="col-lg-8 col-sm-6">
+					          	<div class=" px-2">
+						            <h4 class="card-title"><b>'.$name.'</b></h4>
+						            <p class="card-text">'.$category.'</p>
+						            <a href="singleService?id='.$id.'" class="btn btn-primary">GO</a>
 						        </div>
 					          </div>
 					          </div>
