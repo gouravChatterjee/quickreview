@@ -17,17 +17,18 @@ if(mysqli_connect_error()){
 if (isset($_GET['id'])) {
 	$id = $_GET['id'];
 }
-$sql = "SELECT * FROM PRODUCT WHERE UNI_ID = '$id'";
+$sql = "SELECT * FROM SERVICES WHERE UNI_ID = '$id'";
 
 $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-$name = $row['PR_NAME'];
+$name = $row['SR_NAME'];
 $price = $row['PRICE'];
 $description = $row['DESCRIPTION'];
 $category = $row['CATEGORY'];
 $linkDe = $row['LINK'];
 $review = $row['REVIEW'];
 $imgName = $row['IMAGE'];
+
 if (isset($_POST['submit'])) {
 	$review = $_POST['rvw'];
 	$sqlRvw = "INSERT INTO REVIEWS (`PRODUCT_ID`, `USER_ID`, `USER_TYPE`, `USER_NAME`, `REVIEW_DETAILS`) VALUES ('$id', '$userId', 'ADMIN', '$userName', '$review')";
@@ -39,6 +40,7 @@ if (isset($_POST['submit'])) {
 	}
 
 }
+
 ?>
 
 <?php if($_SESSION['LoggedIn'] && $_SESSION['userAdmin']): ?>
@@ -51,7 +53,7 @@ if (isset($_POST['submit'])) {
         	<h1 class="text-center"><?php echo $name ?></h1><hr>
           <div class="row">
           	<div class="col-lg-6 col-sm-12">
-          	 	<?php echo '<img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" height="100%" width="100%" alt="">'; ?>
+          	 	<?php echo '<img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" height="100%" width="100%" alt="">'; ?>
           	</div>
           	<div class="col-lg-6 col-sm-12">
           		<h3 style="color: green"><?php echo "Rs:- ".$price ?></h3>

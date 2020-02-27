@@ -781,7 +781,7 @@ if (isset($_GET['questionList'])) {
 	              $question = $row['QUESTION_DETAILS'];
 	              $category = $row['CATEGORY'];
 
-					echo '<div class="card border"> 
+					echo '<div class="card border" style="background:#00CCCD; color:black;"> 
 		                    <div class="card-body text-dark">
 		                      <p>Category:- '.$category.'</p>
 		                      <h3 style="font-weight:bold">Q:-'.$question.'</h3>
@@ -818,7 +818,7 @@ if (isset($_GET['questionList'])) {
 		              $question = $row['QUESTION_DETAILS'];
 		              $category = $row['CATEGORY'];
 
-						echo '<div class="card border"> 
+						echo '<div class="card border" style="background:#00CCCD; color:black;"> 
 			                    <div class="card-body text-dark">
 			                      <p>Category:- '.$category.'</p>
 			                      <h3 style="font-weight:bold">Q:-'.$question.'</h3>

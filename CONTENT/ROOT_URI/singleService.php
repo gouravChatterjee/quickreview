@@ -9,7 +9,7 @@
 	}
 </style>
 <style type="text/css">
-  .vertical-menu {
+.vertical-menu {
   width: 230px;
   background: #67E6DC;
   color: #67E6DC;
@@ -65,11 +65,11 @@ if (isset($_POST['submit'])) {
 	}
 
 }
-$sql = "SELECT * FROM PRODUCT WHERE UNI_ID = '$id'";
+$sql = "SELECT * FROM SERVICES WHERE UNI_ID = '$id'";
 
 $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-$name = $row['PR_NAME'];
+$name = $row['SR_NAME'];
 $price = $row['PRICE'];
 $description = $row['DESCRIPTION'];
 $category = $row['CATEGORY'];
@@ -89,11 +89,11 @@ $imgName = $row['IMAGE'];
         	<h1 class="text-center"><?php echo $name ?></h1><hr>
           <div class="row">
           	<div class="col-lg-6 col-sm-12">
-          	 	<?php echo '<img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" height="300" width="100%" alt="">'; ?>
+          	 	<?php echo '<img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" height="300" width="100%" alt="">'; ?>
           	</div>
           	<div class="col-lg-6 col-sm-12">
           		<h3 style="color: green"><?php echo "Rs:- ".$price ?></h3>
-          		<h3><a href="<?php echo $linkDe; ?>" class="btn btn-success"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          		<h3><a href="<?php echo $linkDe; ?>" class="btn btn-success" title="Click to buy the product"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 	Buy</a></h3>
           		<h3>Category:- <?php echo $category; ?></h3>
           		<h4>Product Description:- <?php echo $description; ?></h4>
@@ -110,6 +110,8 @@ $imgName = $row['IMAGE'];
         		</form>
         	</div>
       	</div>
+        <?php else: ?>
+          <div class="alert alert-warning"><a href="signIn" style=" color: black;">Sign In</a> to give a review!</div>
 		<?php endif; ?>
       	<div class="card">
         	<div class="card-header"><h4>Reviews</h4></div>

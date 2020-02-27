@@ -31,7 +31,6 @@
         window.history.replaceState( null, null, window.location.href );
     }
 </script>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0"></script>
 <?php 
 	$link = mysqli_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
   $email = $_SESSION["user"];
