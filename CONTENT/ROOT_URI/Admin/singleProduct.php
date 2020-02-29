@@ -4,7 +4,11 @@
 		padding: 20px;
 	}
 </style>
-
+<script>
+      if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+      }
+</script>
 <?php 
 $link = new mysqli(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
 $link->set_charset("utf8");
@@ -55,7 +59,8 @@ if (isset($_POST['submit'])) {
           	</div>
           	<div class="col-lg-6 col-sm-12">
           		<h3 style="color: green"><?php echo "Rs:- ".$price ?></h3>
-          		<h3>Link:- <?php echo $linkDe; ?></h3>
+          		<h3>Link:-<a href="<?php echo $linkDe; ?>" class="btn btn-success"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+				Go</a></h3>
           		<h3>Category:- <?php echo $category; ?></h3>
           		<h4>Product Description:- <?php echo $description; ?></h4>
           	</div>

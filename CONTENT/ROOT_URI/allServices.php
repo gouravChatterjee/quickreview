@@ -83,7 +83,7 @@
                           $category = $row['CATEGORY'];
                           $price = $row['PRICE'];
                           $imgName = $row['IMAGE'];
-                          echo '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleProduct?id='.$id.'">
+                          echo '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleService?id='.$id.'">
                           <img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title" style="text-decoration:none;">'.$name.'</h5>

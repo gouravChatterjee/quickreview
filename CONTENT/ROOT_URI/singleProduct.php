@@ -110,9 +110,11 @@ $imgName = $row['IMAGE'];
         		</form>
         	</div>
       	</div>
+        <?php else: ?>
+          <div class="alert alert-warning"><a href="signIn" style=" color: black;">Sign In</a> to give a review!</div>
 		<?php endif; ?>
       	<div class="card">
-        	<div class="card-header"><h4>Reviews</h4></div>
+        	<div class="card-header"><h4>All Reviews</h4></div>
         	<div class="card-body">
         		 <?php 
         		 $id = $_GET['id']; 
@@ -127,7 +129,7 @@ $imgName = $row['IMAGE'];
                             $reviewUser = $row['USER_TYPE'];
                             if ($reviewUser == 'ADMIN') {
                               echo '<h4 style="color:#192A56"><b>'.$review.'</b></h4>';
-                              echo '<h5 style="color:#192A56">By:- '.$uName.'</h6>';
+                              echo '<h5 style="color:#192A56">By:- ADMIN</h6>';
                             }else{
                               echo '<h4><b>'.$review.'</b></h4>';
                               echo '<h5>By:- '.$uName.'</h6>';

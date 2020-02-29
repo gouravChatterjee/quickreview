@@ -66,45 +66,6 @@ if(mysqli_connect_error()){
   <body class="hold-transition layout-top-nav">
     <div class="wrapper">
   <!-- NAVBAR STARTS -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
-    <div class="container">
-      <a href="/Admin/allProducts" class="navbar-brand">
-       <!--  <img src="/IMAGES/favicon.ico" alt="" class="brand-image"
-             style="height: 40px; width:auto;"> -->
-        <span class="btn btn-outline-danger brand-text">E - Quick Review</span>
-      </a>
-      <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-        <!-- Left navbar links -->
-     <?php if ($_SESSION['LoggedIn']){ ?>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item" style="margin-right: 5px;">
-            <a href="addProduct" class="btn btn-outline-primary">Add a product</a>
-          </li>
-           <li class="nav-item" style="margin-right: 5px;">
-            <a href="allProducts" class="btn btn-outline-primary">All Products</a>
-          </li>
-           <li class="nav-item" style="margin-right: 5px;">
-            <a href="allQuestions" class="btn btn-outline-primary">All Questions</a>
-          </li>
-          <li class="nav-item">
-            <a href="adminSignOut" class="btn btn-outline-danger">Sign Out</a>
-          </li>
-        </ul>
-      <?php }else{ ?>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item" style="margin-right: 5px;">
-              <a href="adminSign" class="btn btn-outline-primary">Sign In</a>
-            </li>
-        </ul>
-     <?php } ?>
-    
-      </div>
-       
-      <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-  </nav>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <a class="navbar-brand btn btn-outline-success" href="#">E-Quick Review</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,6 +73,7 @@ if(mysqli_connect_error()){
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <?php if ($_SESSION['LoggedIn']){ ?>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="_home">Dashboard <span class="sr-only">(current)</span></a>
@@ -140,15 +102,26 @@ if(mysqli_connect_error()){
           <li class="nav-item">
             <a class="nav-link" href="forum">Forum</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="subscribers">Subscribers</a>
+          </li>
         </ul>
          <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link" href="notification">
-              <i class="far fa-bell"></i>
-              <span class="badge badge-warning navbar-badge"><?php echo $noOfNotification; ?></span>
+            <a class="nav-link" href="adminSignOut">
+             <button class="btn btn-danger">Sign Out</button>
             </a>
           </li>
          </ul>
+       <?php }else{ ?>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="adminSign">
+             <button class="btn btn-primary">Sign In</button>
+            </a>
+          </li>
+         </ul>
+       <?php } ?>
       </div>
     </nav>
   <!-- /.navbar -->

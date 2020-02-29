@@ -1,4 +1,8 @@
-
+<script>
+      if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+      }
+</script>
 <style type="text/css">
 	.con{
 		padding: 20px;
@@ -57,7 +61,8 @@ if (isset($_POST['submit'])) {
           	</div>
           	<div class="col-lg-6 col-sm-12">
           		<h3 style="color: green"><?php echo "Rs:- ".$price ?></h3>
-          		<h3>Link:- <?php echo $linkDe; ?></h3>
+          		<h3>Link:-<a href="<?php echo $linkDe; ?>" class="btn btn-success"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+	Go</a></h3>
           		<h3>Category:- <?php echo $category; ?></h3>
           		<h4>Product Description:- <?php echo $description; ?></h4>
           	</div>

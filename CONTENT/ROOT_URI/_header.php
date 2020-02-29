@@ -13,18 +13,7 @@ if(mysqli_connect_error()){
    die("ERROR: UNABLE TO CONNECT: ".mysqli_connect_error());
 }
   
- // $sql = "SELECT * FROM ATHENEUM_STUDENT WHERE EMAIL = '$email'";
-
- // $result = mysqli_query($link,$sql);
-
- // if($result){
- //      if(mysqli_num_rows($result)>0){
- //        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
- //        $userName = $row["NAME"];
- //        $name = explode(" ", $userName);
- //        $userFirst = $name[0];
- //      }
- //  }
+ 
  ?>
 <!doctype html>
 <html lang="en">
@@ -170,8 +159,6 @@ if(mysqli_connect_error()){
   </nav>
   <!-- /.navbar -->
 
-   
-  
   <div class="content-wrapper">
   <section class="content">
     <br>

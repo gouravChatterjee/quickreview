@@ -41,10 +41,8 @@
 
 <div class="container">
   <div id="fb-root"></div>
-	
 	 <div class="row">
         <div class="col-md-12">
-
           <div class="row">
           <div class="col-12 ml-auto mr-auto">
             <div class="card">
@@ -83,8 +81,8 @@
                           $category = $row['CATEGORY'];
                           $price = $row['PRICE'];
                           $imgName = $row['IMAGE'];
-                          echo '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleProduct?id='.$id.'">
-                          <img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" class="card-img-top" alt="...">
+                          echo '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleService?id='.$id.'">
+                          <img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title" style="text-decoration:none;">'.$name.'</h5>
                           </div></a>
