@@ -19,10 +19,19 @@
   background-color: #192A56;
   color: white;
 }
-.card-img-top {
+@media only screen and (max-width: 600px) {
+  .card-img-top {
+    width: 100%;
+    height: 40vw;
+    object-fit: cover;
+}
+}
+@media only screen and (min-width: 605px) {
+  .card-img-top {
     width: 100%;
     height: 8vw;
     object-fit: cover;
+}
 }
 </style>
 

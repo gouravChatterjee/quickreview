@@ -19,11 +19,22 @@
   background-color: #192A56;
   color: white;
 }
-.card-img-top {
+
+@media only screen and (max-width: 600px) {
+  .card-img-top {
+    width: 100%;
+    height: 40vw;
+    object-fit: cover;
+}
+}
+@media only screen and (min-width: 605px) {
+  .card-img-top {
     width: 100%;
     height: 8vw;
     object-fit: cover;
 }
+}
+
 </style>
 
 <script>
@@ -87,7 +98,7 @@
                           $price = $row['PRICE'];
                           $imgName = $row['IMAGE'];
                           echo '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleProduct?id='.$id.'">
-                          <img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" class="card-img-top" alt="...">
+                          <img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" class="card-img-top card-img-mo" alt="...">
                           <div class="card-body">
                             <h5 class="card-title" style="text-decoration:none;">'.$name.'</h5>
                           </div></a>
