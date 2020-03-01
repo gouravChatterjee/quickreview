@@ -56,8 +56,11 @@ if ($_SESSION['LoggedIn']) {
 
 if (isset($_POST['submit'])) {
 	$review = $_POST['rvw'];
-	$sql = "INSERT INTO REVIEWS (`PRODUCT_ID`, `USER_ID`, `USER_NAME`, `REVIEW_DETAILS`) VALUES ('$id', '$userId', '$userName', '$review')";
-	$result = mysqli_query($link,$sql);
+  $stmt = $link->prepare("INSERT INTO REVIEWS (`PRODUCT_ID`, `USER_ID`, `USER_NAME`, `REVIEW_DETAILS`) VALUES (?, ?, ?, ?)");
+
+  $stmt->bind_param("ssss", $id, $userId, $userName, $review);
+
+  $result = $stmt->execute();
 	if ($result) {
 		echo '<div class="container"><div class="alert alert-success">Successfully submitted review</div></div>';
 	}else{

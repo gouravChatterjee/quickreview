@@ -560,8 +560,12 @@ if (isset($_GET['questionList'])) {
 			  $userId = $_SESSION['userId'];
 			  $userName = $_SESSION['userName'];
 			  $userType = $_POST['userType'];
-			  $sql = "INSERT INTO ANSWERS (`QUESTION_ID`, `ANSWER_ID`, `USER_ID`, `USER_TYPE`, `USER_NAME`, `ANSWER`) VALUES ('$questionId', '$ansId', '$userId', '$userType', '$userName', '$answer')";
-			  $result = mysqli_query($link,$sql);
+
+			  $stmt = $link->prepare("INSERT INTO ANSWERS (`QUESTION_ID`, `ANSWER_ID`, `USER_ID`, `USER_TYPE`, `USER_NAME`, `ANSWER`) VALUES (?, ?, ?, ?, ?, ?)");
+
+			  $stmt->bind_param("ssssss", $questionId, $ansId, $userId, $userType, $userName, $answer);
+
+			  $result = $stmt->execute();
 			  if ($result) {
 			    echo '<div class="container"><div class="alert alert-success">Successfully submitted Question</div></div>';
 			  }else{

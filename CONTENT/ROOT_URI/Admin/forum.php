@@ -29,8 +29,11 @@ if (isset($_POST['submit'])) {
   $quesId = D_create_UserId();
 	$question = $_POST['question'];
   $category = $_POST['category'];
-	$sql = "INSERT INTO QUESTIONS (`QUES_ID`, `USER_ID`, `USER_TYPE`, `USER_NAME`, `QUESTION_DETAILS`, `CATEGORY`) VALUES ('$quesId', '$userId', 'ADMIN', '$userName', '$question', '$category')";
-	$result = mysqli_query($link,$sql);
+  $stmt = $link->prepare("INSERT INTO QUESTIONS (`QUES_ID`, `USER_ID`, `USER_TYPE`, `USER_NAME`, `QUESTION_DETAILS`, `CATEGORY`) VALUES (?, ?, 'ADMIN', ?, ?, ?)");
+
+  $stmt->bind_param("sssss", $quesId, $userId, $userName, $question, $category);
+
+  $result = $stmt->execute();
 	if ($result) {
 		echo '<div class="container"><div class="alert alert-success">Successfully submitted Question</div></div>';
 	}else{

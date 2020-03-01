@@ -71,9 +71,12 @@ if(mysqli_connect_error()){
           <!-- <p class="text-center colorWhite">The place where you can find the best reviews</p> -->
           <h5 class="text-center colorWhite">100% free to join & earn money</h5>
           <div class="text">
-            <a href="https://facebook.com" class="btn btn-primary btns"><i class="fa fa-facebook" style="font-size:25px; color: #fff;"></i></a>
-             <a href="https://twitter.com" class="btn" style="background-color: #4BCFFA"><i class="fa fa-twitter" style="font-size:25px; color: #fff;"></i></a>
-             <a href="https://youtube.com" class="btn btn-danger"><i class="fa fa-youtube" style="font-size:25px; color: #fff;"></i></a>
+            <a href="https://www.facebook.com/EquickReview-105904694349253/?ref=page_internal" class="btn btn-primary btns" title="Facebook Page"><i class="fa fa-facebook" style="font-size:25px; color: #fff;"></i></a>
+             <a href="https://twitter.com/LetssConnect_?s=08" class="btn" style="background-color: #4BCFFA" title="Twitter Account"><i class="fa fa-twitter" style="font-size:25px; color: #fff;"></i></a>
+             <a href="https://www.youtube.com/channel/UCX1KgIs81X9lTlp-Zgrf1ZA?view_as=subscriber" class="btn btn-danger" title="youtube channel"><i class="fa fa-youtube" style="font-size:25px; color: #fff;"></i></a>
+             <a href="https://www.instagram.com/letssconnect/ " class="btn" style="background-color: #EA7773" title="Instagram"><i class="fa fa-instagram" style="font-size:25px; color: #fff;"></i></a>
+             <a href="https://in.pinterest.com/equickreview/" class="btn" style="background-color: #E71C23" title="pinterest"><i class="fa fa-pinterest" style="font-size:25px; color: #fff;"></i></a>
+             
             <?php if (!$_SESSION['LoggedIn']){ ?>
               <a href="signIn" class="btn btn-outline-light float-right" style="text-decoration: none; ">Sign In</a>
               <a href="#" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-light float-right" style="text-decoration: none; margin-right: 5px;">Subscribe</a>

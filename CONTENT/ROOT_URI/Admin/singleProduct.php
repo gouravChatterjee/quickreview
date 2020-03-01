@@ -34,8 +34,11 @@ $review = $row['REVIEW'];
 $imgName = $row['IMAGE'];
 if (isset($_POST['submit'])) {
 	$review = $_POST['rvw'];
-	$sqlRvw = "INSERT INTO REVIEWS (`PRODUCT_ID`, `USER_ID`, `USER_TYPE`, `USER_NAME`, `REVIEW_DETAILS`) VALUES ('$id', '$userId', 'ADMIN', '$userName', '$review')";
-	$resultRvw = mysqli_query($link,$sqlRvw);
+	$stmt = $link->prepare("INSERT INTO REVIEWS (`PRODUCT_ID`, `USER_ID`, `USER_TYPE`, `USER_NAME`, `REVIEW_DETAILS`) VALUES (?, ?, 'ADMIN', ?, ?)");
+
+  	$stmt->bind_param("ssss", $id, $userId, $userName, $review);
+
+  	$resultRvw = $stmt->execute();
 	if ($resultRvw) {
 		echo '<div class="container"><div class="alert alert-success">Successfully submitted review</div></div>';
 	}else{
