@@ -84,7 +84,7 @@ if(mysqli_connect_error()){
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
       <a href="/" class="navbar-brand">
-        <img src="/IMAGES/logo.png" height="60" width="60" style="border-radius: 50%">
+        <img src="/IMAGES/logo.png" height="60" width="60" style="border-radius: 50%" alt="Image Logo">
       </a>
 
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
