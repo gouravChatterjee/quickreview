@@ -5,7 +5,21 @@ if(mysqli_connect_error()){
 	die("ERROR: UNABLE TO CONNECT: ".mysqli_connect_error());
 }
 if (isset($_POST['submit'])) {
-	echo '<div class="container"><div class="alert alert-success">Thanks for your response!</div></div>';
+	$name = $_POST['name'];
+	$phone = $_POST['phone'];
+	$email = $_POST['email'];
+	$message = $_POST['message'];
+	$stmt = $link->prepare("INSERT INTO CONTACT (`NAME`, `PHONE`, `EMAIL`, `MESSAGE`) VALUES (?, ?, ?, ?)");
+
+  	$stmt->bind_param("ssss", $name, $phone, $email, $message);
+
+  	$result = $stmt->execute();
+  	if ($result) {
+  		echo '<div class="container"><div class="alert alert-success">Thanks for your response!</div></div>';	
+  	}else{
+  		// echo '<div class="container"><div class="alert alert-warning">Something wrong! Try again!</div></div>';
+  		echo mysqli_error($link);
+  	}
 }
  ?>
 
@@ -23,7 +37,7 @@ if (isset($_POST['submit'])) {
       			<div class="col-md-6 ml-auto mr-auto">
       			<form method="POST">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Name" name="Name" required>
+                    <input type="text" class="form-control" placeholder="Name" name="name" required>
                     <div class="input-group-append">
                       <div class="input-group-text">
                         <span class="fas fa-user"></span>
@@ -39,7 +53,7 @@ if (isset($_POST['submit'])) {
                     </div>
                   </div>
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Phone Number" name="number" required>
+                    <input type="number" class="form-control" placeholder="Phone Number" name="phone" required>
                     <div class="input-group-append">
                       <div class="input-group-text">
                         <span class="fas fa-phone"></span>

@@ -13,7 +13,7 @@
 <div class="col-md-6 col-lg-6 col-sm-12 ml-auto mr-auto">
 <div class="">
   <div class="register-logo">
-    <a href="https://atheneumglobal.education"><b>Atheneum Global College</b></a>
+    <a><b>E-Quick Review</b></a>
   </div>
 
   <div class="card">
@@ -22,7 +22,7 @@
 
       <form method="post" id="studentSignup" enctype=“multipart/form-data”>
         <input type="hidden" name="s_Hash" value="<?php echo $_SESSION['s_Hash']; ?>">
-        <input type="hidden" name="formName" value="studentSignUp">
+        <input type="hidden" name="formName" value="userSignUp">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Full name" name="name" required>
           <div class="input-group-append">
@@ -64,11 +64,33 @@
           </div>
         </div>
         <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group mb-3">
+              <select id="country" name ="country" class="form-control" id="sel1"></select>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-flag"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="input-group mb-3">
+              <select name ="state" id ="state" class="form-control" id="sel1"></select>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-state"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
               <label for="agreeTerms">
-               I agree to the terms
+               I agree to the <a href="terms">terms</a>
               </label>
             </div>
           </div>
@@ -80,7 +102,7 @@
         </div>
       </form>
 
-      <div class="social-auth-links text-center">
+     <!--  <div class="social-auth-links text-center">
         <p>- OR -</p>
         <a href="#" class="btn btn-block btn-primary">
           <i class="fab fa-facebook mr-2"></i>
@@ -90,7 +112,7 @@
           <i class="fab fa-google-plus mr-2"></i>
           Sign up using Google+
         </a>
-      </div>
+      </div> -->
 
       <a href="signIn" class="text-center">I already have a membership</a>
     </div>
@@ -105,3 +127,7 @@
 
 
 </div>
+<script type="text/javascript" src="/JS/countries.js"></script>
+<script language="javascript">
+  populateCountries("country", "state"); 
+</script>

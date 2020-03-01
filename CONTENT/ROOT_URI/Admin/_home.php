@@ -1,19 +1,26 @@
+<script>
+      if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+      }
+</script>
+
 <?php 
 	$link = mysqli_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
    $email = $_SESSION["user"];
-
-   $sql = "SELECT * FROM BS_USER WHERE USER_EMAIL = '$email'";
+   // echo $email;
+   $sql = "SELECT * FROM USERS WHERE EMAIL = '$email'";
 
    $result = mysqli_query($link,$sql);
 
    if($result){
         if(mysqli_num_rows($result)>0){
          $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-         $fullName = $row["USER_FULL_NAME"];
-         $type = $row["BS_USER_TYPE"];
-         $phn = $row["USER_PHONE"];
-         $email = $row["USER_EMAIL"];
-         $userId = $row["BS_USER_ID"];
+         $fullName = $row['NAME'];
+          // echo $fullName;
+         // $type = $row["BS_USER_TYPE"];
+         $phn = $row["PHONE"];
+         $email = $row["EMAIL"];
+         // $userId = $row["BS_USER_ID"];
         }
     }
  ?>
@@ -30,41 +37,41 @@
 <?php if($_SESSION['LoggedIn'] && $_SESSION['userAdmin']): ?>
 
   <?php 
-    $sql = "SELECT * FROM FRANCHISE_INVENTORY WHERE ITEM_STATUS='ORDERED'";
-    $sql2 = "SELECT * FROM FRANCHISE_INVENTORY WHERE ITEM_STATUS='REQUESTED DELIVERY CHARGE'";
-    $sql3 = "SELECT * FROM BS_USER WHERE BS_USER_TYPE='FRANCHISE'";
-    $sql4 = "SELECT * FROM BS_NOTIFICATION WHERE (NOTIFICATION_DETAILS='Internal Exam Question' OR NOTIFICATION_DETAILS='Final Exam Question') AND STATUS = 'PENDING'";
+    $sql = "SELECT * FROM PRODUCT";
+    $sql2 = "SELECT * FROM SERVICES";
+    $sql3 = "SELECT * FROM QUESTIONS";
+    $sql4 = "SELECT * FROM USERS WHERE EMAIL != '$email'";
     $result = mysqli_query($link,$sql);
     $result2 = mysqli_query($link,$sql2);
     $result3 = mysqli_query($link,$sql3);
     $result4 = mysqli_query($link,$sql4);
      if ($result) {
         if(mysqli_num_rows($result)>0){
-          $noOfOrder = mysqli_num_rows($result);
+          $noOfProd = mysqli_num_rows($result);
         }else{
-          $noOfOrder = 0;
+          $noOfProd = 0;
         }
       }
 
     if ($result2) {
         if(mysqli_num_rows($result2)>0){
-          $noDeliveryCharge = mysqli_num_rows($result2);
+          $noOfSer = mysqli_num_rows($result2);
         }else{
-          $noDeliveryCharge = 0;
+          $noOfSer = 0;
         }
       }
       if ($result3) {
         if(mysqli_num_rows($result3)>0){
-          $noOfFranchise = mysqli_num_rows($result3);
+          $noOfQues = mysqli_num_rows($result3);
         }else{
-          $noOfFranchise = 0;
+          $noOfQues = 0;
         }
       }
       if ($result4) {
         if(mysqli_num_rows($result4)>0){
-          $noQpreq = mysqli_num_rows($result4);
+          $noOfUser = mysqli_num_rows($result4);
         }else{
-          $noQpreq = 0;
+          $noOfUser = 0;
         }
       }
 
@@ -83,14 +90,14 @@
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-                <h3><?php echo $noOfOrder; ?></h3>
+                <h3><?php echo $noOfProd; ?></h3>
 
-                <p>New Orders</p>
+                <p>Total Products</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fab fa-product-hunt"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="allProducts" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -98,14 +105,14 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?php echo $noDeliveryCharge; ?></h3>
+                <h3><?php echo $noOfSer; ?></h3>
 
-                <p>Shipment Charge Req</p>
+                <p>Total Services</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fas fa-signal"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="allServices" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -113,14 +120,14 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3><?php echo $noQpreq; ?></h3>
+                <h3><?php echo $noOfQues; ?></h3>
 
-                <p>Question Paper Req</p>
+                <p>Total Questions asked</p>
               </div>
               <div class="icon">
-                <i class=" fas fa-graduation-cap"></i>
+                <i class="fas fa-graduation-cap"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="forum" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           
@@ -129,12 +136,12 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3><?php echo $noOfFranchise; ?></h3>
+                <h3><?php echo $noOfUser; ?></h3>
 
-                <p>Registered Franchsie</p>
+                <p>Registered Users</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="fas fa-user"></i>
               </div>
               <a href="franchiseeList" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -149,7 +156,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">User Details</h3>
+                <h3 class="card-title">Admin Details</h3>
 
                 <div class="card-tools">
                   <!-- <div class="input-group input-group-sm" style="width: 150px;">
@@ -166,9 +173,7 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>ID</th>
                       <th>User Name</th>
-                      <th>Role</th>
                       <th>Email</th>
                       <th>Phone</th>
                       <th>Password</th>
@@ -176,14 +181,57 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><?php echo $userId; ?></td>
                       <td><?php echo $fullName; ?></td>
-                      <td><?php echo $type; ?></td>
                       <td><?php echo $email; ?></td>
                       <td><?php echo $phn; ?></td>
                       <td><a href="#" class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#changePass">
                     <i class="fas fa-user-circle text-info mr-1"></i> Change Password</a></td>
                     </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">User's Details</h3>
+                <div class="card-tools">
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>User Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                      $sql = "SELECT * FROM USERS WHERE EMAIL != '$email'";
+                      $result = mysqli_query($link,$sql);
+                      if ($result) {
+                         if(mysqli_num_rows($result)>0){
+                          while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
+                            $uName = $row['NAME'];
+                            $uEmail = $row['EMAIL'];
+                            $uPhone = $row['PHONE'];
+                            echo '<tr>
+                            <td>'.$uName.'</td>
+                            <td>'.$uEmail.'</td>
+                            <td>'.$uPhone.'</td>
+                          </tr>';
+                          }
+                        }
+                      }
+
+                     ?>
                   </tbody>
                 </table>
               </div>
@@ -220,7 +268,7 @@
                     </div>
                     <div class="modal-footer">
                       
-                        <button type="submit" name="sendMail" class="btn btn-primary"> Send Request</button>
+                        <button type="submit" name="submit" class="btn btn-primary"> Submit</button>
                     </div>
                 </div>
             </form>

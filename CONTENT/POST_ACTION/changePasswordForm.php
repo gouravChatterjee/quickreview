@@ -1,6 +1,11 @@
+<script>
+      if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+      }
+</script>
 <?php 
-	if(isset($_POST["s_Hash"]) && $_POST["s_Hash"]== $_SESSION['s_Hash']){
-		 $link = mysqli_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB_BEANSTALKFP);
+	if(isset($_POST["FORM_NAME"]) && $_POST["FORM_NAME"]== 'changePasswordForm'){
+		 $link = mysqli_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
 
 		 $email = $_SESSION["user"];
 
@@ -11,14 +16,19 @@
 		 if ($password != $password2) {
               // echo '<div class="alert alert-danger">Password does not match</div>';
             $GLOBALS['alert_info'] .= DaddToBsAlert("Password does not match");
-
           }else{
           	 $password = md5($password);
-          	 $sql = "UPDATE BS_USER SET USER_PASSWORD='$password', STATUS = 'PASSWORD CHANGED' WHERE USER_EMAIL='$email'";
+          	 $sql = "UPDATE USERS SET PASSWORD='$password' WHERE EMAIL='$email'";
           	 $result = mysqli_query($link, $sql);
           	 if($result){
-          	 	$GLOBALS['alert_info'] .= DaddToBsAlert("Password changed Successfully");
-          	 }
+          	 	echo '<script>
+                alert("Password changed successfully");
+             </script>';
+          	 }else{
+              echo '<script>
+                alert("Something wrong!");
+             </script>';
+             }
           }
 
 
@@ -27,3 +37,5 @@
   		echo $GLOBALS['alert_info'];
 	}
  ?>
+
+ 

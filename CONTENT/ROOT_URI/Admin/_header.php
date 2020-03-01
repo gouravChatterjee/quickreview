@@ -102,9 +102,9 @@ if(mysqli_connect_error()){
           <li class="nav-item">
             <a class="nav-link" href="forum">Forum</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="subscribers">Subscribers</a>
-          </li>
+           </li> -->
         </ul>
          <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">

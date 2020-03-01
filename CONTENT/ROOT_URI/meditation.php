@@ -79,7 +79,7 @@
                       if(mysqli_num_rows($result)>0){
                         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
                           $id = $row['UNI_ID'];
-                          $name = $row['PR_NAME'];
+                          $name = $row['SR_NAME'];
                           $category = $row['CATEGORY'];
                           $price = $row['PRICE'];
                           $imgName = $row['IMAGE'];

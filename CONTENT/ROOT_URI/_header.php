@@ -70,19 +70,12 @@ if(mysqli_connect_error()){
           <h1 class="text-center colorWhite">E-Quick Review</h1>
           <!-- <p class="text-center colorWhite">The place where you can find the best reviews</p> -->
           <h5 class="text-center colorWhite">100% free to join & earn money</h5>
-          <div class="text">
+          <div class="text-center">
             <a href="https://www.facebook.com/EquickReview-105904694349253/?ref=page_internal" class="btn btn-primary btns" title="Facebook Page"><i class="fa fa-facebook" style="font-size:25px; color: #fff;"></i></a>
              <a href="https://twitter.com/LetssConnect_?s=08" class="btn" style="background-color: #4BCFFA" title="Twitter Account"><i class="fa fa-twitter" style="font-size:25px; color: #fff;"></i></a>
              <a href="https://www.youtube.com/channel/UCX1KgIs81X9lTlp-Zgrf1ZA?view_as=subscriber" class="btn btn-danger" title="youtube channel"><i class="fa fa-youtube" style="font-size:25px; color: #fff;"></i></a>
-             <a href="https://www.instagram.com/letssconnect/ " class="btn" style="background-color: #EA7773" title="Instagram"><i class="fa fa-instagram" style="font-size:25px; color: #fff;"></i></a>
+             <a href="https://www.instagram.com/letssconnect/" class="btn" style="background-color: #EA7773" title="Instagram"><i class="fa fa-instagram" style="font-size:25px; color: #fff;"></i></a>
              <a href="https://in.pinterest.com/equickreview/" class="btn" style="background-color: #E71C23" title="pinterest"><i class="fa fa-pinterest" style="font-size:25px; color: #fff;"></i></a>
-             
-            <?php if (!$_SESSION['LoggedIn']){ ?>
-              <a href="signIn" class="btn btn-outline-light float-right" style="text-decoration: none; ">Sign In</a>
-              <a href="#" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-light float-right" style="text-decoration: none; margin-right: 5px;">Subscribe</a>
-             <?php }else{ ?>
-             <a href="signOut" class="btn btn-outline-light float-right" style="text-decoration: none; ">Sign Out</a>
-           <?php } ?>
           </div>
         </div>
       </div>
@@ -91,7 +84,7 @@ if(mysqli_connect_error()){
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
       <a href="/" class="navbar-brand">
-        <span class="btn btn-outline-danger brand-text">Review</span>
+        <img src="/IMAGES/logo.png" height="60" width="60" style="border-radius: 50%">
       </a>
 
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
@@ -99,7 +92,7 @@ if(mysqli_connect_error()){
      
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown dd" style="margin-right: 5px;">
-            <a href="allProducts" class="btn btn-outline-success dropdown-toggle" id="navbarDropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+            <a href="allProducts" class="btn btn-outline-dark dropdown-toggle" id="navbarDropdown" aria-haspopup="true" aria-expanded="false">Products</a>
             <div class="dropdown-menu dm" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="technology">Technology</a>
               <a class="dropdown-item" href="food">Food</a>
@@ -139,16 +132,26 @@ if(mysqli_connect_error()){
             </div>
           </li>
           <li class="nav-item" style="margin-right: 5px;">
-            <a href="forum" class="btn btn-warning">Forum</a>
+            <a href="forum" class="btn btn-outline-dark">Forum</a>
           </li>
-          <li class="nav-item" >
-            <a href="about" class="btn btn-primary">About</a>
-            <a href="contact" class="btn btn-success">Contact Us</a>
+          <li class="nav-item">
+            <a href="about" class="btn btn-outline-dark">About</a>
+            <a href="contact" class="btn btn-outline-dark" style="margin-right: 5px;">Contact Us</a>
             <?php if ($_SESSION['LoggedIn']) { ?>
-              <a href="#" class="btn btn-dark"><?php echo $_SESSION['userName']; ?></a>
+              <li class="nav-item dropdown">
+                <a class="btn btn-outline-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <?php echo $_SESSION['userName']; ?>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="signOut">Sign Out</a>
+                </div>
+              </li>
             <?php }else{
-              echo '<a href="signUp" class="btn btn-dark">Sign Up</a>';
+              echo '<a href="signUp" style="margin-right: 5px;" class="btn btn-dark">Join Us</a>';
             } ?>
+          </li>
+          <li class="nav-item">
+            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalCenter">Subscribe</button>
           </li>
           
         </ul>
