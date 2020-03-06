@@ -9,11 +9,53 @@
     echo $GLOBALS['alert_info'];
   }
 ?>
+
+<?php 
+if ($_GET['usertype']) { ?>
+  <div class="col-sm-8 ml-auto mr-auto" >
+    <div class="col-sm-12 card shadow rounded pt-2" style="background-color: #fff;">
+      <h2 style="text-align: center;">Who are you?</h2>
+      <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card" style="">
+                  <div class="card-body cb" style="text-align: center; background-color: #EA7773" >
+                    <i class="fas fa-handshake" style="font-size: 100px;"></i>
+                    <h3 class="title" style="font-weight: bold;">I am a seller</h3>
+                    <a href="signUp?user=seller" class="btn btn-primary">Click Here</a> 
+                  </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card" style="">
+                 
+                  <div class="card-body cb" style="text-align: center; background-color: #F5BCBA">
+                    <i class="fas fa-shopping-cart" style="font-size: 100px;" ></i>
+                    <h3 class="title" style="font-weight: bold;">I am a buyer</h3>
+                    <a href="signUp?user=buyer" class="btn btn-primary">Click Here</a>
+                  </div>
+                </div>
+            </div>
+            
+        </div>
+        <br>
+
+    </div>
+    <br>
+
+    <br>
+  </div>
+<?php }else{ ?>
+
+  <?php 
+    $sellerType = $_GET['user'];
+
+   ?>
 <div class="row">
 <div class="col-md-6 col-lg-6 col-sm-12 ml-auto mr-auto">
 <div class="">
   <div class="register-logo">
-    <a><b>E-Quick Review</b></a>
+    <a><b>I am a <?php echo $sellerType ?></b></a>
   </div>
 
   <div class="card">
@@ -124,6 +166,10 @@
 <!-- jQuery -->
 </div>
 </div>
+
+<?php }
+
+ ?>
 
 
 </div>

@@ -91,23 +91,67 @@ if(mysqli_connect_error()){
         <!-- Left navbar links -->
      
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item" style="margin-right: 5px;">
-            <a href="about" class="btn btn-outline-success" style="font-weight: bold;">About</a>
+          <li class="nav-item dropdown dd" style="margin-right: 5px;">
+            <a href="allProducts" class="btn btn-outline-dark dropdown-toggle" id="navbarDropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+            <div class="dropdown-menu dm" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="technology">Technology</a>
+              <a class="dropdown-item" href="food">Food</a>
+              <a class="dropdown-item" href="fashion">Fashion</a>
+              <a class="dropdown-item" href="skincare">Skincare & beauty</a>
+              <a class="dropdown-item" href="accessories">Accessories</a>
+              <a class="dropdown-item" href="art">Art</a>
+              <a class="dropdown-item" href="games">Games</a>
+              <a class="dropdown-item" href="books">Books/e-books/audio-books</a>
+              <a class="dropdown-item" href="homeDecor">Home Decor</a>
+              <a class="dropdown-item" href="software">Software</a>
+              <a class="dropdown-item" href="sports">Sports</a>
+              <a class="dropdown-item" href="travel">Travel</a>
+              <a class="dropdown-item" href="greenProducts">Green Products</a>
+              <a class="dropdown-item" href="computer">Computer/Internet</a>
+              <a class="dropdown-item" href="health">Health & Fitness</a>
+              <a class="dropdown-item" href="bestProducts">Best Products</a>
+              <a class="dropdown-item" href="others">Others</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown dd2" style="margin-right: 5px;">
+            <a href="allServices" class="btn btn-outline-dark dropdown-toggle" id="navbarDropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+            <div class="dropdown-menu dm2" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="education">Education/Course</a>
+              <a class="dropdown-item" href="onlineCourses">Online Courses</a>
+              <a class="dropdown-item" href="eCommerce">E-Commerce</a>
+              <a class="dropdown-item" href="meditation">Spirituality/Meditation</a>
+              <a class="dropdown-item" href="selfAwarness">Self-awareness</a>
+              <a class="dropdown-item" href="jobs">Employment/Jobs</a>
+              <a class="dropdown-item" href="movies">Movies/Music</a>
+              <a class="dropdown-item" href="business">Business/ Entrepreneurship</a>
+              <a class="dropdown-item" href="publicSpeaking">Public speaking</a>
+              <a class="dropdown-item" href="coach">Coach/Mentor</a>
+              <a class="dropdown-item" href="leadership">Leadership</a>
+              <a class="dropdown-item" href="opportunity">Best opportunity</a>
+              <a class="dropdown-item" href="otherServices">Other Services</a>
+            </div>
           </li>
           <li class="nav-item" style="margin-right: 5px;">
-            <a href="requestReview" class="btn btn-outline-success" style="font-weight: bold;">Request a Review</a>
-          </li>
-          <li class="nav-item" style="margin-right: 5px;">
-            <a href="shareReview" class="btn btn-outline-success" style="font-weight: bold;">Share a Review</a>
-          </li>
-          <li class="nav-item" style="margin-right: 5px;">
-            <a href="bestReview" class="btn btn-outline-success" style="font-weight: bold;">Best Reviews</a>
-          </li>
-          <li class="nav-item" style="margin-right: 5px;">
-            <a href="terms" class="btn btn-outline-success" style="font-weight: bold;">Terms & Conditions</a>
+            <a href="forum" class="btn btn-outline-dark">Forum</a>
           </li>
           <li class="nav-item">
-            <button type="button" class="btn btn-outline-success" style="font-weight: bold;" data-toggle="modal" data-target="#exampleModalCenter">Subscribe</button>
+            <a href="about" class="btn btn-outline-dark">About</a>
+            <a href="contact" class="btn btn-outline-dark" style="margin-right: 5px;">Contact Us</a>
+            <?php if ($_SESSION['LoggedIn']) { ?>
+              <li class="nav-item dropdown">
+                <a class="btn btn-outline-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <?php echo $_SESSION['userName']; ?>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="signOut">Sign Out</a>
+                </div>
+              </li>
+            <?php }else{
+              echo '<a href="signUp" style="margin-right: 5px;" class="btn btn-dark">Join Us</a>';
+            } ?>
+          </li>
+          <li class="nav-item">
+            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalCenter">Subscribe</button>
           </li>
           
         </ul>
