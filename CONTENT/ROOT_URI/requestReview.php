@@ -27,6 +27,7 @@ if (isset($_POST['submitProduct'])){
 		$prType = $_POST['prType'];
 	if(isset($_POST['prDesc']))
 		$prDesc = $_POST['prDesc'];
+	
 	$unid = D_create_UserId();
 	
 	

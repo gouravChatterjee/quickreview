@@ -38,6 +38,7 @@
 }
 
 </style>
+<link rel="stylesheet" type="text/css" href="/CSS/5star.css">
 
 <?php 
 $link = new mysqli(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
@@ -56,16 +57,31 @@ if ($_SESSION['LoggedIn']) {
 
 if (isset($_POST['submit'])) {
 	$review = $_POST['rvw'];
-	$stmt = $link->prepare("INSERT INTO REVIEWS (`PRODUCT_ID`, `USER_ID`, `USER_NAME`, `REVIEW_DETAILS`) VALUES (?, ?, ?, ?)");
+  $rating = $_POST['rating'];
+  $image = $_FILES['image']['name'];
+  $imgName = basename($image);
+  $unid = D_create_UserId();
+  echo $imgName;
+  echo $image;
+	// $stmt = $link->prepare("INSERT INTO REVIEWS (`UNI_ID`, `PRODUCT_ID`, `USER_ID`, `USER_NAME`, `REVIEW_DETAILS`, `RATING`, `IMAGE`) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-  $stmt->bind_param("ssss", $id, $userId, $userName, $review);
+ //  $stmt->bind_param("sssssss", $unid, $id, $userId, $userName, $review, $rating, $imgName);
 
-  $result = $stmt->execute();
-	if ($result) {
-		echo '<div class="container"><div class="alert alert-success">Successfully submitted review</div></div>';
-	}else{
-		echo mysqli_error($link);
-	}
+ //  $result = $stmt->execute();
+	// if ($result) {
+ //    mkdir("CONTENT/UPLOADS/REVIEWS/".$id."/".$unid, 0755, true);
+ //    $target = "CONTENT/UPLOADS/REVIEWS/".$id."/".$unid."/".basename($image);
+ //    if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+ //        $msg = "File uploaded successfully";
+ //        // echo $msg;
+ //    }else{
+ //      $msg = "Failed to upload File";
+ //      // echo "not uploaded";
+ //    }
+	// 	echo '<div class="container"><div class="alert alert-success">Successfully submitted review</div></div>';
+	// }else{
+	// 	echo mysqli_error($link);
+	// }
 
 }
 $sql = "SELECT * FROM SERVICES WHERE UNI_ID = '$id'";
@@ -108,8 +124,29 @@ $imgName = $row['IMAGE'];
         	<div class="card-header"><h4>Share a review</h4></div>
         	<div class="card-body">
         		<form method="POST">
-        			<input type="text" name="rvw" placeholder="Enter your review" class="form-control" required><br>
-        			<input type="submit" name="submit" class="btn btn-success" value="Submit Review">
+              <div class="rate-area">
+                <h4 style="font-weight: bold;">Give Rating:- </h4>
+                <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Amazing">5 stars</label>
+                <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="Good">4 stars</label>
+                <input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="Average">3 stars</label>
+                <input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not Good">2 stars</label>
+                <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Bad">1 star</label>
+                
+            </div>
+              <textarea name="rvw" class="form-control" placeholder="Enter your review" rows="3"></textarea><br>
+              <div class="col-sm-12">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroupFileAddon01"><i class="fa fa-upload" aria-hidden="true"></i></span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01" name="image">
+                      <label class="custom-file-label" for="inputGroupFile01">Upload an image</label>
+                    </div>
+                  </div>
+              </div><br>
+              <input type="submit" name="submit" class="btn btn-success" value="Submit Review">
         		</form>
         	</div>
       	</div>
@@ -177,4 +214,16 @@ $imgName = $row['IMAGE'];
   	</div>
 	
 </div>
+
+<script type="text/javascript">
+// Add the following code if you want the name of the file appear on select
+  $(document).ready(function(){
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+  });
+      
+</script>
+
 
