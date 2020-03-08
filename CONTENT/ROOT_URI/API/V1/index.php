@@ -573,6 +573,78 @@ if (isset($_GET['questionList'])) {
 			  }
 		}
 
+if (isset($_GET['fetchProducts'])) {
+	$category = $_GET['category'];
+	if ($category == 'allProducts') {
+		$sql = "SELECT * FROM PRODUCT ORDER BY ID DESC";
+	}else{
+		$sql = "SELECT * FROM PRODUCT WHERE CATEGORY = '$category' ORDER BY ID DESC";
+	}
+  
+  $result = mysqli_query($link,$sql);
+  if(mysqli_num_rows($result)>0){
+    while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
+      $id = $row['UNI_ID'];
+      $name = $row['PR_NAME'];
+      $category = $row['CATEGORY'];
+      $price = $row['PRICE'];
+      $imgName = $row['IMAGE'];
+      $data .= '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleProduct?id='.$id.'">
+      <img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" class="card-img-top card-img-mo" alt="...">
+      <div class="card-body">
+        <h5 class="card-title" style="text-decoration:none;">'.$name.'</h5>
+      </div></a>
+    </div></div>';
+        // echo '<div class="col-sm-4 col-md-6 col-lg-2">
+        // <a href="singleProduct?id='.$id.'"><img style="margin-bottom:5px; border: 2px solid;" src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'"  width="90px" height="90px"></a>
+        // </div>';
+     }
+  }else{
+    $data .= "<div class='alert alert-warning'>No Data</div>";
+  }
+  $myObj = new stdClass();
+  $myObj->data = $data;
+	  // $myObj->errorm = $errorm;
+  $myJSON = json_encode($myObj);
+  echo $myJSON;
+
+}
+if (isset($_GET['fetchServices'])) {
+	$category = $_GET['category'];
+	if ($category == 'allServices') {
+		$sql = "SELECT * FROM SERVICES ORDER BY ID DESC";
+	}else{
+		$sql = "SELECT * FROM SERVICES WHERE CATEGORY = '$category' ORDER BY ID DESC";
+	}
+  
+  $result = mysqli_query($link,$sql);
+  if(mysqli_num_rows($result)>0){
+    while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
+      $id = $row['UNI_ID'];
+      $name = $row['SR_NAME'];
+      $category = $row['CATEGORY'];
+      $price = $row['PRICE'];
+      $imgName = $row['IMAGE'];
+      $data .= '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleService?id='.$id.'">
+      <img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" class="card-img-top card-img-mo" alt="...">
+      <div class="card-body">
+        <h5 class="card-title" style="text-decoration:none;">'.$name.'</h5>
+      </div></a>
+    </div></div>';
+        // echo '<div class="col-sm-4 col-md-6 col-lg-2">
+        // <a href="singleProduct?id='.$id.'"><img style="margin-bottom:5px; border: 2px solid;" src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'"  width="90px" height="90px"></a>
+        // </div>';
+     }
+  }else{
+    $data .= "<div class='alert alert-warning'>No Data</div>";
+  }
+  $myObj = new stdClass();
+  $myObj->data = $data;
+	  // $myObj->errorm = $errorm;
+  $myJSON = json_encode($myObj);
+  echo $myJSON;
+
+}
 
 
 ?>

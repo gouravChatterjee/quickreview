@@ -11,8 +11,10 @@ $link->set_charset("utf8");
  ?>
 
  <?php 
+ $userId = $_SESSION["userId"];
+ $userName = $_SESSION["userName"];
  
- if (isset($_POST['submitProduct'])){
+if (isset($_POST['submitProduct'])){
 	if(isset($_POST['prName']))
 		$prName = $_POST['prName'];
 	if(isset($_POST['prCategory']))
@@ -26,45 +28,94 @@ $link->set_charset("utf8");
 	if(isset($_POST['prDesc']))
 		$prDesc = $_POST['prDesc'];
 	$unid = D_create_UserId();
-	$userId = $_SESSION["userId"];
- 	$userName = $_SESSION["userName"];
- 	echo $userName;
- 	echo $userId;
+	
 	
 	$image = $_FILES['image']['name'];
 	$imgName = basename($image);
 
-	// $stmt = $link->prepare("INSERT INTO PRODUCT (`UNI_ID`, `PR_NAME`, `CATEGORY`, `PRICE`, `LINK`, `DESCRIPTION`, `IMAGE`, `USER_ID`, `USER_NAME`)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+	$stmt = $link->prepare("INSERT INTO PRODUCT (`UNI_ID`, `PR_NAME`, `CATEGORY`, `PRICE`, `LINK`, `DESCRIPTION`, `IMAGE`, `USER_ID`, `USER_NAME`)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-	// $stmt->bind_param("sssssssss", $unid, $prName, $prCategory, $price, $prLink, $prDesc, $imgName, $userId, $userName);
+	$stmt->bind_param("sssssssss", $unid, $prName, $prCategory, $price, $prLink, $prDesc, $imgName, $userId, $userName);
 
-	// $result = $stmt->execute();
+	$result = $stmt->execute();
 
-	// if ($result) {
-	// 	mkdir("CONTENT/UPLOADS/PRODUCT/".$unid, 0755, true);
+	if ($result) {
+		mkdir("CONTENT/UPLOADS/PRODUCT/".$unid, 0755, true);
 
 
-	// 	$target = "CONTENT/UPLOADS/PRODUCT/".$unid."/".basename($image);
-	// 	// echo "  ".$target;
+		$target = "CONTENT/UPLOADS/PRODUCT/".$unid."/".basename($image);
+		// echo "  ".$target;
 
-	// 	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-	//   		$msg = "File uploaded successfully";
-	//   		// echo $msg;
-	//   		echo '<div class="container"><div class="alert alert-success">Successfully Added the product </div></div>';
-	//   	}else{
-	//   		$msg = "Failed to upload File";
-	//   		// echo "not uploaded";
-	//   	}
-	// }
+		if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+	  		$msg = "File uploaded successfully";
+	  		// echo $msg;
+	  		
+	  	}else{
+	  		$msg = "Failed to upload File";
+	  		// echo "not uploaded";
+	  		// echo '<div class="container"><div class="alert alert-danger">There was a error uploading the image! Please try again!</div></div>';
+	  	}
+	  	echo '<div class="container"><div class="alert alert-success">Successfully Added the product </div></div>';
+	}
 
 	// echo '<div class="alert alert-danger">'.$Id.'</div>';
 	
 
- //  	if(!$result){
-	// 	echo '<div class="container"><div class="alert alert-danger">There was a database error </div></div>';
-	// 	echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
-	// 	exit;
-	// }
+  	if(!$result){
+		echo '<div class="container"><div class="alert alert-danger">There was an error </div></div>';
+		// echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
+		exit;
+	}
+}
+
+if (isset($_POST['submitService'])){
+	if(isset($_POST['srName']))
+		$srName = $_POST['srName'];
+	if(isset($_POST['srCategory']))
+		$srCategory = $_POST['srCategory'];
+	if(isset($_POST['price']))
+		$price = $_POST['price'];
+	if(isset($_POST['srLink']))
+		$srLink = $_POST['srLink'];
+	if(isset($_POST['srType']))
+		$srType = $_POST['srType'];
+	if(isset($_POST['srDesc']))
+		$srDesc = $_POST['srDesc'];
+	$unid = D_create_UserId();
+	
+	$image = $_FILES['image']['name'];
+	$imgName = basename($image);
+
+	$stmt = $link->prepare("INSERT INTO SERVICES (`UNI_ID`, `SR_NAME`, `CATEGORY`, `PRICE`, `LINK`, `DESCRIPTION`, `IMAGE`, `USER_ID`, `USER_NAME`)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+	$stmt->bind_param("sssssssss", $unid, $srName, $srCategory, $price, $srLink, $srDesc, $imgName, $userId, $userName);
+
+	$result = $stmt->execute();
+
+	if ($result) {
+		mkdir("CONTENT/UPLOADS/SERVICES/".$unid, 0755, true);
+
+
+		$target = "CONTENT/UPLOADS/SERVICES/".$unid."/".basename($image);
+		// echo "  ".$target;
+
+		if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+	  		$msg = "File uploaded successfully";
+	  		// echo $msg;
+	  	}else{
+	  		$msg = "Failed to upload File";
+	  		// echo "not uploaded";
+	  	}
+	  	echo '<div class="container"><div class="alert alert-success">Successfully Added the Service </div></div>';
+	}
+	// echo '<div class="alert alert-danger">'.$Id.'</div>';
+	
+
+  	if(!$result){
+		echo '<div class="container"><div class="alert alert-danger">There was an error! Try again!</div></div>';
+		// echo '<div class="alert alert-danger">' . mysqli_error($link) . '</div>';
+		exit;
+	}
 }
 
   ?>
@@ -72,7 +123,9 @@ $link->set_charset("utf8");
  <?php 
  if(!$_SESSION['LoggedIn'] ){
  	include("signUp.php");
- }else{ ?>
+ }else{
+  ?>
+
  	<div class="container">
     <div class="col-sm-9 ml-auto mr-auto">
         <ul class="nav nav-pills nav-fill mb-1" id="pills-tab" role="tablist">
@@ -88,7 +141,7 @@ $link->set_charset("utf8");
 
     <div class="tab-pane fade show active" id="pills-iimtt" role="tabpanel" aria-labelledby="pills-iimtt-tab">
         <div class="card col-sm-12 border border-primary shadow rounded pt-2">
-        	<form role="form" method="POST" enctype="multipart/form-data">
+        <form role="form" method="POST" enctype="multipart/form-data">
           	<input type="hidden" name="size" value="1000000">
             <div class="card-body">
               <!-- <div class="form-group">
@@ -143,7 +196,7 @@ $link->set_charset("utf8");
 	            </div>
 	            <div class="row">
 	            	<div class="col-sm-6">
-	            		 <label for="validform">Upload Product Image<span style="color: red;">*</span></label>
+	            		 <label for="validform">Upload Product Image</label>
 					  	 <br>
 						  <div class="input-group">
 							  <div class="input-group-prepend">
@@ -151,7 +204,7 @@ $link->set_charset("utf8");
 							  </div>
 							  <div class="custom-file">
 							    <input type="file" class="custom-file-input" id="inputGroupFile01"
-							      aria-describedby="inputGroupFileAddon01" name="image" required>
+							      aria-describedby="inputGroupFileAddon01" name="image">
 							    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
 							  </div>
 						</div>
@@ -182,165 +235,91 @@ $link->set_charset("utf8");
 
 
             <div class="tab-pane fade" id="pills-non" role="tabpanel" aria-labelledby="pills-non-tab">
-                <div class="col-sm-12 border border-primary shadow rounded pt-2">
-             <form action="register_non" method="post" id="singnupFrom">
-             <div class="row">
-	        	<div class="col-sm-6">
-	        		 <div class="form-group">
-					    <label for="name">Name of Candidate <span style="color: red;">*</span></label>
-					    <input type="text" class="form-control" id="nameofchild"  placeholder="Enter the name of Candidate" name="sName" required>
-
+                <div class="card col-sm-12 border border-primary shadow rounded pt-2">
+                	<form role="form" method="POST" enctype="multipart/form-data">
+          	<input type="hidden" name="size" value="1000000">
+            <div class="card-body">
+              <!-- <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+              </div> -->
+              <div class="row">
+            	<div class="col-sm-6">
+            		 <div class="form-group">
+					    <label for="name">Service Name<span style="color: red;">*</span></label>
+		    			<input type="text" class="form-control" name="srName" placeholder="Enter the name of service" required>
 					  </div>
-
 	      		</div>
-
 	      		  <div class="col-sm-6">
-	      		  	   <div class="form-group">
-					    <label for="dateofbirth">Date of Birth <span style="color: red;">*</span></label>
-					    <input type="date" class="form-control" id="dob" name="dob" required>
-
+	      		  	  <div class="form-group">
+					   <label for="name">Service Category<span style="color: red;">*</span></label>
+		    			<select name ="srCategory" class="form-control">
+		    				<option>Select Category</option>
+			                  	<option value="Education">Education/Course</option>
+		                        <option value="OnlineCourses">Online Courses</option>
+		                        <option value="Ecommerce">E-Commerce</option>
+		                        <option value="Meditation">Spirituality/Meditation</option>
+		                        <option value="SelfAwarness">Self-awareness</option>
+		                        <option value="Jobs">Employment/Jobs</option>
+		                        <option value="Movies">Movies/Music</option>
+		                        <option value="Business">Business/ Entrepreneurship</option>
+		                        <option value="PublicSpeaking">Public speaking</option>
+		                        <option value="Coach">Coach/Mentor</option>
+		                        <option value="Leadership">Leadership</option>
+		                        <option value="Opportunity">Best opportunity</option>
+		                        <option value="OtherServices">Other Services</option>
+		    			</select>
 					  </div>
-
-
-	  		 	 </div>
-        </div>
-
-        <div class="row">
-        	<div class="col">
-        		<div class="form-group">
-				    <label for="name">Name of Father <span style="color: red;">*</span></label>
-				    <input type="text" class="form-control" id="nameoffather"  placeholder="Enter the name of father" name="fathername" required>
-
-				 </div>
-        	</div>
-        	<div class="col">
-        		<div class="form-group">
-				    <label for="name">Name of Mother<span style="color: red;">*</span></label>
-				    <input type="text" class="form-control" id="nameoffather"  placeholder="Enter the name of mother" name="mothername" required>
-
-				  </div>
-        	</div>
-        </div>
-
-        <div class="row">
-        	<div class="col">
-        		 <div class="form-group">
-				    <label for="number">Phone no of Parent<span style="color: red;">*</span></label>
-				    <input type="number" class="form-control" id="nameofchild"  placeholder="Enter the phn no. of parent" name="phn" required>
-
-				  </div>
-        	</div>
-        	<div class="col">
-        		<div class="form-group">
-				    <label for="exampleInputEmail1">Email address<span style="color: red;">*</span></label>
-				    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email of Parent" name="email" required>
-				    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-				  </div>
-        	</div>
-        </div>
-
-        	<div class="table-responsive " >
-        	<label for="name">Select Program and sub Program <span style="color: red;">*</span></label>
-        	<table class="table table-bordered table-hover">
-        		<tr>
-        			<div class="row">
-        				<div class="col">
-        					<td scope="col">
-		        		   	  <div class="form-check">
-							    <input type="checkbox" class="form-check-input"  name="program[]" value="YLE" id="yleCheck">
-							    <label class="form-check-label" for="exampleCheck1">YLE</label>
-							   </div>
-		        		   </td>
-        				</div>
-        				<div class="col">
-        					 <td scope="col">
-        		   				<div class="form-check" id="yleRow">
-                                    <select class="form-control" id="yleDrop" name="subProgram[]"></select>
-        		   				</div>
-        		   			</td>
-        				</div>
-        			</div>
-        		</tr>
-        		<tr>
-        		  <div class="row">
-        				<div class="col">
-        					<td scope="col">
-		        		   	   <div class="form-check">
-							     <input type="checkbox" class="form-check-input" name="program[]" value="MAXBRAIN" id="maxCheck">
-							     <label class="form-check-label" for="exampleCheck1">MAXBRAIN</label>
+      		  		</div>
+	            </div>
+              <div class="row">
+            	<div class="col-sm-6">
+            		 <div class="form-group">
+					    <label for="name">Price<span style="color: red;">*</span></label>
+						<input type="number" class="form-control" id="nameofchild"  placeholder="Enter the price" name="price" required>
+					  </div>
+	      		</div>
+	      		  <div class="col-sm-6">
+	      		  	  <div class="form-group">
+					    <label for="name">Service Link<span style="color: red;">*</span></label>
+					    <input type="text" class="form-control" id="region"  placeholder="https://xyz.com/xyzproduct" name="srLink" required>
+					  </div>
+      		  		</div>
+	            </div>
+	            <div class="row">
+	            	<div class="col-sm-6">
+	            		 <label for="validform">Upload Service Image</label>
+					  	 <br>
+						  <div class="input-group">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
 							  </div>
-		        		   </td>
-        				</div>
-        				<div class="col">
-        					 <td  scope="col">
-        		   				<div class="form-check" id="maxRow">
-                                    <select class="form-control" id="maxDrop" name="subProgram[]"></select>
-        		   				</div>
-        		   			</td>
-        				</div>
-        			</div>
-        		</tr>
-        		
-        		<tr>
-        		  <div class="row">
-        				<div class="col">
-        					<td scope="col">
-		        		   	  <div class="form-check">
-							    <input type="checkbox" class="form-check-input" name="program[]" value="WRITO" id="wrtCheck">
-							    <label class="form-check-label" for="exampleCheck1">WRITO</label>
+							  <div class="custom-file">
+							    <input type="file" class="custom-file-input" id="inputGroupFile01"
+							      aria-describedby="inputGroupFileAddon01" name="image">
+							    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
 							  </div>
-		        		   </td>
-        				</div>
-        				<div class="col">
-        					 <td scope="col">
-        		   				<div class="form-check" id="wrtRow">
-                                    <select class="form-control" id="wrtDrop" name="subProgram[]"></select>
-        		   				</div>
-        		   			</td>
-        				</div>
-        			</div>
-        		</tr>
-        		<tr>
-        		  <div class="row">
-        				<div class="col">
-        					<td scope="col">
-		        		   	  <div class="form-check">
-							    <input type="checkbox" class="form-check-input" name="program[]" value="3P" id="3pCheck">
-							    <label class="form-check-label" for="exampleCheck1">3P</label>
-							  </div>
-		        		   </td>
-        				</div>
-        				<div class="col">
-        					 <td scope="col">
-        		   				<div class="form-check" id="3pRow">
-                                    <select class="form-control" id="3pDrop" name="subProgram[]"></select>
-        		   				</div>
-        		   			</td>
-        				</div>
-        			</div>
-        		</tr>
-        	</table>
-        </div>
-
-		  <div class="row">
-		  	
-		  	<div class="col">
-		  		<div class="form-group">
-				    <label for="exampleInputEmail1">Date of Enrollment<span style="color: red;">*</span></label>
-				    <input type="date" class="form-control" id="dateenroll"  name="dateEnroll" required>
-
+						</div>
+		      		</div>
+	      		    <div class="col-sm-6">
+	      		  	  <div class="form-group">
+					    <label for="name">Service Type<span style="color: red;">*</span></label>
+					    <input type="text" class="form-control" id="nameofchild"  placeholder="Service Type" name="srType" required>
+					  </div>
+      		  		</div>
+	            </div>
+	             <div class="form-group">
+				    <label for="exampleFormControlTextarea1">Service Description</label>
+				    <textarea class="form-control" name="srDesc" id="exampleFormControlTextarea1" rows="3" placeholder="Description"></textarea>
 				  </div>
-		  	</div>
-		  </div>
 
+	            <div class="row justify-content-center">
+				  	<button type="submit" name="submitService" class="btn btn-lg btn-block btn-success" style="margin-right: 20px; margin-left: 20px;">Submit Service</button>
+				</div>
 
-
-
-
-
-
-		  <button type="submit" class="btn btn-primary btn-block" style="background-color: darkgreen;" name="submit">Submit</button>
-                    </form>
+          	</div>
+          </form>
+           
                     <br>
                 </div>
             </div>
@@ -351,3 +330,13 @@ $link->set_charset("utf8");
 <?php } ?>
  	
 
+<script type="text/javascript">
+// Add the following code if you want the name of the file appear on select
+	$(document).ready(function(){
+		$(".custom-file-input").on("change", function() {
+		  var fileName = $(this).val().split("\\").pop();
+		  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+		});
+	});
+      
+</script>

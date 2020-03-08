@@ -36,8 +36,8 @@
               if ($stmt->execute()) {   
                 $_SESSION["LoggedIn"]=true;
                 $_SESSION["user"] = $email;
-                $_SESSION["userId"] = $row['UNI_ID'];
-                $_SESSION["userName"] = $row['NAME'];     
+                $_SESSION["userId"] = $uniqueUserId;
+                $_SESSION["userName"] = $name;     
                 echo "<script>
                         window.location.href='/';
                       </script>";
