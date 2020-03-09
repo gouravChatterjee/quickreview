@@ -4,11 +4,75 @@
 	  }
 </script>
 <script type="text/javascript">
+  function fetchProducts(productCategory){
+    fetch('/API/V1/?fetchProducts&category='+productCategory)
+        .then(
+          function(response) {
+            if (response.status !== 200) {
+              console.log('Looks like there was a problem. Status Code: ' +
+                response.status);
+              return;
+            }
+              response.json().then(function(data) {
+              console.log(data.data);
+              var dataToshow = document.getElementById('showProductsHere');
+              dataToshow.innerHTML = '';
+              dataToshow.innerHTML = data.data;
+            });
+          }
+        )
+        .catch(function(err) {
+          console.log('Fetch Error :-S', err);
+        });
+  }
+  function fetchServices(serviceCategory){
+    fetch('/API/V1/?fetchServices&category='+serviceCategory)
+        .then(
+          function(response) {
+            if (response.status !== 200) {
+              console.log('Looks like there was a problem. Status Code: ' +
+                response.status);
+              return;
+            }
+              response.json().then(function(data) {
+              console.log(data.data);
+              var dataToshow = document.getElementById('showServicesHere');
+              dataToshow.innerHTML = '';
+              dataToshow.innerHTML = data.data;
+            });
+          }
+        )
+        .catch(function(err) {
+          console.log('Fetch Error :-S', err);
+        });
+  }
+</script>
+
+<?php 
+
+if (isset($_GET['type'])) {
+  $type = $_GET['type'];
+  if($_GET['product'] == 'true')
+    echo '<script>fetchProducts(`'.$type.'`); fetchServices("allServices");</script>';
+  else
+    echo '<script>fetchServices(`'.$type.'`); fetchProducts("allProducts");</script>';
+}else{
+  echo '<script type="text/javascript">
+  window.onload = function() {
+    fetchProducts("allProducts");
+    fetchServices("allServices");
+  };
+</script>';
+}
+
+
+ ?>
+<!-- <script type="text/javascript">
 	window.onload = function() {
 	  fetchProducts('allProducts');
 	  fetchServices('allServices');
 	};
-</script>
+</script> -->
 <style type="text/css">
   .vertical-menu {
     width: 230px;
@@ -84,7 +148,7 @@ $userName = $_SESSION["userName"];
                   <div class="col-lg-3 col-sm-12">
                     <h4>Categories</h4>
                     <div class="vertical-menu">
-                      <a href="#" onclick="fetchProducts('allProducts')" class="active">All Products</a>
+                      <a href="#" onclick="fetchProducts('allProducts')">All Products</a>
                       <a href="#" onclick="fetchProducts('technology')">Technology</a>
                       <a href="#" onclick="fetchProducts('food')">Food</a>
                       <a href="#" onclick="fetchProducts('fashion')">Fashion</a>
@@ -138,7 +202,7 @@ $userName = $_SESSION["userName"];
                   <div class="col-lg-3 col-sm-12">
                     <h4>Categories</h4>
                     <div class="vertical-menu">
-                        <a href="#" onclick="fetchServices('allServices')" class="active">All Services</a>
+                        <a href="#" onclick="fetchServices('allServices')">All Services</a>
                         <a href="#" onclick="fetchServices('education')">Education/Course</a>
                         <a href="#" onclick="fetchServices('onlineCourses')">Online Courses</a>
                         <a href="#" onclick="fetchServices('eCommerce')">E-Commerce</a>
@@ -190,47 +254,4 @@ $userName = $_SESSION["userName"];
       
 </script>
 
-<script type="text/javascript">
-	function fetchProducts(productCategory){
-		fetch('/API/V1/?fetchProducts&category='+productCategory)
-        .then(
-          function(response) {
-            if (response.status !== 200) {
-              console.log('Looks like there was a problem. Status Code: ' +
-                response.status);
-              return;
-            }
-              response.json().then(function(data) {
-              console.log(data.data);
-              var dataToshow = document.getElementById('showProductsHere');
-              dataToshow.innerHTML = '';
-              dataToshow.innerHTML = data.data;
-            });
-          }
-        )
-        .catch(function(err) {
-          console.log('Fetch Error :-S', err);
-        });
-	}
-	function fetchServices(serviceCategory){
-		fetch('/API/V1/?fetchServices&category='+serviceCategory)
-        .then(
-          function(response) {
-            if (response.status !== 200) {
-              console.log('Looks like there was a problem. Status Code: ' +
-                response.status);
-              return;
-            }
-              response.json().then(function(data) {
-              console.log(data.data);
-              var dataToshow = document.getElementById('showServicesHere');
-              dataToshow.innerHTML = '';
-              dataToshow.innerHTML = data.data;
-            });
-          }
-        )
-        .catch(function(err) {
-          console.log('Fetch Error :-S', err);
-        });
-	}
-</script>
+

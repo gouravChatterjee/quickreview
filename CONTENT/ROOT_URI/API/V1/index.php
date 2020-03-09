@@ -589,9 +589,13 @@ if (isset($_GET['fetchProducts'])) {
       $category = $row['CATEGORY'];
       $price = $row['PRICE'];
       $imgName = $row['IMAGE'];
-      $data .= '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleProduct?id='.$id.'">
-      <img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" class="card-img-top card-img-mo" alt="...">
-      <div class="card-body">
+      $data .= '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleProduct?id='.$id.'">';
+      if ($imgName == '' || $imgName == null) {
+      	$data .= '<img src="https://www.movehostel.com/storage/app/Hostels/fab30d10-bb5b-11e9-b24b-a9b5c37d172c/20190810104533no%20image.jpg" class="card-img-top card-img-mo" alt="...">';
+      }else{
+      	$data .= '<img src="/CONTENT/UPLOADS/PRODUCT/'.$id.'/'.$imgName.'" class="card-img-top card-img-mo" alt="...">';
+      }
+      $data .= '<div class="card-body">
         <h5 class="card-title" style="text-decoration:none;">'.$name.'</h5>
       </div></a>
     </div></div>';
@@ -625,9 +629,13 @@ if (isset($_GET['fetchServices'])) {
       $category = $row['CATEGORY'];
       $price = $row['PRICE'];
       $imgName = $row['IMAGE'];
-      $data .= '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleService?id='.$id.'">
-      <img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" class="card-img-top card-img-mo" alt="...">
-      <div class="card-body">
+      $data .= '<div class="col-sm-4 col-md-6 col-lg-3"><div class="card" style="width:100%; "><a href="singleService?id='.$id.'">';
+      if ($imgName == '' || $imgName == null) {
+      	$data .= '<img src="https://www.movehostel.com/storage/app/Hostels/fab30d10-bb5b-11e9-b24b-a9b5c37d172c/20190810104533no%20image.jpg" class="card-img-top card-img-mo" alt="...">';
+      }else{
+      	$data .= '<img src="/CONTENT/UPLOADS/SERVICES/'.$id.'/'.$imgName.'" class="card-img-top card-img-mo" alt="...">';
+      }
+      $data .= '<div class="card-body">
         <h5 class="card-title" style="text-decoration:none;">'.$name.'</h5>
       </div></a>
     </div></div>';

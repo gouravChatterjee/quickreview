@@ -104,6 +104,9 @@ if(mysqli_connect_error()){
             <a href="bestReview" class="btn btn-outline-success" style="font-weight: bold;">Best Reviews</a>
           </li>
           <li class="nav-item" style="margin-right: 5px;">
+            <a href="forum" class="btn btn-outline-success" style="font-weight: bold;">Forum</a>
+          </li>
+          <li class="nav-item" style="margin-right: 5px;">
             <a href="terms" class="btn btn-outline-success" style="font-weight: bold;">Terms & Conditions</a>
           </li>
           <li class="nav-item">
