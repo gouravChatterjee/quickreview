@@ -101,7 +101,7 @@ if(mysqli_connect_error()){
             <a href="shareReview" class="btn btn-outline-success" style="font-weight: bold;">Share a Review</a>
           </li>
           <li class="nav-item" style="margin-right: 5px;">
-            <a href="bestReview" class="btn btn-outline-success" style="font-weight: bold;">Best Reviews</a>
+            <a href="bestReviews" class="btn btn-outline-success" style="font-weight: bold;">Best Reviews</a>
           </li>
           <li class="nav-item" style="margin-right: 5px;">
             <a href="forum" class="btn btn-outline-success" style="font-weight: bold;">Forum</a>
@@ -126,7 +126,7 @@ if(mysqli_connect_error()){
 
   <div class="content-wrapper">
   <section class="content">
-    <br>
+    <!-- <br> -->
    <?php 
         if (isset($_POST['subscribe'])) {
           $fName = $_POST['fName'];

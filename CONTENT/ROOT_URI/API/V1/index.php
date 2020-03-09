@@ -654,6 +654,41 @@ if (isset($_GET['fetchServices'])) {
 
 }
 
+if (isset($_GET['markBest'])){
+	$data = null;
+	$error = null;
+	$reviewId = $_GET['reviewId'];
+	$sql = "UPDATE REVIEWS SET BEST_REVIEW = 'TRUE' WHERE UNI_ID = '$reviewId'";
+	$result = mysqli_query($link,$sql);
+	if ($result) {
+	 	$data = "Successfull";
+	}else{
+		$error = "Something happened!";
+	}
+	$myObj = new stdClass();
+  	$myObj->data = $data;
+  	$myObj->error = $error;
+  	$myJSON = json_encode($myObj);
+  	echo $myJSON;		
+}
+if (isset($_GET['removeBest'])){
+	$data = null;
+	$error = null;
+	$reviewId = $_GET['reviewId'];
+	$sql = "UPDATE REVIEWS SET BEST_REVIEW = null WHERE UNI_ID = '$reviewId'";
+	$result = mysqli_query($link,$sql);
+	if ($result) {
+	 	$data = "Successfull";
+	}else{
+		$error = "Something happened!";
+	}
+	$myObj = new stdClass();
+  	$myObj->data = $data;
+  	$myObj->error = $error;
+  	$myJSON = json_encode($myObj);
+  	echo $myJSON;		
+}
+
 
 ?>
 

@@ -156,7 +156,6 @@ if (isset($_POST['submit'])) {
                       $uId = $row['USER_ID'];
                       $rId = $row['UNI_ID'];
                       $pId = $row['PRODUCT_ID'];
-                      $pType = $row['PRODUCT_TYPE'];
                       $uName = $row['USER_NAME'];
                       $review = $row['REVIEW_DETAILS'];
                       $reviewUser = $row['USER_TYPE'];
@@ -167,20 +166,6 @@ if (isset($_POST['submit'])) {
                         echo '<h4 style="color:#192A56"><b>'.$review.'</b></h4>';
                         echo '<h5 style="color:#192A56">By:- '.$uName.'</h6>';
                       }else{
-                        if ($pType == 'SERVICE') {
-                          $sqlFetch = "SELECT * FROM SERVICES WHERE UNI_ID = '$pId'";
-                          $resultFetch = mysqli_query($link,$sqlFetch);
-                          $rowFetch = mysqli_fetch_array($resultFetch,MYSQLI_ASSOC);
-                          $prName = $rowFetch['SR_NAME'];
-                          echo '<h2>Name:- <a href="singleService?id='.$pId.'" style="color:black;">'.$prName.'</a></h2>';
-
-                        }else{
-                          $sqlFetch = "SELECT * FROM PRODUCT WHERE UNI_ID = '$pId'";
-                          $resultFetch = mysqli_query($link,$sqlFetch);
-                          $rowFetch = mysqli_fetch_array($resultFetch,MYSQLI_ASSOC);
-                          $prName = $rowFetch['PR_NAME'];
-                          echo '<h2>Name:- <a style="color:black; href="singleProduct?id='.$pId.'">'.$prName.'</a></h2>';
-                        }
                         for ($i=0; $i < $rating; $i++) { 
                           echo '<span class="fa fa-star checked"></span>';
                         }
@@ -202,17 +187,22 @@ if (isset($_POST['submit'])) {
                         
                         echo '<p>By:- '.$uName.'</p>';
                       }
-                      
+                      if ($bestReview == null) {
+                        echo '<button onclick="markBest(`'.$rId.'`)" class="btn btn-success">Mark as best review</button>';
+                      }else{
+                        echo '<button onclick="removeBest(`'.$rId.'`)" class="btn btn-danger">Remove from best reviews</button>';
+                      }
                       echo '<hr>';
                      }
-
                   }else{
                     echo '<div class="container"><div class="alert alert-warning">No review</div></div>';
                   }
                 }else{
                   echo mysqli_error($link);
                 }
-            ?>
+               
+
+                ?>
           </div>
       	</div>
       </div>
@@ -220,7 +210,6 @@ if (isset($_POST['submit'])) {
     
 	
 </div>
-<a href="sin"></a>
 
 <div id="myModal" class="modal">
 

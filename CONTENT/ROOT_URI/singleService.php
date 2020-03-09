@@ -155,9 +155,9 @@ if (isset($_POST['submit'])) {
     // $imgName = null;
   }
   $unid = D_create_UserId();       
-	$stmt = $link->prepare("INSERT INTO REVIEWS (`UNI_ID`, `PRODUCT_ID`, `USER_ID`, `USER_NAME`, `REVIEW_DETAILS`, `RATING`, `IMAGE`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+	$stmt = $link->prepare("INSERT INTO REVIEWS (`UNI_ID`, `PRODUCT_ID`, `PRODUCT_TYPE`, `USER_ID`, `USER_NAME`, `REVIEW_DETAILS`, `RATING`, `IMAGE`) VALUES (?, ?, 'SERVICE', ?, ?, ?, ?, ?)");
 
-  $stmt->bind_param("sssssss", $unid, $id, $userId, $userName, $review, $rating, $image);
+  $stmt->bind_param("sssssss", $unid, $id,$userId, $userName, $review, $rating, $image);
 
   $result = $stmt->execute();
 	if ($result) {

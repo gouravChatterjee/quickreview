@@ -102,6 +102,9 @@ if(mysqli_connect_error()){
           <li class="nav-item">
             <a class="nav-link" href="forum">Forum</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="bestReviews">Best Reviews</a>
+          </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="subscribers">Subscribers</a>
            </li> -->
