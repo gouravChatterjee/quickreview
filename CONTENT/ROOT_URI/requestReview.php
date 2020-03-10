@@ -120,7 +120,7 @@ if (isset($_POST['submitService'])){
 }
 
   ?>
-
+<br>
  <?php 
  if(!$_SESSION['LoggedIn'] ){
  	include("signUp.php");

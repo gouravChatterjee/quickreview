@@ -124,7 +124,7 @@ $userName = $_SESSION["userName"];
  	include("signUp.php");
  }else{
   ?>
-
+<br>
  	<div class="container">
     <div class="col-sm-12 ml-auto mr-auto">
         <ul class="nav nav-pills nav-fill mb-1" id="pills-tab" role="tablist">

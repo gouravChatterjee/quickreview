@@ -39,7 +39,7 @@
                 $_SESSION["userId"] = $uniqueUserId;
                 $_SESSION["userName"] = $name;     
                 echo "<script>
-                        window.location.href='/';
+                        window.history.go(-1);
                       </script>";
               }else{
                 $errorm = "Failed-> ".mysqli_error($link);
@@ -81,7 +81,7 @@
                     $_SESSION["userId"] = $row['UNI_ID'];
                     $_SESSION["userName"] = $row['NAME'];
                     echo "<script>
-                        window.location.href='/';
+                        window.history.go(-2);
                       </script>";
                 }else{
                     // echo '<div class="alert alert-danger"> Credential did not match! </div>';
