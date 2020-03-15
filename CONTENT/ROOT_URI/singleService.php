@@ -223,6 +223,7 @@ $imgName = $row['IMAGE'];
           	</div>
           </div>
       	</div>
+
       	<?php if($_SESSION['LoggedIn'] ): ?>
       	<div class="card">
         	<div class="card-header"><h4>Share a review</h4></div>
@@ -254,6 +255,23 @@ $imgName = $row['IMAGE'];
         		</form>
         	</div>
       	</div>
+        <!-- SHARE TO SOCIAL MEDIA -->
+        <div class="card">
+          <div class="card-body">
+            <div class="card-text">Share this page</div>
+          <!-- AddToAny BEGIN -->
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+              <a class="a2a_button_facebook"></a>
+              <a class="a2a_button_twitter"></a>
+              <a class="a2a_button_email"></a>
+              <a class="a2a_button_linkedin"></a>
+              <a class="a2a_button_pinterest"></a>
+            </div>
+            <script async src="https://static.addtoany.com/menu/page.js"></script>
+        <!-- AddToAny END -->
+          </div>
+        </div>
+         <!-- SHARE TO SOCIAL MEDIA -->
         <?php else: ?>
           <div class="alert alert-warning"><a href="signIn" style=" color: black;">Sign In</a> to give a review!</div>
 		<?php endif; ?>
@@ -311,6 +329,7 @@ $imgName = $row['IMAGE'];
                      
 
                 ?>
+                
         	</div>
       	</div>
       </div>
