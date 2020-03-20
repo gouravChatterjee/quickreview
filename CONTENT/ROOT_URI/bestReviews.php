@@ -144,9 +144,7 @@ if (isset($_POST['submit'])) {
       <div class="col-md-12 ml-auto mr-auto">
         <h3>Best Reviews</h3>
                 <!-- general form elements -->
-      	<div class="card">
-        	
-        	<div class="card-body">
+      	
              <?php 
                 $sql = "SELECT * FROM REVIEWS WHERE BEST_REVIEW = 'TRUE' ORDER BY ID DESC";
                 $result = mysqli_query($link,$sql);
@@ -167,19 +165,21 @@ if (isset($_POST['submit'])) {
                         echo '<h4 style="color:#192A56"><b>'.$review.'</b></h4>';
                         echo '<h5 style="color:#192A56">By:- '.$uName.'</h6>';
                       }else{
+                        echo '<div class="card">
+                        <div class="card-body">';
                         if ($pType == 'SERVICE') {
                           $sqlFetch = "SELECT * FROM SERVICES WHERE UNI_ID = '$pId'";
                           $resultFetch = mysqli_query($link,$sqlFetch);
                           $rowFetch = mysqli_fetch_array($resultFetch,MYSQLI_ASSOC);
                           $prName = $rowFetch['SR_NAME'];
-                          echo '<h2>Name:- <a href="singleService?id='.$pId.'" style="color:black;">'.$prName.'</a></h2>';
+                          echo '<h2 style="font-weight:bold;">Service:- <a href="singleService?id='.$pId.'" style="color:black;">'.$prName.'</a></h2>';
 
                         }else{
                           $sqlFetch = "SELECT * FROM PRODUCT WHERE UNI_ID = '$pId'";
                           $resultFetch = mysqli_query($link,$sqlFetch);
                           $rowFetch = mysqli_fetch_array($resultFetch,MYSQLI_ASSOC);
                           $prName = $rowFetch['PR_NAME'];
-                          echo '<h2>Name:- <a style="color:black; href="singleProduct?id='.$pId.'">'.$prName.'</a></h2>';
+                          echo '<h2 style="font-weight:bold;">Product:- <a style="color:black; href="singleProduct?id='.$pId.'">'.$prName.'</a></h2>';
                         }
                         for ($i=0; $i < $rating; $i++) { 
                           echo '<span class="fa fa-star checked"></span>';
@@ -201,9 +201,8 @@ if (isset($_POST['submit'])) {
                         }
                         
                         echo '<p>By:- '.$uName.'</p>';
+                        echo '</div></div>';
                       }
-                      
-                      echo '<hr>';
                      }
 
                   }else{
@@ -213,8 +212,7 @@ if (isset($_POST['submit'])) {
                   echo mysqli_error($link);
                 }
             ?>
-          </div>
-      	</div>
+          
       </div>
   	</div>
     

@@ -42,7 +42,7 @@
         								<p style="font-weight: bold"><i class="fa fa-eercast" aria-hidden="true"></i>&nbsp;Earn affiliate income</p>
         								<p style="font-weight: bold"><i class="fa fa-eercast" aria-hidden="true"></i>&nbsp;Create your multiple incomes source</p>
         								<p style="font-weight: bold"><i class="fa fa-eercast" aria-hidden="true"></i>&nbsp;Earn money while helping others With your honest review.</p>
-        								<p style="font-weight: bold; font-style: italic;"><a href="forum">Share A Review</a></p>
+        								<p style="font-weight: bold; font-style: italic;"><a href="shareReview">Share A Review</a></p>
         							</div>
         						</div>
         					</div>
@@ -59,7 +59,7 @@
         								<p style="font-weight: bold"><i class="fa fa-superpowers" aria-hidden="true"></i>&nbsp;Create an organic customer</p>
         								<p style="font-weight: bold"><i class="fa fa-superpowers" aria-hidden="true"></i>&nbsp;Get the best feedback</p>
         								<p style="font-weight: bold"><i class="fa fa-superpowers" aria-hidden="true"></i>&nbsp;Create your massive growth</p>
-        								<p style="font-weight: bold; font-style: italic;"><a href="forum">Share A Review</a></p>
+        								<p style="font-weight: bold; font-style: italic;"><a href="requestReview">Request A Review</a></p>
         							</div>
         						</div>
         					</div>

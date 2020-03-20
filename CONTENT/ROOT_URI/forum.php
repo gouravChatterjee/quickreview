@@ -44,14 +44,14 @@ if (isset($_POST['submit'])) {
 ?>
 
 
-<div class="container">
+<div class="container"><br>
 	<div class="row">
           <!-- left column -->
-      <div class="col-md-12 ml-auto mr-auto">
+      <div class="col-md-9 col-sm-12">
                 <!-- general form elements -->
       	<?php if($_SESSION['LoggedIn'] ): ?>
           <dib class="addbtn">
-          <button class="btn btn-success" id="askQuesBtn" style="color: black;"><i class="fa fa-plus"></i>&nbsp;Ask a Question</button><br><br>
+          <button class="btn btn-success" id="askQuesBtn" style="color: #fff;"><i class="fa fa-plus"></i>&nbsp;Ask A Question</button><br><br>
         </dib>
       	<div class="card bg-dark" id="askQuesDiv" style="display: none;">
         	<div class="card-header"><h4>Ask what is on your mind?</h4></div>
@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
         	</div>
       	</div>
         <?php else: ?>
-          <div class="alert alert-warning"><a href="signIn" style=" color: black;">Sign In</a> to ask a question!</div>
+          <div class="alert alert-warning"><a href="signIn" style=" color: black;">Sign In</a> to start your journey!</div>
 		    <?php endif; ?>
       	<div class="card">
         	<div class="card-header">
@@ -127,6 +127,26 @@ if (isset($_POST['submit'])) {
         		
         	</div>
       	</div>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <br><br><br>
+         <!-- SHARE TO SOCIAL MEDIA -->
+        <div class="card">
+          <div class="card-body">
+            <div class="card-text">Share this page</div>
+          <!-- AddToAny BEGIN -->
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+              <a class="a2a_button_facebook"></a>
+              <a class="a2a_button_twitter"></a>
+              <a class="a2a_button_email"></a>
+              <a class="a2a_button_linkedin"></a>
+              <a class="a2a_button_pinterest"></a>
+            </div>
+            <script async src="https://static.addtoany.com/menu/page.js"></script>
+        <!-- AddToAny END -->
+          </div>
+        </div>
+         <!-- SHARE TO SOCIAL MEDIA -->
       </div>
   	</div>
     <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

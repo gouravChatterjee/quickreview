@@ -15,12 +15,73 @@ if(mysqli_connect_error()){
   
  
  ?>
+<?php 
+    if (isset($_POST['subscribe'])) {
+      $fName = $_POST['fName'];
+      $lName = $_POST['lName'];
+      $bEmail = $_POST['bEmail'];
+      $phone = $_POST['pNumber'];
+
+      $stmt = $link->prepare("INSERT INTO SUBSCRIBERS (`FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`) VALUES (?, ?, ?, ?)");
+      $stmt->bind_param("ssss", $fName, $lName, $phone, $bEmail);
+      if ($stmt->execute()) { 
+       $to = "chatterjeegouravking@gmail.com";
+        $subject = "New user Signed up!";
+
+        $message = "
+        <html>
+        <head>
+        <title>Welcome email</title>
+        </head>
+        <body>
+        <p>Welcome to equickreview.com! This is a welcome mail to greet you to our portal. Keep Sharing reviews to make us better and let us know how we can improve the user experience in a better way! </p>
+        <p>Thank you!</p>
+        <table>
+        <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        </tr>
+        <tr>
+        <td>John</td>
+        <td>Doe</td>
+        </tr>
+        </table>
+        </body>
+        </html>
+        ";
+
+        // Always set content-type when sending HTML email
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+        // More headers
+        $headers .= 'From: Admin<no-reply@equickreview.com>' . "\r\n";
+
+        mail($to,$subject,$message,$headers);
+        echo '<script>window.location.href = "thankYou"</script>';
+        echo '<div class="alert alert-success">You are now subscribed!</div>';
+      }else{
+        echo '<div class="alert alert-warning">'.mysqli_error($link).'</div>';
+      }
+    }
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QRXS6VWZSY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QRXS6VWZSY');
+    </script>
+
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/CSS/style.css">
@@ -30,20 +91,11 @@ if(mysqli_connect_error()){
 
      <link rel="stylesheet" href="/CSS/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
-    <!-- <link rel="stylesheet" href="/CSS/plugins/icheck-bootstrap/icheck-bootstrap.min.css"> -->
-    <!-- JQVMap -->
-    <!-- <link rel="stylesheet" href="/CSS/plugins/jqvmap/jqvmap.min.css"> -->
-    <!-- Theme style -->
     <link rel="stylesheet" href="/CSS/dist/css/adminlte.css">
-    <!-- overlayScrollbars -->
-    <!-- <link rel="stylesheet" href="/CSS/plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> -->
+    
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="/CSS/video.css" > -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-    <!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <!-- <script src="https://kit.fontawesome.com/e1f2cafe0a.js"></script> -->
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -108,7 +160,7 @@ if(mysqli_connect_error()){
       </div>
 
   <!-- NAVBAR STARTS -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" id="myHeader" style="background: #fff;">
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" id="myHeader" style="background: #fff; z-index: 1;">
     <div class="container">
       <!-- <a href="/" class="navbar-brand">
         <img src="/IMAGES/logo.png" height="60" width="60" style="border-radius: 50%" alt="Image Logo">
@@ -151,26 +203,9 @@ if(mysqli_connect_error()){
   </nav>
   <!-- /.navbar -->
 
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="min-height: auto;">
   <section class="content">
     <!-- <br> -->
-   <?php 
-        if (isset($_POST['subscribe'])) {
-          $fName = $_POST['fName'];
-          $lName = $_POST['lName'];
-          $bEmail = $_POST['bEmail'];
-          $phone = $_POST['pNumber'];
-
-          $stmt = $link->prepare("INSERT INTO SUBSCRIBERS (`FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`) VALUES (?, ?, ?, ?)");
-          $stmt->bind_param("ssss", $fName, $lName, $phone, $bEmail);
-          if ($stmt->execute()) { 
-            echo '<div class="alert alert-success">You are now subscribed!</div>';
-          }else{
-            echo '<div class="alert alert-warning">'.mysqli_error($link).'</div>';
-          }
-        }
-
-       ?>
 
       <!-- MODAL FOR SUBSCRIBE FORM -->
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
