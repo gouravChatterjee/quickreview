@@ -17,35 +17,26 @@ if(mysqli_connect_error()){
  ?>
 <?php 
     if (isset($_POST['subscribe'])) {
-      $fName = $_POST['fName'];
-      $lName = $_POST['lName'];
+      $name = $_POST['name'];
       $bEmail = $_POST['bEmail'];
       $phone = $_POST['pNumber'];
 
-      $stmt = $link->prepare("INSERT INTO SUBSCRIBERS (`FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`) VALUES (?, ?, ?, ?)");
-      $stmt->bind_param("ssss", $fName, $lName, $phone, $bEmail);
+      $stmt = $link->prepare("INSERT INTO SUBSCRIBERS (`NAME`, `PHONE`, `EMAIL`) VALUES (?, ?, ?)");
+      $stmt->bind_param("sss", $name, $phone, $bEmail);
       if ($stmt->execute()) { 
-       $to = "chatterjeegouravking@gmail.com";
-        $subject = "New user Signed up!";
+        $to = $bEmail;
+        $subject = "Welcome to Equickreview";
 
         $message = "
         <html>
         <head>
-        <title>Welcome email</title>
+        <title>HTML email</title>
         </head>
         <body>
-        <p>Welcome to equickreview.com! This is a welcome mail to greet you to our portal. Keep Sharing reviews to make us better and let us know how we can improve the user experience in a better way! </p>
-        <p>Thank you!</p>
-        <table>
-        <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        </tr>
-        <tr>
-        <td>John</td>
-        <td>Doe</td>
-        </tr>
-        </table>
+        <h2>Thank you for subscribing. You will be the first to know about new releases,best product/services,giveaways, special offers, big discounts & best value of your money.
+          Stay tuned..</h2>
+        <img src='https://equickreview.com/IMAGES/subscribe.png'>
+        <p>Visit us for any questions, enquiry or anything on your mind! Click <a href='https://equickreview.com'>here</a> to visit our website. </p>
         </body>
         </html>
         ";
@@ -55,7 +46,7 @@ if(mysqli_connect_error()){
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
         // More headers
-        $headers .= 'From: Admin<no-reply@equickreview.com>' . "\r\n";
+        $headers .= 'From: Admin<admin@equickreview.com>' . "\r\n";
 
         mail($to,$subject,$message,$headers);
         echo '<script>window.location.href = "thankYou"</script>';
@@ -116,11 +107,8 @@ if(mysqli_connect_error()){
       <div class="container-fluid social">
         <div class="container">
           <div class="row">
-            <div class="col-md-4 col-sm-12">
-              <a href="/"><img src="/IMAGES/logo.png" class="float-left logoImg" height="80" width="80" alt="Image Logo"></a>
-            </div>
-            <div class="col-md-8 col-sm-12 mr-auto">
-              <h1 class="colorWhite" style="font-size: 60px;">E-Quick Review</h1>
+            <div class="col-md-12 col-sm-12 text-center">
+              <h1 class="colorWhite" style="font-size: 60px;">Equick Review</h1>
               <h4 class="colorWhite">100% free to join & earn money</h4>
             <!-- <p class="text-center colorWhite">The place where you can find the best reviews</p> -->
             </div>
@@ -137,10 +125,7 @@ if(mysqli_connect_error()){
                 <form method="POST">
                   <div class="row">
                     <div class="col-md-2 col-sm-4">
-                      <input type="text" class="form-control" name="fName" placeholder="First Name" required>
-                    </div>
-                    <div class="col-md-2 col-sm-4">
-                      <input type="text" class="form-control" name="lName" placeholder="Last Name" required>
+                      <input type="text" class="form-control" name="name" placeholder="Name" required>
                     </div>
                     <div class="col-md-2 col-sm-4">
                       <input type="email" class="form-control" name="bEmail" placeholder="Best Email" required>
@@ -208,19 +193,16 @@ if(mysqli_connect_error()){
     <!-- <br> -->
 
       <!-- MODAL FOR SUBSCRIBE FORM -->
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Subscribe Now to get all the updates</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
               <form method="POST">
               <div class="modal-body">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="First Name" name="fName" required>
+                    <input type="text" class="form-control" placeholder="ENTER YOUR NAME" name="name" required>
                     <div class="input-group-append">
                       <div class="input-group-text">
                         <span class="fas fa-user"></span>
@@ -228,26 +210,10 @@ if(mysqli_connect_error()){
                     </div>
                   </div>
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Last Name" name="lName" required>
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-user"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Best Email" name="bEmail" required>
+                    <input type="email" class="form-control" placeholder="ENTER YOUR EMAIL" name="bEmail" required>
                     <div class="input-group-append">
                       <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Phone Number" name="pNumber" required>
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-phone"></span>
                       </div>
                     </div>
                   </div>
@@ -274,6 +240,10 @@ if(mysqli_connect_error()){
       header.classList.remove("sticky");
     }
   }
+//   $('#exampleModalCenter').modal({
+//     backdrop: 'static',
+//     keyboard: false
+// })
 
     
 </script>

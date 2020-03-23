@@ -68,10 +68,7 @@
           <div class="col-md-5">
               <form method="POST">
                   <fieldset class="form-group">
-                      <input type="text" class="form-control" name="fName" placeholder="First Name" required>
-                  </fieldset>
-                  <fieldset class="form-group">
-                      <input type="text" class="form-control" name="lName" placeholder="Last Name" required>
+                      <input type="text" class="form-control" name="name" placeholder="Name" required>
                   </fieldset>
                   <fieldset class="form-group">
                       <input type="email" class="form-control" name="bEmail" placeholder="Best Email" required>
