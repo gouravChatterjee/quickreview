@@ -99,7 +99,7 @@
 
 <script src="/CSS/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/CSS/dist/js/adminlte.js"></script>
+<!-- <script src="/CSS/dist/js/adminlte.js"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/CSS/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->

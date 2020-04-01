@@ -3,6 +3,85 @@
           window.history.replaceState( null, null, window.location.href );
       }
 </script>
+<?php 
+
+$link = new mysqli(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
+$link->set_charset("utf8");
+// require 'google-api/vendor/autoload.php';
+
+function saveAccountDataSpreadsheet($name, $email, $phone)
+{
+    $client = new Google_Client();
+    $client->setApplicationName('Google Sheets API PHP Quickstart');
+    $client->setScopes(Google_Service_Sheets::SPREADSHEETS);
+    $client->setAuthConfig('google-api/credentials.json');
+    $client->setAccessType('online');
+    $service = new Google_Service_Sheets($client);
+
+    // print_r($service);
+    $spreadsheetId = '15AJVokdffYA47levcHTsWDJMrKH4Eb056kKXhLoHHhQ';
+    $range = "Sheet1";
+    $values = [
+    [
+        $name, $email, $phone
+    ],
+  ];
+  $body = new Google_Service_Sheets_ValueRange([
+      'values' => $values
+  ]);
+  $params = [
+      'valueInputOption' => 'RAW'
+  ];
+  $insert = [
+      'insertDataOption' => 'INSERT_ROWS'
+  ];
+  $result = $service->spreadsheets_values->append($spreadsheetId, $range, $body, $params, $insert);
+}
+
+  if (isset($_POST['register'])){
+
+          $name =  $_POST['name'];
+          $email = $_POST['email'];
+          $phone = $_POST['phone'];
+          $password = $_POST['password1'];
+          $password2 = $_POST['password2'];
+          $country = $_POST['country'];
+          $state = $_POST['state'];
+          $uniqueUserId = D_create_UserId();
+          if ($password != $password2) {
+              // echo '<div class="container"><div class="alert alert-danger">Password does not match</div></div>';
+            $GLOBALS['alert_info'] .= DaddToBsAlert("Passwords are not same!");
+
+          }else{
+            $sql = "SELECT * FROM USERS WHERE EMAIL = '$email'";
+            $result = mysqli_query($link, $sql);
+            if(mysqli_num_rows($result)>0){
+              $GLOBALS['alert_info'] .= DaddToBsAlert("You are already registered. Please Sign In!");
+            }else{
+              $password = md5($password);
+              $stmt = $link->prepare("INSERT INTO USERS (`UNI_ID`, `NAME`, `PHONE`, `EMAIL`, `PASSWORD`, `COUNTRY`, `STATE`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+              $stmt->bind_param("sssssss", $uniqueUserId, $name, $phone, $email, $password, $country, $state);
+              if ($stmt->execute()) {
+                saveAccountDataSpreadsheet($name, $email, $phone);   
+                $_SESSION["LoggedIn"]=true;
+                $_SESSION["user"] = $email;
+                $_SESSION["userId"] = $uniqueUserId;
+                $_SESSION["userName"] = $name;     
+                echo "<script>
+                        window.history.go(-1);
+                      </script>";
+              }else{
+                $errorm = "Failed-> ".mysqli_error($link);
+                $GLOBALS['alert_info'] .= DaddToBsAlert("Error occured! Please try again!".$errorm);
+              }
+
+            }
+
+          }
+  }
+  
+
+ ?>
 <div class="container">
 <?php
   if ($GLOBALS['alert_info']!="") {

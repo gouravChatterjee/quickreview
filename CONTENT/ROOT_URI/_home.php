@@ -65,23 +65,7 @@ if(mysqli_connect_error()){
     }*/
   </style>
 
-  <?php 
-    if (isset($_POST['subscribe'])) {
-      $fName = $_POST['fName'];
-      $lName = $_POST['lName'];
-      $bEmail = $_POST['bEmail'];
-      $phone = $_POST['pNumber'];
 
-      $stmt = $link->prepare("INSERT INTO SUBSCRIBERS (`FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`) VALUES (?, ?, ?, ?)");
-      $stmt->bind_param("ssss", $fName, $lName, $phone, $bEmail);
-      if ($stmt->execute()) { 
-        echo '<div class="alert alert-success">You are now subscribed!</div>';
-      }else{
-        echo '<div class="alert alert-warning">'.mysqli_error($link).'</div>';
-      }
-    }
-
-   ?>
   <script type="text/javascript">
     $(document).ready(function(){ 
       $('.goDown').click(function(){

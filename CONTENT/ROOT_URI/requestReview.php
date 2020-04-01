@@ -8,13 +8,43 @@
 $link = new mysqli(MYSQL_HOST,MYSQL_USER,MYSQL_PASS,MYSQL_DB);
 $link->set_charset("utf8");
 
+include 'Instamojo.php';
+
+function makePayment()
+{
+	$buyEmail = $_SESSION["user"];
+	$buyerName = $_SESSION["userName"];
+	$api = new Instamojo\Instamojo('0c602e704d42eff0c969bd16d84689ce', '3ea02278545d14faac4ccee6d3dc6dc6');
+	try {
+	    $response = $api->paymentRequestCreate(array(
+	        "purpose" => "Requesting Review",
+	        "amount" => "12",
+	        "send_email" => false,
+	        "buyer_name" => $buyerName,
+	        "email" => $buyEmail,
+	        "redirect_url" => "https://equickreview.com/handlePayment",
+	        "webhook" => "https://equickreview.com/webhookPayment"
+	    ));
+	    // print_r($response);
+	    // $myJSON = json_encode($response);
+	    $reqId = $response['id'];
+	    $url = $response['longurl'];
+	    // echo $url;
+	    echo '<script>window.location.href = "'.$url.'"</script>';
+	}
+	catch (Exception $e) {
+	    print('Error: ' . $e->getMessage());
+	}
+}
+ 
+
  ?>
 
  <?php 
  $userId = $_SESSION["userId"];
  $userName = $_SESSION["userName"];
- 
 if (isset($_POST['submitProduct'])){
+
 	if(isset($_POST['prName']))
 		$prName = $_POST['prName'];
 	if(isset($_POST['prCategory']))
@@ -34,13 +64,16 @@ if (isset($_POST['submitProduct'])){
 	$image = $_FILES['image']['name'];
 	$imgName = basename($image);
 
-	$stmt = $link->prepare("INSERT INTO PRODUCT (`UNI_ID`, `PR_NAME`, `CATEGORY`, `PRICE`, `LINK`, `DESCRIPTION`, `IMAGE`, `USER_ID`, `USER_NAME`)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+	$stmt = $link->prepare("INSERT INTO PRODUCT (`UNI_ID`, `PR_NAME`, `CATEGORY`, `PRICE`, `LINK`, `DESCRIPTION`, `IMAGE`, `USER_ID`, `USER_NAME`, `STATUS`)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 'PENDING')");
 
 	$stmt->bind_param("sssssssss", $unid, $prName, $prCategory, $price, $prLink, $prDesc, $imgName, $userId, $userName);
 
 	$result = $stmt->execute();
 
 	if ($result) {
+		$_SESSION['newReqId'] = $unid;
+		$_SESSION['reviewType'] = "PRODUCT";
+		
 		mkdir("CONTENT/UPLOADS/PRODUCT/".$unid, 0755, true);
 
 
@@ -50,7 +83,7 @@ if (isset($_POST['submitProduct'])){
 		if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
 	  		$msg = "File uploaded successfully";
 	  		// echo $msg;
-	  		
+	  		makePayment();
 	  	}else{
 	  		$msg = "Failed to upload File";
 	  		// echo "not uploaded";
@@ -87,13 +120,15 @@ if (isset($_POST['submitService'])){
 	$image = $_FILES['image']['name'];
 	$imgName = basename($image);
 
-	$stmt = $link->prepare("INSERT INTO SERVICES (`UNI_ID`, `SR_NAME`, `CATEGORY`, `PRICE`, `LINK`, `DESCRIPTION`, `IMAGE`, `USER_ID`, `USER_NAME`)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+	$stmt = $link->prepare("INSERT INTO SERVICES (`UNI_ID`, `SR_NAME`, `CATEGORY`, `PRICE`, `LINK`, `DESCRIPTION`, `IMAGE`, `USER_ID`, `USER_NAME`, `STATUS`)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 'PENDING')");
 
 	$stmt->bind_param("sssssssss", $unid, $srName, $srCategory, $price, $srLink, $srDesc, $imgName, $userId, $userName);
 
 	$result = $stmt->execute();
 
 	if ($result) {
+		$_SESSION['newReqId'] = $unid;
+		$_SESSION['reviewType'] = "SERVICE";
 		mkdir("CONTENT/UPLOADS/SERVICES/".$unid, 0755, true);
 
 
@@ -102,6 +137,7 @@ if (isset($_POST['submitService'])){
 
 		if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
 	  		$msg = "File uploaded successfully";
+	  		makePayment();
 	  		// echo $msg;
 	  	}else{
 	  		$msg = "Failed to upload File";

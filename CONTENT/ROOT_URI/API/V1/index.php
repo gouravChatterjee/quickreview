@@ -576,9 +576,9 @@ if (isset($_GET['questionList'])) {
 if (isset($_GET['fetchProducts'])) {
 	$category = $_GET['category'];
 	if ($category == 'allProducts') {
-		$sql = "SELECT * FROM PRODUCT ORDER BY ID DESC";
+		$sql = "SELECT * FROM PRODUCT WHERE STATUS = 'APPROVED' ORDER BY ID DESC";
 	}else{
-		$sql = "SELECT * FROM PRODUCT WHERE CATEGORY = '$category' ORDER BY ID DESC";
+		$sql = "SELECT * FROM PRODUCT WHERE STATUS = 'APPROVED' AND CATEGORY = '$category' ORDER BY ID DESC";
 	}
   
   $result = mysqli_query($link,$sql);
@@ -616,9 +616,9 @@ if (isset($_GET['fetchProducts'])) {
 if (isset($_GET['fetchServices'])) {
 	$category = $_GET['category'];
 	if ($category == 'allServices') {
-		$sql = "SELECT * FROM SERVICES ORDER BY ID DESC";
+		$sql = "SELECT * FROM SERVICES WHERE STATUS = 'APPROVED' ORDER BY ID DESC";
 	}else{
-		$sql = "SELECT * FROM SERVICES WHERE CATEGORY = '$category' ORDER BY ID DESC";
+		$sql = "SELECT * FROM SERVICES WHERE STATUS = 'APPROVED' AND CATEGORY = '$category' ORDER BY ID DESC";
 	}
   
   $result = mysqli_query($link,$sql);
